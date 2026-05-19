@@ -1,0 +1,9 @@
+{
+  "Common": {
+    "getHelpNow": "Get Help Now",
+    "dashboard": "Dashboard",
+    "logout": "Log out",
+    "login": "Log in",
+    "profile": "Profile"
+  }
+}
