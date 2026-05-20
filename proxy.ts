@@ -1,14 +1,7 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import type { NextRequest } from "next/server";
-import createMiddleware from 'next-intl/middleware';
 import { redis } from './lib/redis';
-
-const intlMiddleware = createMiddleware({
-  locales: ['en', 'ur'],
-  defaultLocale: 'en',
-  localePrefix: 'never' // We use cookies instead of routing prefix to preserve clean URLs
-});
 
 // Fallback in-memory rate limit store if Redis isn't configured (Not for production horizontal scale)
 const fallbackRateLimitMap = new Map<string, { count: number, timestamp: number }>();
@@ -18,36 +11,33 @@ const staffRoutes = ["/staff"];
 const adminRoutes = ["/admin"];
 const studentRoutes = ["/student"];
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   // 0. Correlation ID for Request Tracing
   const correlationId = crypto.randomUUID();
   const requestStartTime = Date.now();
-  
+
   // 1. Distributed Rate Limiting
   const ip = req.ip || req.headers.get("x-forwarded-for") || "unknown";
   const now = Date.now();
   const windowMs = 60 * 1000; // 1 minute window
-  const maxRequests = req.nextUrl.pathname.startsWith('/api') ? 30 : 60; 
+  const maxRequests = req.nextUrl.pathname.startsWith('/api') ? 30 : 60;
 
   if (redis) {
     try {
       const redisKey = `ratelimit:${ip}`;
-      // Basic token bucket simulation in Redis
       const [response] = await redis.pipeline()
         .incr(redisKey)
         .expire(redisKey, 60)
         .exec();
-        
+
       const currentCount = response as number;
       if (currentCount > maxRequests) {
         return new NextResponse("Too Many Requests. Please slow down.", { status: 429 });
       }
     } catch (error) {
       console.error("Redis Rate Limit Error:", error);
-      // Fallback open on Redis failure to avoid taking down the whole app
     }
   } else {
-    // Memory fallback
     const rlData = fallbackRateLimitMap.get(ip);
     if (rlData) {
       if (now - rlData.timestamp > windowMs) {
@@ -64,10 +54,13 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  // 2. Run next-intl middleware first to establish locale headers/cookies
-  const res = intlMiddleware(req);
-  
-  // 2. Perform Auth checks
+  // 2. Pass locale from cookie to next-intl via request header
+  // (next-intl reads X-NEXT-INTL-LOCALE in i18n/request.ts via getLocale())
+  const locale = req.cookies.get('NEXT_LOCALE')?.value || 'en';
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set('X-NEXT-INTL-LOCALE', locale);
+
+  // 3. Perform Auth checks
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const { pathname } = req.nextUrl;
 
@@ -87,7 +80,7 @@ export async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL("/unauthorized", req.url));
     }
   }
-  
+
   // Protect Student Routes
   if (studentRoutes.some(route => pathname.startsWith(route))) {
     if (!isAuth) return NextResponse.redirect(new URL("/login", req.url));
@@ -95,9 +88,9 @@ export async function middleware(req: NextRequest) {
 
   // Redirect authenticated users away from auth pages
   if (isAuth && ["/login", "/signup", "/forgot-password"].includes(pathname)) {
-    if (role === "ADMIN") return NextResponse.redirect(new URL("/admin", req.url));
-    if (role === "COUNSELLOR") return NextResponse.redirect(new URL("/staff", req.url));
-    return NextResponse.redirect(new URL("/student", req.url));
+    if (role === "ADMIN") return NextResponse.redirect(new URL("/admin/dashboard", req.url));
+    if (role === "COUNSELLOR") return NextResponse.redirect(new URL("/staff/dashboard", req.url));
+    return NextResponse.redirect(new URL("/student/counsellors", req.url));
   }
 
   // Require onboarding for students
@@ -105,7 +98,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/student/onboarding/step-1", req.url));
   }
 
-  // 4. Apply Strict Security Headers (CSP, CSRF Protections)
+  // 4. Apply Strict Security Headers
   const cspHeader = `
     default-src 'self';
     script-src 'self' 'unsafe-eval' 'unsafe-inline';
@@ -119,13 +112,16 @@ export async function middleware(req: NextRequest) {
     upgrade-insecure-requests;
   `.replace(/\s{2,}/g, ' ').trim();
 
+  const res = NextResponse.next({ request: { headers: requestHeaders } });
+
+  // Set locale cookie so browser retains it
+  res.cookies.set('NEXT_LOCALE', locale, { path: '/', sameSite: 'lax' });
+
   res.headers.set("Content-Security-Policy", cspHeader);
   res.headers.set("X-Content-Type-Options", "nosniff");
   res.headers.set("X-Frame-Options", "DENY");
   res.headers.set("X-XSS-Protection", "1; mode=block");
   res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-  
-  // Inject tracing headers
   res.headers.set("X-Correlation-ID", correlationId);
   res.headers.set("X-Response-Time", `${Date.now() - requestStartTime}ms`);
 

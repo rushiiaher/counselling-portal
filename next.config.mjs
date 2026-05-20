@@ -1,4 +1,7 @@
 import { withSentryConfig } from "@sentry/nextjs";
+import createNextIntlPlugin from 'next-intl/plugin';
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,7 +14,7 @@ const nextConfig = {
 }
 
 export default withSentryConfig(
-  nextConfig,
+  withNextIntl(nextConfig),
   {
     // For all available options, see:
     // https://github.com/getsentry/sentry-webpack-plugin#options
@@ -20,12 +23,16 @@ export default withSentryConfig(
     sentryUrl: "https://sentry.io/",
     silent: !process.env.CI,
     widenClientFileUpload: true,
-    reactComponentAnnotation: {
-      enabled: true,
-    },
     tunnelRoute: "/monitoring",
     hideSourceMaps: true,
-    disableLogger: true,
-    automaticVercelMonitors: true,
+    webpack: {
+      reactComponentAnnotation: {
+        enabled: true,
+      },
+      automaticVercelMonitors: true,
+      treeshake: {
+        removeDebugLogging: true,
+      },
+    },
   }
 );
