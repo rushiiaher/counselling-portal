@@ -73,7 +73,6 @@ export default function CounsellorsPage() {
               <Link href="/services" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Services</Link>
               <Link href="/counselors" className="text-blue-200 border-b-2 border-blue-300 text-sm font-medium">Counsellors</Link>
               <Link href="/events" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Events</Link>
-              <Link href="/resources" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Resources</Link>
               <Link href="/contact" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Contact</Link>
             </div>
             <div className="flex items-center gap-3">

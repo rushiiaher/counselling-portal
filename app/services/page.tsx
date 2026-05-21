@@ -1,81 +1,198 @@
+'use client';
+
 import Link from 'next/link';
+import { useState, useRef } from 'react';
 
 const services = [
   {
-    icon: '🎯',
     title: 'Career Counselling',
-    shortDesc: 'Expert guidance on career paths, aptitude assessment, and professional development.',
-    fullDesc: 'Our Career Counselling service provides comprehensive support to students and young professionals in making informed career decisions. Through scientifically validated aptitude tests, interest inventories, and one-on-one counselling sessions, our certified career counsellors help you identify your strengths, explore career options, and create a clear roadmap for your professional journey.',
-    benefits: ['Scientifically validated aptitude and interest assessments', 'One-on-one career counselling sessions', 'Information on over 500+ career options', 'Guidance on entrance exams and competitive tests', 'Resume building and interview preparation', 'Scholarship and financial aid information', 'Industry exposure and internship guidance'],
+    img: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&h=500&fit=crop',
+    detailImg: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&h=500&fit=crop',
+    heading: 'Complete Solution For Career Growth & Professional Development',
+    para1: 'Our Career Counselling service is a comprehensive, evidence-based program designed to help students, graduates, and working professionals make informed and confident career decisions. We understand that choosing the right career path is one of the most important decisions in a person\'s life, and our certified career counsellors are here to guide you every step of the way.',
+    para2: 'We use scientifically validated tools such as <strong>Holland\'s Career Interest Inventory</strong>, <strong>MBTI Personality Assessment</strong>, and <strong>Multiple Intelligence Tests</strong> to map your strengths, interests, and aptitudes to the most suitable career options. Our counsellors then work with you to build a personalised career roadmap.',
+    para3: 'Our expertise covers over 500+ career options across engineering, medicine, law, arts, commerce, government services, entrepreneurship, and emerging fields like AI, data science, and digital marketing. Whether you are a Class 10 student choosing a stream or a professional looking to switch careers, we have the right guidance for you.',
+    highlights: [
+      'Scientifically validated aptitude & interest assessments',
+      'One-on-one personalised career counselling sessions',
+      'Guidance on 500+ career options across all fields',
+      'Entrance exam strategy (JEE, NEET, UPSC, CAT, CLAT)',
+      'Resume building & interview preparation support',
+      'Scholarship, fellowship & financial aid information',
+      'Industry exposure, internship & placement guidance',
+    ],
     audience: 'Students (Class 8–12), College Students, Working Professionals',
     duration: '60–90 minutes per session',
     sessions: '3–5 sessions recommended',
   },
   {
-    icon: '📚',
     title: 'Educational Guidance',
-    shortDesc: 'Support for academic challenges, course selection, and higher education planning.',
-    fullDesc: 'Educational Guidance services are designed to help students navigate the complex landscape of academic choices and challenges. From selecting the right subjects in school to choosing the best college and course for higher education, our educational counsellors provide evidence-based guidance tailored to each student\'s unique profile, aspirations, and circumstances.',
-    benefits: ['Subject and stream selection guidance (Class 9–12)', 'College and university selection support', 'Entrance exam preparation strategies', 'Study skills and time management coaching', 'Learning disability assessment and support', 'Scholarship and fellowship information', 'Abroad education guidance and visa support'],
+    img: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=700&h=500&fit=crop',
+    detailImg: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=700&h=500&fit=crop',
+    heading: 'Complete Solution For Academic Excellence & Higher Education',
+    para1: 'Educational Guidance services are designed to help students navigate the complex landscape of academic choices and challenges. From selecting the right subjects in school to choosing the best college and course for higher education, our educational counsellors provide evidence-based guidance tailored to each student\'s unique profile.',
+    para2: 'We address a wide range of academic concerns including <strong>subject and stream selection</strong>, <strong>study skills coaching</strong>, <strong>learning disability assessment</strong>, and <strong>higher education planning</strong>. Our counsellors work closely with students and parents to create a structured academic plan.',
+    para3: 'We also provide guidance on studying abroad, including university selection, application strategy, SOP writing, scholarship opportunities, and visa support. Our counsellors have helped hundreds of students secure admissions in top universities across India and internationally.',
+    highlights: [
+      'Subject & stream selection guidance (Class 9–12)',
+      'College & university selection support',
+      'Entrance exam preparation strategies',
+      'Study skills & time management coaching',
+      'Learning disability assessment & support',
+      'Scholarship & fellowship information',
+      'Abroad education guidance & visa support',
+    ],
     audience: 'School Students (Class 6–12), College Students, Parents',
     duration: '45–60 minutes per session',
     sessions: '2–4 sessions recommended',
   },
   {
-    icon: '🧠',
-    title: 'Mental Wellness Counselling',
-    shortDesc: 'Confidential mental health support, stress management, and emotional well-being programs.',
-    fullDesc: 'Our Mental Wellness program offers a safe, confidential, and non-judgmental space for individuals to address mental health challenges. Our licensed clinical psychologists and counsellors use evidence-based therapeutic approaches including Cognitive Behavioral Therapy (CBT), Mindfulness-Based Stress Reduction (MBSR), and Solution-Focused Brief Therapy (SFBT) to help you achieve emotional balance and mental well-being.',
-    benefits: ['Confidential individual therapy sessions', 'Anxiety and depression management', 'Stress and burnout counselling', 'Trauma-informed care and PTSD support', 'Mindfulness and relaxation techniques', 'Group therapy and support groups', 'Crisis intervention and emergency support'],
+    title: 'Mental Wellness',
+    img: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=700&h=500&fit=crop',
+    detailImg: 'https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=700&h=500&fit=crop',
+    heading: 'Complete Solution For Psychological Well-being & Mental Health',
+    para1: 'Our Mental Wellness program offers a safe, confidential, and non-judgmental space for individuals to address mental health challenges. Our licensed clinical psychologists and counsellors use evidence-based therapeutic approaches to help you achieve emotional balance and lasting mental well-being.',
+    para2: 'We focus on a range of therapeutic approaches, each tailored to the specific requirements of our clients. Our team utilises advanced approaches such as <strong>Cognitive Behavioral Therapy (CBT)</strong>, <strong>Mindfulness-Based Stress Reduction (MBSR)</strong>, <strong>Solution-Focused Brief Therapy (SFBT)</strong>, and Acceptance & Commitment Therapy (ACT) to ensure each individual receives a comprehensive, personalised treatment plan.',
+    para3: 'Our expertise extends to treating common issues such as stress, burnout, and relationship difficulties, as well as more complex conditions like anxiety disorders, depression, bipolar disorder, OCD, PTSD, and emotional regulation challenges. We also offer group therapy and peer support programs.',
+    highlights: [
+      'Confidential individual therapy sessions',
+      'Anxiety & depression management',
+      'Stress, burnout & trauma counselling',
+      'CBT, MBSR, SFBT & ACT therapeutic approaches',
+      'Mindfulness & relaxation techniques',
+      'Group therapy & peer support groups',
+      'Crisis intervention & emergency support',
+    ],
     audience: 'All Age Groups (10 years and above)',
     duration: '50–60 minutes per session',
     sessions: 'Ongoing as per clinical assessment',
   },
   {
-    icon: '🌱',
     title: 'Youth Guidance',
-    shortDesc: 'Specialized programs for youth development, leadership skills, and life transitions.',
-    fullDesc: 'The Youth Guidance program is specifically designed for young people aged 13–25 who are navigating the challenges of adolescence and early adulthood. Our youth counsellors provide a supportive environment to address issues related to identity, peer pressure, relationships, substance abuse prevention, and life skills development.',
-    benefits: ['Adolescent development and identity counselling', 'Peer pressure and bullying intervention', 'Substance abuse prevention programs', 'Life skills and decision-making workshops', 'Leadership development programs', 'Positive youth development activities', 'Online safety and digital wellness guidance'],
+    img: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&h=500&fit=crop',
+    detailImg: 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=700&h=500&fit=crop',
+    heading: 'Complete Solution For Youth Development & Life Skills',
+    para1: 'The Youth Guidance program is specifically designed for young people aged 13–25 who are navigating the challenges of adolescence and early adulthood. Our youth counsellors provide a supportive environment to address issues related to identity, peer pressure, relationships, and life skills development.',
+    para2: 'We address critical youth issues including <strong>identity and self-esteem development</strong>, <strong>peer pressure and bullying</strong>, <strong>substance abuse prevention</strong>, and <strong>digital wellness</strong>. Our programs are interactive, engaging, and designed to resonate with today\'s youth.',
+    para3: 'Our leadership development workshops and life skills programs equip young people with the tools they need to make positive decisions, build healthy relationships, and navigate life transitions with confidence and resilience.',
+    highlights: [
+      'Adolescent development & identity counselling',
+      'Peer pressure & bullying intervention',
+      'Substance abuse prevention programs',
+      'Life skills & decision-making workshops',
+      'Leadership development programs',
+      'Online safety & digital wellness guidance',
+      'Positive youth development activities',
+    ],
     audience: 'Youth aged 13–25 years',
     duration: '45–60 minutes per session',
     sessions: '4–6 sessions recommended',
   },
   {
-    icon: '💼',
     title: 'Skill Development',
-    shortDesc: 'Vocational training guidance, skill assessment, and development programs.',
-    fullDesc: 'Our Skill Development Counselling service bridges the gap between education and employment by helping individuals identify their vocational strengths and connect them with appropriate skill development opportunities. We work in close collaboration with the Skill India Mission, NSDC, and local ITIs to provide comprehensive vocational guidance.',
-    benefits: ['Vocational aptitude and interest assessment', 'Information on government skill development schemes', 'ITI, polytechnic, and vocational course guidance', 'Entrepreneurship development counselling', 'PMKVY and other scheme enrollment support', 'Job placement assistance and career fairs', 'Self-employment and startup guidance'],
+    img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&h=500&fit=crop',
+    detailImg: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&h=500&fit=crop',
+    heading: 'Complete Solution For Vocational Training & Employment Readiness',
+    para1: 'Our Skill Development Counselling service bridges the gap between education and employment by helping individuals identify their vocational strengths and connect them with appropriate skill development opportunities. We work in close collaboration with the Skill India Mission and NSDC.',
+    para2: 'We provide guidance on <strong>government skill development schemes</strong>, <strong>ITI and polytechnic courses</strong>, <strong>PMKVY enrollment</strong>, and <strong>entrepreneurship development</strong>. Our counsellors help you identify the right vocational path based on your aptitude and market demand.',
+    para3: 'Our job placement assistance, career fairs, and self-employment guidance programs have helped hundreds of youth secure meaningful employment and start their own ventures. We also provide support for those looking to upskill or reskill for better career opportunities.',
+    highlights: [
+      'Vocational aptitude & interest assessment',
+      'Government skill development scheme guidance',
+      'ITI, polytechnic & vocational course support',
+      'PMKVY & other scheme enrollment assistance',
+      'Entrepreneurship development counselling',
+      'Job placement assistance & career fairs',
+      'Self-employment & startup guidance',
+    ],
     audience: 'Youth (16–35 years), School Dropouts, Unemployed Youth',
     duration: '60 minutes per session',
     sessions: '3–5 sessions recommended',
   },
   {
-    icon: '👨‍👩‍👧',
     title: 'Family Counselling',
-    shortDesc: 'Strengthening family bonds through communication workshops and conflict resolution.',
-    fullDesc: 'Family Counselling services focus on improving family dynamics, communication patterns, and relationships. Our family therapists work with the entire family unit to identify and resolve conflicts, improve understanding, and build a healthier, more supportive home environment. We address issues ranging from parent-child conflicts to marital challenges and family crises.',
-    benefits: ['Family communication improvement workshops', 'Parent-child relationship counselling', 'Marital and couples counselling', 'Conflict resolution and mediation', 'Parenting skills development programs', 'Blended family and divorce adjustment support', 'Elder care and intergenerational conflict resolution'],
+    img: 'https://images.unsplash.com/photo-1511895426328-dc8714191011?w=700&h=500&fit=crop',
+    detailImg: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=700&h=500&fit=crop',
+    heading: 'Complete Solution For Family Harmony & Relationship Wellness',
+    para1: 'Family Counselling services focus on improving family dynamics, communication patterns, and relationships. Our family therapists work with the entire family unit to identify and resolve conflicts, improve understanding, and build a healthier, more supportive home environment.',
+    para2: 'We address issues ranging from <strong>parent-child conflicts</strong> to <strong>marital challenges</strong>, <strong>blended family adjustments</strong>, and <strong>elder care concerns</strong>. Our therapists use Emotionally Focused Therapy (EFT), Narrative Therapy, and Structural Family Therapy to bring lasting positive change.',
+    para3: 'Our parenting skills workshops and communication improvement programs have helped thousands of families build stronger bonds, resolve long-standing conflicts, and create a nurturing environment for children to thrive.',
+    highlights: [
+      'Family communication improvement workshops',
+      'Parent-child relationship counselling',
+      'Marital & couples counselling',
+      'Conflict resolution & mediation',
+      'Parenting skills development programs',
+      'Blended family & divorce adjustment support',
+      'Elder care & intergenerational conflict resolution',
+    ],
     audience: 'Families, Couples, Parents, Children',
     duration: '60–90 minutes per session',
     sessions: '5–8 sessions recommended',
   },
   {
-    icon: '🤝',
     title: 'Personal Counselling',
-    shortDesc: 'One-on-one sessions addressing personal challenges, self-esteem, and life goals.',
-    fullDesc: 'Personal Counselling provides individualized support for a wide range of personal challenges that affect daily functioning and quality of life. Whether you are dealing with low self-esteem, relationship difficulties, grief, life transitions, or simply feeling stuck, our counsellors offer a compassionate and professional space to explore your concerns and develop effective coping strategies.',
-    benefits: ['Self-esteem and confidence building', 'Grief and loss counselling', 'Relationship and interpersonal skills', 'Life transitions and adjustment support', 'Goal setting and motivation coaching', 'Anger management and emotional regulation', 'Personal development and self-discovery'],
+    img: 'https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=700&h=500&fit=crop',
+    detailImg: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&h=500&fit=crop',
+    heading: 'Complete Solution For Personal Growth & Emotional Well-being',
+    para1: 'Personal Counselling provides individualized support for a wide range of personal challenges that affect daily functioning and quality of life. Whether you are dealing with low self-esteem, relationship difficulties, grief, life transitions, or simply feeling stuck, our counsellors offer a compassionate and professional space.',
+    para2: 'Our counsellors are trained in <strong>Person-Centered Therapy</strong>, <strong>Cognitive Behavioral Therapy (CBT)</strong>, <strong>Motivational Interviewing</strong>, and <strong>Narrative Therapy</strong> to help you explore your concerns, understand your patterns, and develop effective coping strategies tailored to your unique situation.',
+    para3: 'We help individuals build self-awareness, develop emotional resilience, set meaningful goals, and create a life aligned with their values. Our sessions are completely confidential, non-judgmental, and focused entirely on your well-being and growth.',
+    highlights: [
+      'Self-esteem & confidence building',
+      'Grief, loss & bereavement counselling',
+      'Relationship & interpersonal skills',
+      'Life transitions & adjustment support',
+      'Goal setting & motivation coaching',
+      'Anger management & emotional regulation',
+      'Personal development & self-discovery',
+    ],
     audience: 'All Adults (18 years and above)',
     duration: '50–60 minutes per session',
     sessions: 'As per individual need',
   },
+  {
+    title: 'Crisis Support',
+    img: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=700&h=500&fit=crop',
+    detailImg: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&h=500&fit=crop',
+    heading: 'Complete Solution For Crisis Intervention & Emergency Mental Health',
+    para1: 'Our Crisis Support service provides immediate, compassionate, and professional intervention for individuals experiencing acute mental health crises, emotional breakdowns, or situations of immediate risk. Our trained crisis counsellors are available to provide rapid response and stabilisation.',
+    para2: 'We are equipped to handle a wide range of crisis situations including <strong>suicidal ideation</strong>, <strong>acute anxiety and panic attacks</strong>, <strong>trauma and PTSD episodes</strong>, <strong>domestic violence situations</strong>, and <strong>substance abuse crises</strong>. Our team follows evidence-based crisis intervention protocols to ensure safety and stabilisation.',
+    para3: 'Following immediate crisis intervention, we provide a structured follow-up care plan including ongoing therapy, referrals to psychiatric services if needed, and connection to community support resources. Our goal is not just to manage the crisis but to help individuals build long-term resilience.',
+    highlights: [
+      'Immediate crisis assessment & intervention',
+      'Suicidal ideation & self-harm support',
+      'Trauma & PTSD crisis management',
+      'Domestic violence & abuse support',
+      'Substance abuse crisis intervention',
+      'Psychiatric referral & coordination',
+      'Follow-up care & safety planning',
+    ],
+    audience: 'All individuals in acute distress (any age)',
+    duration: 'As needed — immediate response',
+    sessions: 'Ongoing follow-up care provided',
+  },
 ];
 
 export default function ServicesPage() {
+  const [activeService, setActiveService] = useState<string | null>(null);
+  const detailRef = useRef<HTMLDivElement>(null);
+
+  const handleServiceClick = (title: string) => {
+    if (activeService === title) {
+      setActiveService(null);
+    } else {
+      setActiveService(title);
+      setTimeout(() => {
+        detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  };
+
+  const selected = services.find((s) => s.title === activeService);
+
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white font-sans antialiased">
       {/* NAVBAR */}
       <nav className="sticky top-0 z-50 bg-[#1a3a6b] shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,7 +212,6 @@ export default function ServicesPage() {
               <Link href="/services" className="text-blue-200 border-b-2 border-blue-300 text-sm font-medium">Services</Link>
               <Link href="/counselors" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Counsellors</Link>
               <Link href="/events" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Events</Link>
-              <Link href="/resources" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Resources</Link>
               <Link href="/contact" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Contact</Link>
             </div>
             <div className="flex items-center gap-3">
@@ -107,92 +223,53 @@ export default function ServicesPage() {
       </nav>
 
       {/* HERO BANNER */}
-      <section className="bg-gradient-to-br from-[#1a3a6b] via-[#1e4d8c] to-[#2563eb] py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-2 text-blue-200 text-sm mb-4">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-white">Services</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Counselling Services</h1>
-          <p className="text-blue-100 text-lg max-w-3xl leading-relaxed">
-            Comprehensive, free, and professional counselling services designed to support every individual at every stage of life. All services are provided by certified counsellors in a safe and confidential environment.
-          </p>
-          <div className="flex flex-wrap gap-3 mt-8">
-            {services.map((s) => (
-              <span key={s.title} className="bg-white bg-opacity-20 text-white text-xs px-3 py-1.5 rounded-full border border-white border-opacity-30">
-                {s.icon} {s.title}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* OVERVIEW STRIP */}
-      <section className="bg-white border-b border-gray-100 py-8 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            {[
-              { icon: '✅', label: '100% Free Services' },
-              { icon: '🔒', label: 'Fully Confidential' },
-              { icon: '🏅', label: 'Certified Counsellors' },
-              { icon: '🌐', label: 'Online & Offline' },
-            ].map((item) => (
-              <div key={item.label} className="flex items-center justify-center gap-2 text-sm text-gray-700 font-medium">
-                <span className="text-lg">{item.icon}</span>
-                <span>{item.label}</span>
-              </div>
-            ))}
+      <section className="relative overflow-hidden">
+        <img
+          src="/con2.jpg"
+          alt="Counselling Services"
+          className="w-full h-[320px] object-cover"
+        />
+        <div className="absolute inset-0 bg-[#1a3a6b]/65" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="flex items-center gap-2 text-blue-200 text-sm mb-4">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <span>/</span>
+              <span className="text-white">Services</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Counselling Services</h1>
+            <p className="text-blue-100 text-lg max-w-2xl leading-relaxed">
+              Comprehensive, free, and professional counselling services designed to support every individual at every stage of life.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* SERVICES DETAILED CARDS */}
-      <section className="bg-gray-50 py-20 px-4">
+      {/* SERVICES IMAGE GRID */}
+      <section className="bg-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="space-y-8">
-            {services.map((service, index) => (
-              <div key={service.title} className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all border border-gray-100 overflow-hidden">
-                <div className={`flex flex-col lg:flex-row ${index % 2 !== 0 ? 'lg:flex-row-reverse' : ''}`}>
-                  <div className="lg:w-72 bg-gradient-to-br from-[#1a3a6b] to-[#2563eb] p-8 flex flex-col items-center justify-center text-center flex-shrink-0">
-                    <div className="text-6xl mb-4">{service.icon}</div>
-                    <h2 className="text-white font-bold text-xl mb-2">{service.title}</h2>
-                    <p className="text-blue-200 text-sm leading-relaxed">{service.shortDesc}</p>
-                    <div className="mt-6 space-y-2 w-full">
-                      <div className="bg-white bg-opacity-10 rounded-lg p-2 text-xs text-blue-100">
-                        <span className="font-semibold text-white">Duration:</span> {service.duration}
-                      </div>
-                      <div className="bg-white bg-opacity-10 rounded-lg p-2 text-xs text-blue-100">
-                        <span className="font-semibold text-white">Sessions:</span> {service.sessions}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex-1 p-8">
-                    <div className="mb-6">
-                      <h3 className="text-lg font-bold text-[#1a3a6b] mb-2">About This Service</h3>
-                      <p className="text-gray-600 leading-relaxed text-sm">{service.fullDesc}</p>
-                    </div>
-                    <div className="mb-6">
-                      <h3 className="text-base font-bold text-[#1a3a6b] mb-3">Key Benefits</h3>
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {service.benefits.map((benefit) => (
-                          <li key={benefit} className="flex items-start gap-2 text-sm text-gray-600">
-                            <span className="text-green-500 mt-0.5 flex-shrink-0 font-bold">✓</span>
-                            <span>{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-gray-100">
-                      <div className="text-sm text-gray-500">
-                        <span className="font-semibold text-gray-700">For: </span>
-                        {service.audience}
-                      </div>
-                      <Link href="/book-appointment" className="bg-[#1a3a6b] text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#2563eb] transition-colors flex-shrink-0">
-                        📅 Book Appointment
-                      </Link>
-                    </div>
-                  </div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Counselling Services We Offer</h2>
+            <div className="w-24 h-1 bg-orange-400 mx-auto mt-3 mb-6 rounded-full" />
+            <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed text-sm md:text-base">
+              We offer a team of the most trusted and experienced psychologists, best therapists, certified counsellors, and mental health professionals to take care of your mind and well-being. Click on any service below to learn more.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {services.map((service) => (
+              <div
+                key={service.title}
+                onClick={() => handleServiceClick(service.title)}
+                className={`group relative overflow-hidden rounded-lg cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 ${activeService === service.title ? 'ring-4 ring-orange-400 ring-offset-2' : ''}`}
+              >
+                <img
+                  src={service.img}
+                  alt={service.title}
+                  className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className={`absolute bottom-0 left-0 right-0 py-3 px-4 text-center transition-colors duration-200 ${activeService === service.title ? 'bg-orange-600' : 'bg-orange-500 group-hover:bg-orange-600'}`}>
+                  <p className="text-white font-semibold text-sm">{service.title}</p>
                 </div>
               </div>
             ))}
@@ -200,18 +277,97 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* SERVICE DETAIL PANEL — shown on click, reference design */}
+      {selected && (
+        <section ref={detailRef} className="bg-gray-50 py-16 px-4 border-t-4 border-orange-400">
+          <div className="max-w-7xl mx-auto">
+            {/* Close button */}
+            <div className="flex justify-between items-center mb-10">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-snug">{selected.heading}</h2>
+                <div className="w-16 h-1 bg-orange-400 mt-2 rounded-full" />
+              </div>
+              <button
+                onClick={() => setActiveService(null)}
+                className="text-gray-400 hover:text-gray-700 transition-colors text-sm flex items-center gap-1 border border-gray-200 px-3 py-1.5 rounded-lg"
+              >
+                ✕ Close
+              </button>
+            </div>
+
+            {/* Main content — left text, right image */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+              {/* LEFT — text */}
+              <div>
+                <p className="text-gray-700 leading-relaxed mb-5 text-[15px]">{selected.para1}</p>
+                <p
+                  className="text-gray-700 leading-relaxed mb-5 text-[15px]"
+                  dangerouslySetInnerHTML={{ __html: selected.para2 }}
+                />
+                <p className="text-gray-700 leading-relaxed mb-8 text-[15px]">{selected.para3}</p>
+
+                {/* Key highlights */}
+                <h3 className="text-base font-bold text-gray-900 mb-4">Key Highlights</h3>
+                <ul className="space-y-2 mb-8">
+                  {selected.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-2 text-sm text-gray-700">
+                      <span className="w-5 h-5 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">✓</span>
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Meta info */}
+                <div className="flex flex-wrap gap-4 mb-8">
+                  <div className="bg-blue-50 border border-blue-100 rounded-lg px-4 py-3 text-sm">
+                    <p className="text-blue-400 text-xs font-medium mb-0.5">For</p>
+                    <p className="text-blue-900 font-semibold">{selected.audience}</p>
+                  </div>
+                  <div className="bg-orange-50 border border-orange-100 rounded-lg px-4 py-3 text-sm">
+                    <p className="text-orange-400 text-xs font-medium mb-0.5">Duration</p>
+                    <p className="text-orange-900 font-semibold">{selected.duration}</p>
+                  </div>
+                  <div className="bg-green-50 border border-green-100 rounded-lg px-4 py-3 text-sm">
+                    <p className="text-green-400 text-xs font-medium mb-0.5">Sessions</p>
+                    <p className="text-green-900 font-semibold">{selected.sessions}</p>
+                  </div>
+                </div>
+
+                <Link
+                  href="/book-appointment"
+                  className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors shadow-md"
+                >
+                  📅 Book Free Appointment
+                </Link>
+              </div>
+
+              {/* RIGHT — image */}
+              <div className="rounded-2xl overflow-hidden shadow-lg">
+                <img
+                  src={selected.detailImg}
+                  alt={selected.title}
+                  className="w-full h-[420px] object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+
+
       {/* CTA SECTION */}
-      <section className="bg-gradient-to-br from-[#1a3a6b] to-[#2563eb] py-16 px-4">
+      <section className="bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 py-16 px-4 border-t border-orange-100">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Take the First Step?</h2>
-          <p className="text-blue-100 mb-8 leading-relaxed">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to Take the First Step?</h2>
+          <p className="text-gray-600 mb-8 leading-relaxed">
             All our services are completely free for district residents. Book your appointment today and take the first step towards a better tomorrow.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/book-appointment" className="bg-white text-[#1a3a6b] px-8 py-3.5 rounded-lg font-semibold hover:bg-blue-50 transition-colors shadow-lg">
+            <Link href="/book-appointment" className="bg-orange-500 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-orange-600 transition-colors shadow-md">
               📅 Book Free Appointment
             </Link>
-            <Link href="/counselors" className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-[#1a3a6b] transition-colors">
+            <Link href="/counselors" className="border-2 border-orange-400 text-orange-600 px-8 py-3.5 rounded-lg font-semibold hover:bg-orange-500 hover:text-white transition-colors">
               Meet Our Counsellors →
             </Link>
           </div>

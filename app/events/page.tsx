@@ -98,7 +98,6 @@ export default function EventsPage() {
               <Link href="/services" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Services</Link>
               <Link href="/counselors" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Counsellors</Link>
               <Link href="/events" className="text-blue-200 border-b-2 border-blue-300 text-sm font-medium">Events</Link>
-              <Link href="/resources" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Resources</Link>
               <Link href="/contact" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Contact</Link>
             </div>
             <div className="flex items-center gap-3">
@@ -257,7 +256,7 @@ export default function EventsPage() {
             <div>
               <h4 className="font-bold text-base mb-4 text-blue-100">Quick Links</h4>
               <ul className="space-y-2">
-                {[{ label: 'Home', href: '/' }, { label: 'About Us', href: '/about' }, { label: 'Services', href: '/services' }, { label: 'Counsellors', href: '/counselors' }, { label: 'Events', href: '/events' }, { label: 'Resources', href: '/resources' }, { label: 'Contact', href: '/contact' }].map((link) => (
+                {[{ label: 'Home', href: '/' }, { label: 'About Us', href: '/about' }, { label: 'Services', href: '/services' }, { label: 'Counsellors', href: '/counselors' }, { label: 'Events', href: '/events' }, { label: 'Contact', href: '/contact' }].map((link) => (
                   <li key={link.label}><Link href={link.href} className="text-blue-300 hover:text-white text-sm transition-colors">→ {link.label}</Link></li>
                 ))}
               </ul>

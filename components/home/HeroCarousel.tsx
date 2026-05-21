@@ -1,0 +1,104 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+
+const slides = [
+  {
+    bg: '/con4.jpg',
+    tag: 'Hope. Healing. Growth',
+    heading: 'Empowering Youth Through Professional Guidance & Counselling',
+    overlay: 'from-[#0a1628]/70 via-[#0a1628]/40 to-transparent',
+  },
+  {
+    bg: '/con3.webp',
+    tag: 'Healing Minds, Transforming Lives',
+    heading: "Helping you navigate life's challenges with expert Therapy, Counselling, and Emotional Support",
+    overlay: 'from-[#0a1628]/70 via-[#0a1628]/40 to-transparent',
+  },
+];
+
+export default function HeroCarousel() {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div>
+      {/* CAROUSEL */}
+      <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden">
+        {slides.map((slide, i) => (
+          <div
+            key={i}
+            className={`absolute inset-0 transition-opacity duration-1000 ${i === current ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+          >
+            <img
+              src={slide.bg}
+              alt={slide.tag}
+              className="w-full h-full object-cover"
+            />
+            <div className={`absolute inset-0 bg-gradient-to-r ${slide.overlay}`} />
+
+            {/* Caption */}
+            <div className="absolute inset-0 flex items-center">
+              <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
+                <p className="text-orange-400 font-semibold text-sm md:text-base uppercase tracking-widest mb-3">
+                  {slide.tag}
+                </p>
+                <h2 className="text-white font-bold text-3xl md:text-4xl lg:text-5xl leading-tight max-w-2xl">
+                  {slide.heading}
+                </h2>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {/* Dot indicators */}
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${i === current ? 'bg-orange-400 w-6' : 'bg-white/50 hover:bg-white/80 w-2.5'}`}
+            />
+          ))}
+        </div>
+
+        {/* Prev / Next arrows */}
+        <button
+          onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/30 hover:bg-black/50 text-white rounded-full flex items-center justify-center text-xl transition-colors"
+        >
+          ‹
+        </button>
+        <button
+          onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/30 hover:bg-black/50 text-white rounded-full flex items-center justify-center text-xl transition-colors"
+        >
+          ›
+        </button>
+      </section>
+
+      {/* BUTTONS BELOW IMAGE — exactly like reference */}
+      <div className="bg-white py-8 flex flex-col sm:flex-row items-center justify-center gap-6 border-b border-gray-100">
+        <Link
+          href="/book-appointment"
+          style={{ backgroundColor: '#16a34a', color: '#fff', fontWeight: 600, padding: '12px 40px', borderRadius: '4px', fontSize: '18px', display: 'inline-block', textDecoration: 'none' }}
+        >
+          Book an Appointment
+        </Link>
+        <Link
+          href="/services"
+          style={{ backgroundColor: '#16a34a', color: '#fff', fontWeight: 600, padding: '12px 40px', borderRadius: '4px', fontSize: '18px', display: 'inline-block', textDecoration: 'none' }}
+        >
+          Free Self Assessments
+        </Link>
+      </div>
+    </div>
+  );
+}

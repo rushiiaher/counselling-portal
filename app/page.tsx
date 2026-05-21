@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import HeroCarousel from '@/components/home/HeroCarousel';
 
 export default function HomePage() {
   return (
@@ -22,7 +23,6 @@ export default function HomePage() {
               <Link href="/services" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Services</Link>
               <Link href="/counselors" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Counsellors</Link>
               <Link href="/events" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Events</Link>
-              <Link href="/resources" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Resources</Link>
               <Link href="/contact" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Contact</Link>
             </div>
             <div className="flex items-center gap-3">
@@ -33,38 +33,8 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <section className="bg-gradient-to-br from-[#0f2347] via-[#1a3a6b] to-[#2563eb] py-24 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-300 rounded-full blur-3xl"></div>
-        </div>
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <div className="inline-block bg-blue-500 bg-opacity-30 text-blue-100 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 border border-blue-400 border-opacity-40">
-            🇮🇳 Government of India Initiative
-          </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 max-w-4xl mx-auto">
-            Empowering Youth Through Professional Guidance &amp; Counselling
-          </h1>
-          <p className="text-blue-100 text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed">
-            The District Counselling Center provides free, confidential, and professional counselling services to students, youth, and families across the district. Our certified counsellors are here to guide you toward a brighter future.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/book-appointment" className="bg-white text-[#1a3a6b] px-8 py-3.5 rounded-lg font-semibold text-base hover:bg-blue-50 transition-colors shadow-lg">
-              📅 Book Appointment
-            </Link>
-            <Link href="/services" className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold text-base hover:bg-white hover:text-[#1a3a6b] transition-colors">
-              Explore Services →
-            </Link>
-          </div>
-          <div className="flex flex-wrap justify-center gap-6 mt-12 text-sm text-blue-200">
-            <span className="flex items-center gap-2"><span className="text-green-400">✓</span> 100% Free Services</span>
-            <span className="flex items-center gap-2"><span className="text-green-400">✓</span> Certified Counsellors</span>
-            <span className="flex items-center gap-2"><span className="text-green-400">✓</span> Fully Confidential</span>
-            <span className="flex items-center gap-2"><span className="text-green-400">✓</span> Online &amp; Offline</span>
-          </div>
-        </div>
-      </section>
+      {/* CAROUSEL SECTION */}
+      <HeroCarousel />
 
       {/* STATISTICS SECTION */}
       <section className="bg-white py-16 px-4 border-b border-gray-100">
@@ -347,7 +317,6 @@ export default function HomePage() {
                   { label: 'Services', href: '/services' },
                   { label: 'Counsellors', href: '/counselors' },
                   { label: 'Events', href: '/events' },
-                  { label: 'Resources', href: '/resources' },
                   { label: 'Contact', href: '/contact' },
                 ].map((link) => (
                   <li key={link.label}>
