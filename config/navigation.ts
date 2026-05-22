@@ -1,4 +1,8 @@
-import { Home, Calendar, Users, FileText, Settings, ShieldAlert, Activity, BookOpen, MessageCircle } from "lucide-react";
+import {
+  Home, Calendar, Users, FileText, Settings, ShieldAlert, Activity,
+  BookOpen, MessageCircle, Building2, ClipboardList, CalendarDays,
+  HeartHandshake, UserCheck, Bell,
+} from "lucide-react";
 
 export type NavItem = {
   title: string;
@@ -14,25 +18,34 @@ export const publicNav: NavItem[] = [
 ];
 
 export const studentNav: NavItem[] = [
-  { title: "Dashboard", href: "/student", icon: Home },
-  { title: "Appointments", href: "/student/appointments", icon: Calendar },
+  { title: "Dashboard", href: "/student/dashboard", icon: Home },
+  { title: "Request Support", href: "/student/services", icon: HeartHandshake },
+  { title: "My Requests", href: "/student/requests", icon: ClipboardList },
+  { title: "Programs", href: "/student/programs", icon: CalendarDays },
+  { title: "Counsellors", href: "/student/counsellors", icon: Users },
   { title: "Resources", href: "/student/resources", icon: BookOpen },
-  { title: "Self-Assessments", href: "/student/assessments", icon: Activity },
+  { title: "Notifications", href: "/student/notifications", icon: Bell },
   { title: "Profile", href: "/student/profile", icon: Settings },
 ];
 
 export const counsellorNav: NavItem[] = [
-  { title: "Console", href: "/staff", icon: Activity },
-  { title: "Schedule", href: "/staff/schedule", icon: Calendar },
-  { title: "Patients", href: "/staff/patients", icon: Users },
-  { title: "Clinical Notes", href: "/staff/notes", icon: FileText },
+  { title: "Dashboard", href: "/staff", icon: Activity },
+  { title: "My Cases", href: "/staff/cases", icon: ClipboardList },
+  { title: "Reports", href: "/staff/reports", icon: FileText },
+  { title: "Follow-ups", href: "/staff/follow-ups", icon: Calendar },
+  { title: "Referrals", href: "/staff/referrals", icon: UserCheck },
+  { title: "Notifications", href: "/staff/notifications", icon: Bell },
+  { title: "Profile", href: "/staff/profile", icon: Settings },
 ];
 
 export const adminNav: NavItem[] = [
-  { title: "Overview", href: "/admin", icon: Activity },
-  { title: "User Management", href: "/admin/users", icon: Users },
-  { title: "Resource Manager", href: "/admin/resources", icon: BookOpen },
-  { title: "Crisis Alerts", href: "/admin/crisis", icon: ShieldAlert },
-  { title: "Audit Logs", href: "/admin/audit", icon: FileText },
+  { title: "Dashboard", href: "/admin/dashboard", icon: Activity },
+  { title: "Cases", href: "/admin/cases", icon: ClipboardList },
+  { title: "Counsellors", href: "/admin/counsellors", icon: UserCheck },
+  { title: "Institutions", href: "/admin/institutions", icon: Building2 },
+  { title: "Students", href: "/admin/students", icon: Users },
+  { title: "Programs", href: "/admin/programs", icon: CalendarDays },
+  { title: "Resources", href: "/admin/resources", icon: BookOpen },
+  { title: "Audit Logs", href: "/admin/audit", icon: ShieldAlert },
   { title: "Settings", href: "/admin/settings", icon: Settings },
 ];

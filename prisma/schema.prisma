@@ -9,6 +9,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ─── Existing Enums (preserved) ───────────────────────────────────────────────
+
 enum Role {
   STUDENT
   PARENT
@@ -35,6 +37,15 @@ enum NotificationType {
   APPOINTMENT_CANCELLED
   CRISIS_ALERT
   SYSTEM
+  // New types for support request workflow
+  REQUEST_SUBMITTED
+  REQUEST_ASSIGNED
+  ASSIGNMENT_ACCEPTED
+  ASSIGNMENT_REJECTED
+  FOLLOW_UP_DUE
+  PROGRAM_REGISTERED
+  CASE_RESOLVED
+  CASE_ESCALATED
 }
 
 enum NotificationChannel {
@@ -86,193 +97,6 @@ enum Gender {
   PREFER_NOT_TO_SAY
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  role          Role      @default(STUDENT)
-  isActive      Boolean   @default(true)
-  profileCompleted Boolean @default(false)
-  language      String    @default("en") // 'en' or 'ur'
-  
-  termsAcceptedAt   DateTime?
-  privacyAcceptedAt DateTime?
-  clinicalConsentGivenAt DateTime?
-
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  deletedAt     DateTime?
-
-  // Relationships
-  studentProfile    StudentProfile?
-  parentProfile     ParentProfile?
-  counsellorProfile CounsellorProfile?
-  
-  appointmentsAsStudent    Appointment[] @relation("StudentAppointments")
-  appointmentsAsCounsellor Appointment[] @relation("CounsellorAppointments")
-  
-  auditLogs         AuditLog[]
-  resources         Resource[]
-  notifications     Notification[]
-  notificationPreference NotificationPreference?
-  adminProfile      AdminProfile?
-
-  @@index([email])
-}
-
-model StudentProfile {
-  id        String   @id @default(cuid())
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  firstName String
-  lastName  String?
-  ageRange  String
-  preferredLanguage String @default("en")
-  avatarUrl String?
-  school    String?
-  guardianPhone String?
-  gender    Gender?
-  district  String?
-  grade     String?
-  parentId  String?
-  parent    ParentProfile? @relation(fields: [parentId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  deletedAt DateTime?
-  
-  assessments Assessment[]
-  parentInvitations ParentInvitation[]
-  assignedCounsellors CounsellorPatientAssignment[]
-  clinicalNotes       ClinicalNote[]
-  referralsMade       Referral[]
-  groupAttendances    GroupAttendance[]
-  assessmentResults   AssessmentResult[]
-
-  @@index([userId])
-  @@index([parentId])
-}
-
-model ParentProfile {
-  id        String   @id @default(cuid())
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  phone     String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  children  StudentProfile[]
-
-  @@index([userId])
-}
-
-model CounsellorProfile {
-  id              String   @id @default(cuid())
-  userId          String   @unique
-  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  specializations String[]
-  languages       String[]
-  yearsOfExperience Int?
-  isVerified      Boolean  @default(false)
-  acceptingPatients Boolean @default(true)
-  bio             String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  deletedAt       DateTime?
-
-  availabilities  CounsellorAvailability[]
-  blockedSlots    CounsellorBlockedSlot[]
-  anonymousSessions AnonymousSession[]
-  assignedPatients  CounsellorPatientAssignment[]
-  clinicalNotes     ClinicalNote[]
-  referralsMade     Referral[]
-  groupSessions     GroupSession[]
-
-  @@index([userId])
-}
-
-model AdminProfile {
-  id        String   @id @default(cuid())
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  scope     AdminScope @default(SUPER_ADMIN)
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([userId])
-}
-
-model CounsellorAvailability {
-  id           String   @id @default(cuid())
-  counsellorId String
-  dayOfWeek    Int      // 0 = Sunday, 1 = Monday, etc.
-  startTime    String   // "09:00" format
-  endTime      String   // "17:00" format
-  slotDuration Int      // in minutes
-  isActive     Boolean  @default(true)
-
-  counsellor   CounsellorProfile @relation(fields: [counsellorId], references: [id], onDelete: Cascade)
-
-  @@index([counsellorId])
-  @@index([dayOfWeek])
-}
-
-model CounsellorBlockedSlot {
-  id           String   @id @default(cuid())
-  counsellorId String
-  startsAt     DateTime
-  endsAt       DateTime
-  reason       String?
-
-  counsellor   CounsellorProfile @relation(fields: [counsellorId], references: [id], onDelete: Cascade)
-
-  @@index([counsellorId])
-  @@index([startsAt])
-}
-
-model Appointment {
-  id              String            @id @default(cuid())
-  studentId       String
-  counsellorId    String
-  startTime       DateTime
-  endTime         DateTime
-  status          AppointmentStatus @default(PENDING)
-  mode            SessionMode       @default(VIDEO)
-  jitsiRoom       String?
-  notes           String?           // Encrypted in app layer
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  deletedAt       DateTime?
-
-  clinicalNotes   ClinicalNote[]
-
-  student         User              @relation("StudentAppointments", fields: [studentId], references: [id])
-  counsellor      User              @relation("CounsellorAppointments", fields: [counsellorId], references: [id])
-
-  @@index([studentId])
-  @@index([counsellorId])
-  @@index([startTime])
-}
-
-model Assessment {
-  id              String   @id @default(cuid())
-  studentId       String?  // Optional for anonymous
-  type            String   // PHQ-9, GAD-7
-  score           Int
-  responses       Json     // Raw answers
-  crisisTriggered Boolean  @default(false)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-
-  student         StudentProfile? @relation(fields: [studentId], references: [id])
-
-  @@index([studentId])
-}
-
 enum ResourceCategory {
   ANXIETY
   DEPRESSION
@@ -286,88 +110,626 @@ enum ResourceCategory {
   GENERAL
 }
 
-model Resource {
-  id              String   @id @default(cuid())
-  slug            String   @unique
+// ─── New Enums ─────────────────────────────────────────────────────────────────
 
-  title           String
-  excerpt         String?
-  content         String   @db.Text
-
-  category        ResourceCategory @default(GENERAL)
-  tags            String[]
-
-  language        String   @default("en")
-
-  readingMinutes  Int?
-
-  isPublished     Boolean  @default(false)
-  publishedAt     DateTime?
-
-  seoTitle        String?
-  seoDescription  String?
-
-  featuredImage   String?
-
-  authorId        String?
-  author          User?    @relation(fields: [authorId], references: [id])
-  
-  reviewedBy      String?
-  reviewedAt      DateTime?
-
-  helpfulCount    Int      @default(0)
-
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  deletedAt       DateTime?
-
-  @@index([category])
-  @@index([isPublished])
-  @@index([slug])
-  @@index([authorId])
+enum ServiceCategory {
+  CAREER_COUNSELLING
+  EDUCATIONAL_GUIDANCE
+  MENTAL_WELLNESS
+  YOUTH_GUIDANCE
+  SKILL_DEVELOPMENT
+  FAMILY_COUNSELLING
+  PERSONAL_COUNSELLING
+  CRISIS_SUPPORT
 }
 
-model AuditLog {
-  id        String   @id @default(cuid())
-  userId    String?  // actorId
-  action    String
-  resourceType String?
-  resourceId   String?
-  details   String?
-  ipHash    String?
-  userAgentHash String?
-  metadata  Json?
-  createdAt DateTime @default(now())
+enum RequestStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  COUNSELLOR_ASSIGNED
+  SESSION_SCHEDULED
+  IN_PROGRESS
+  FOLLOW_UP_REQUIRED
+  RESOLVED
+  ESCALATED
+}
 
-  user      User?    @relation(fields: [userId], references: [id])
+enum RequestUrgency {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum InstitutionType {
+  SCHOOL
+  COLLEGE
+  HOSPITAL
+  WELFARE_DEPT
+  LAW_ENFORCEMENT
+  ADMINISTRATION
+  NGO
+  OTHER
+}
+
+enum AssignmentStatus {
+  PENDING_ACCEPTANCE
+  ACCEPTED
+  REJECTED
+  REASSIGNED
+}
+
+enum SupportReferralTarget {
+  HOSPITAL
+  PSYCHOLOGIST
+  ADDICTION_CENTER
+  WELFARE_DEPT
+  ADMINISTRATION
+  LAW_ENFORCEMENT
+  NGO
+  OTHER
+}
+
+enum SupportReferralStatus {
+  PENDING
+  ACCEPTED
+  COMPLETED
+  CANCELLED
+}
+
+enum ProgramType {
+  SEMINAR
+  WORKSHOP
+  WEBINAR
+  CAMP
+}
+
+enum ProgramStatus {
+  DRAFT
+  SCHEDULED
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum FollowUpStatus {
+  PENDING
+  COMPLETED
+  MISSED
+  RESCHEDULED
+}
+
+enum StudentProgress {
+  IMPROVING
+  STABLE
+  DETERIORATING
+  RESOLVED
+}
+
+// ─── Core User Models ──────────────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          Role      @default(STUDENT)
+  isActive      Boolean   @default(true)
+  profileCompleted Boolean @default(false)
+  language      String    @default("en")
+
+  termsAcceptedAt        DateTime?
+  privacyAcceptedAt      DateTime?
+  clinicalConsentGivenAt DateTime?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  studentProfile    StudentProfile?
+  parentProfile     ParentProfile?
+  counsellorProfile CounsellorProfile?
+  adminProfile      AdminProfile?
+
+  appointmentsAsStudent    Appointment[] @relation("StudentAppointments")
+  appointmentsAsCounsellor Appointment[] @relation("CounsellorAppointments")
+
+  auditLogs              AuditLog[]
+  resources              Resource[]
+  notifications          Notification[]
+  notificationPreference NotificationPreference?
+
+  // New: admin manages request assignments and programs
+  requestAssignmentsManaged RequestAssignment[]
+  createdPrograms           AwarenessProgram[]
+
+  @@index([email])
+}
+
+model StudentProfile {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  firstName         String
+  lastName          String?
+  ageRange          String
+  preferredLanguage String   @default("en")
+  avatarUrl         String?
+  school            String?  // kept for backward compat; institutionId is canonical
+  guardianPhone     String?
+  gender            Gender?
+  district          String?
+  grade             String?
+  parentId          String?
+  parent            ParentProfile? @relation(fields: [parentId], references: [id])
+
+  // New fields
+  institutionId     String?
+  institution       Institution?   @relation(fields: [institutionId], references: [id])
+  mobile            String?
+  area              String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+
+  // Existing relations (preserved)
+  assessments         Assessment[]
+  parentInvitations   ParentInvitation[]
+  assignedCounsellors CounsellorPatientAssignment[]
+  clinicalNotes       ClinicalNote[]
+  referralsMade       Referral[]
+  groupAttendances    GroupAttendance[]
+  assessmentResults   AssessmentResult[]
+
+  // New relations
+  supportRequests      SupportRequest[]
+  guidanceReports      GuidanceReport[]
+  programParticipations ProgramParticipation[]
 
   @@index([userId])
-  @@index([action])
-  @@index([resourceType, resourceId])
-  @@index([createdAt])
-  @@index([userId, createdAt])
+  @@index([parentId])
+  @@index([institutionId])
 }
 
-model AnonymousSession {
+model ParentProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  children StudentProfile[]
+
+  @@index([userId])
+}
+
+model CounsellorProfile {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  specializations   String[] // legacy string array
+  languages         String[]
+  yearsOfExperience Int?
+  isVerified        Boolean  @default(false)
+  acceptingPatients Boolean  @default(true)
+  bio               String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  deletedAt         DateTime?
+
+  // New: typed service category specializations
+  serviceCategories ServiceCategory[]
+
+  // Existing relations (preserved)
+  availabilities   CounsellorAvailability[]
+  blockedSlots     CounsellorBlockedSlot[]
+  anonymousSessions AnonymousSession[]
+  assignedPatients  CounsellorPatientAssignment[]
+  clinicalNotes     ClinicalNote[]
+  referralsMade     Referral[]
+  groupSessions     GroupSession[]
+
+  // New relations
+  assignedRequests    SupportRequest[]              @relation("AssignedRequests")
+  requestAssignments  RequestAssignment[]
+  guidanceReports     GuidanceReport[]
+  supportFollowUps    SupportFollowUp[]
+  supportReferrals    SupportReferral[]
+  facilitatingPrograms AwarenessProgramFacilitator[]
+
+  @@index([userId])
+}
+
+model AdminProfile {
+  id     String     @id @default(cuid())
+  userId String     @unique
+  user   User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  scope  AdminScope @default(SUPER_ADMIN)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// ─── Institution ───────────────────────────────────────────────────────────────
+
+model Institution {
+  id            String          @id @default(cuid())
+  name          String
+  type          InstitutionType
+  district      String
+  area          String?
+  address       String?
+  contactPerson String?
+  contactPhone  String?
+  contactEmail  String?
+  principalName String?
+  isActive      Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  students         StudentProfile[]
+  supportReferrals SupportReferral[]
+  programs         AwarenessProgramInstitution[]
+
+  @@index([type])
+  @@index([district])
+  @@index([isActive])
+}
+
+// ─── Support Request Workflow ──────────────────────────────────────────────────
+
+model SupportRequest {
+  id                   String          @id @default(cuid())
+  studentId            String
+  serviceCategories    ServiceCategory[]
+  description          String          @db.Text
+  urgency              RequestUrgency  @default(MEDIUM)
+  preferredLanguage    String          @default("en")
+  attachments          String[]
+  status               RequestStatus   @default(SUBMITTED)
+  assignedCounsellorId String?
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+  resolvedAt           DateTime?
+
+  student            StudentProfile     @relation(fields: [studentId], references: [id])
+  assignedCounsellor CounsellorProfile? @relation("AssignedRequests", fields: [assignedCounsellorId], references: [id])
+
+  assignments     RequestAssignment[]
+  guidanceReports GuidanceReport[]
+  followUps       SupportFollowUp[]
+  referrals       SupportReferral[]
+
+  @@index([studentId])
+  @@index([status])
+  @@index([urgency])
+  @@index([assignedCounsellorId])
+  @@index([createdAt])
+}
+
+model RequestAssignment {
+  id              String           @id @default(cuid())
+  requestId       String
+  counsellorId    String
+  assignedById    String
+  assignedAt      DateTime         @default(now())
+  status          AssignmentStatus @default(PENDING_ACCEPTANCE)
+  rejectionReason String?
+  respondedAt     DateTime?
+
+  request      SupportRequest    @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  counsellor   CounsellorProfile @relation(fields: [counsellorId], references: [id])
+  assignedBy   User              @relation(fields: [assignedById], references: [id])
+
+  @@index([requestId])
+  @@index([counsellorId])
+  @@index([status])
+}
+
+model GuidanceReport {
+  id                       String   @id @default(cuid())
+  requestId                String
+  counsellorId             String
+  studentId                String
+  sessionDate              DateTime
+  concernsEncrypted        String   @db.Text
+  observationsEncrypted    String   @db.Text
+  supportEncrypted         String   @db.Text
+  recommendationsEncrypted String   @db.Text
+  encryptionKeyVersion     Int      @default(1)
+  followUpRequired         Boolean  @default(false)
+  followUpDate             DateTime?
+  escalationRequired       Boolean  @default(false)
+  escalationReason         String?
+  referralRequired         Boolean  @default(false)
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+
+  request    SupportRequest    @relation(fields: [requestId], references: [id])
+  counsellor CounsellorProfile @relation(fields: [counsellorId], references: [id])
+  student    StudentProfile    @relation(fields: [studentId], references: [id])
+
+  @@index([requestId])
+  @@index([counsellorId])
+  @@index([studentId])
+  @@index([createdAt])
+}
+
+model SupportFollowUp {
+  id                    String          @id @default(cuid())
+  requestId             String
+  counsellorId          String
+  scheduledDate         DateTime
+  purpose               String
+  status                FollowUpStatus  @default(PENDING)
+  progressNoteEncrypted String?         @db.Text
+  encryptionKeyVersion  Int             @default(1)
+  studentProgress       StudentProgress?
+  nextFollowUpRequired  Boolean         @default(false)
+  nextFollowUpDate      DateTime?
+  completedAt           DateTime?
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+
+  request    SupportRequest    @relation(fields: [requestId], references: [id])
+  counsellor CounsellorProfile @relation(fields: [counsellorId], references: [id])
+
+  @@index([requestId])
+  @@index([counsellorId])
+  @@index([status])
+  @@index([scheduledDate])
+}
+
+model SupportReferral {
+  id           String                @id @default(cuid())
+  requestId    String
+  counsellorId String
+  referredTo   SupportReferralTarget
+  institutionId String?
+  details      String                @db.Text
+  urgency      RequestUrgency        @default(MEDIUM)
+  status       SupportReferralStatus @default(PENDING)
+  notes        String?               @db.Text
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  request     SupportRequest    @relation(fields: [requestId], references: [id])
+  counsellor  CounsellorProfile @relation(fields: [counsellorId], references: [id])
+  institution Institution?      @relation(fields: [institutionId], references: [id])
+
+  @@index([requestId])
+  @@index([counsellorId])
+  @@index([status])
+}
+
+// ─── Awareness Programs ────────────────────────────────────────────────────────
+
+model AwarenessProgram {
+  id                   String          @id @default(cuid())
+  title                String
+  description          String          @db.Text
+  serviceCategory      ServiceCategory
+  programType          ProgramType
+  targetDistrict       String?
+  scheduledDate        DateTime
+  durationMinutes      Int
+  venue                String?
+  maxParticipants      Int?
+  isPublic             Boolean         @default(true)
+  registrationDeadline DateTime?
+  status               ProgramStatus   @default(DRAFT)
+  createdByAdminId     String
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+
+  createdByAdmin User                          @relation(fields: [createdByAdminId], references: [id])
+  facilitators   AwarenessProgramFacilitator[]
+  institutions   AwarenessProgramInstitution[]
+  participants   ProgramParticipation[]
+
+  @@index([status])
+  @@index([serviceCategory])
+  @@index([scheduledDate])
+}
+
+model AwarenessProgramFacilitator {
+  programId    String
+  counsellorId String
+
+  program    AwarenessProgram  @relation(fields: [programId], references: [id], onDelete: Cascade)
+  counsellor CounsellorProfile @relation(fields: [counsellorId], references: [id])
+
+  @@id([programId, counsellorId])
+  @@index([programId])
+  @@index([counsellorId])
+}
+
+model AwarenessProgramInstitution {
+  programId     String
+  institutionId String
+
+  program     AwarenessProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
+  institution Institution      @relation(fields: [institutionId], references: [id])
+
+  @@id([programId, institutionId])
+  @@index([programId])
+  @@index([institutionId])
+}
+
+model ProgramParticipation {
+  id           String   @id @default(cuid())
+  programId    String
+  studentId    String?
+  registeredAt DateTime @default(now())
+  attended     Boolean  @default(false)
+  feedback     String?
+
+  program AwarenessProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
+  student StudentProfile?  @relation(fields: [studentId], references: [id])
+
+  @@index([programId])
+  @@index([studentId])
+}
+
+// ─── Scheduling (kept, secondary to SupportRequest) ───────────────────────────
+
+model CounsellorAvailability {
+  id           String  @id @default(cuid())
+  counsellorId String
+  dayOfWeek    Int
+  startTime    String
+  endTime      String
+  slotDuration Int
+  isActive     Boolean @default(true)
+
+  counsellor CounsellorProfile @relation(fields: [counsellorId], references: [id], onDelete: Cascade)
+
+  @@index([counsellorId])
+  @@index([dayOfWeek])
+}
+
+model CounsellorBlockedSlot {
+  id           String   @id @default(cuid())
+  counsellorId String
+  startsAt     DateTime
+  endsAt       DateTime
+  reason       String?
+
+  counsellor CounsellorProfile @relation(fields: [counsellorId], references: [id], onDelete: Cascade)
+
+  @@index([counsellorId])
+  @@index([startsAt])
+}
+
+model Appointment {
+  id           String            @id @default(cuid())
+  studentId    String
+  counsellorId String
+  startTime    DateTime
+  endTime      DateTime
+  status       AppointmentStatus @default(PENDING)
+  mode         SessionMode       @default(VIDEO)
+  jitsiRoom    String?
+  notes        String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  deletedAt    DateTime?
+
+  clinicalNotes ClinicalNote[]
+
+  student    User @relation("StudentAppointments", fields: [studentId], references: [id])
+  counsellor User @relation("CounsellorAppointments", fields: [counsellorId], references: [id])
+
+  @@index([studentId])
+  @@index([counsellorId])
+  @@index([startTime])
+}
+
+// ─── Clinical (kept for historical data) ──────────────────────────────────────
+
+model ClinicalNote {
+  id                    String           @id @default(cuid())
+  patientId             String
+  counsellorId          String
+  appointmentId         String?
+  contentEncrypted      String           @db.Text
+  encryptionKeyVersion  Int              @default(1)
+  noteType              ClinicalNoteType
+  requiresElevatedAccess Boolean         @default(false)
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+  editedAt              DateTime?
+
+  patient     StudentProfile    @relation(fields: [patientId], references: [id])
+  counsellor  CounsellorProfile @relation(fields: [counsellorId], references: [id])
+  appointment Appointment?      @relation(fields: [appointmentId], references: [id])
+
+  @@index([patientId])
+  @@index([counsellorId])
+  @@index([createdAt])
+}
+
+model Referral {
+  id                   String   @id @default(cuid())
+  patientId            String
+  fromCounsellorId     String
+  referralType         String
+  notesEncrypted       String   @db.Text
+  encryptionKeyVersion Int      @default(1)
+  status               String   @default("PENDING")
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  patient        StudentProfile    @relation(fields: [patientId], references: [id])
+  fromCounsellor CounsellorProfile @relation(fields: [fromCounsellorId], references: [id])
+
+  @@index([patientId])
+  @@index([fromCounsellorId])
+}
+
+// ─── Assessments (kept as optional tools) ─────────────────────────────────────
+
+model Assessment {
   id              String   @id @default(cuid())
-  token           String   @unique
-  topic           String?
-  language        String   @default("en")
-  
-  counsellorId    String?
-  counsellor      CounsellorProfile? @relation(fields: [counsellorId], references: [id])
-  
-  status          String   @default("OPEN") // OPEN, CLOSED, ESCALATED
-  crisisSeverity  CrisisSeverity @default(LOW)
+  studentId       String?
+  type            String
+  score           Int
+  responses       Json
+  crisisTriggered Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
-  startedAt       DateTime @default(now())
-  endedAt         DateTime?
-  lastActivityAt  DateTime @default(now())
-  expiresAt       DateTime // 30 days retention policy
+  student StudentProfile? @relation(fields: [studentId], references: [id])
 
-  isActive        Boolean  @default(true)
+  @@index([studentId])
+}
 
-  messages        AnonymousMessage[]
+model AssessmentResult {
+  id                 String             @id @default(cuid())
+  assessmentType     AssessmentType
+  patientId          String?
+  anonymousSessionId String?
+  answers            Json
+  score              Int
+  severity           AssessmentSeverity
+  triggeredCrisis    Boolean            @default(false)
+  createdAt          DateTime           @default(now())
+
+  patient          StudentProfile?  @relation(fields: [patientId], references: [id])
+  anonymousSession AnonymousSession? @relation(fields: [anonymousSessionId], references: [id])
+
+  @@index([patientId])
+  @@index([anonymousSessionId])
+  @@index([createdAt])
+  @@index([assessmentType])
+  @@index([severity])
+  @@index([patientId, createdAt])
+}
+
+// ─── Anonymous Crisis Chat (kept) ─────────────────────────────────────────────
+
+model AnonymousSession {
+  id             String         @id @default(cuid())
+  token          String         @unique
+  topic          String?
+  language       String         @default("en")
+  counsellorId   String?
+  counsellor     CounsellorProfile? @relation(fields: [counsellorId], references: [id])
+  status         String         @default("OPEN")
+  crisisSeverity CrisisSeverity @default(LOW)
+  startedAt      DateTime       @default(now())
+  endedAt        DateTime?
+  lastActivityAt DateTime       @default(now())
+  expiresAt      DateTime
+  isActive       Boolean        @default(true)
+
+  messages          AnonymousMessage[]
   assessmentResults AssessmentResult[]
 
   @@index([token])
@@ -380,57 +742,68 @@ model AnonymousSession {
 }
 
 model AnonymousMessage {
-  id              String   @id @default(cuid())
-  sessionId       String
-  sender          String   // 'ANONYMOUS', 'COUNSELLOR', 'SYSTEM'
-  content         String   // Encrypted at rest
-  encryptionKeyVersion Int @default(1)
-  
-  createdAt       DateTime @default(now())
-  expiresAt       DateTime // Mirrored from session
+  id                   String   @id @default(cuid())
+  sessionId            String
+  sender               String
+  content              String
+  encryptionKeyVersion Int      @default(1)
+  createdAt            DateTime @default(now())
+  expiresAt            DateTime
 
-  session         AnonymousSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  session AnonymousSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
   @@index([sessionId])
   @@index([createdAt])
   @@index([expiresAt])
 }
 
-model ParentInvitation {
-  id        String   @id @default(cuid())
-  studentId String
-  email     String
-  token     String   @unique
-  expiry    DateTime
-  acceptedAt DateTime?
-  createdAt DateTime @default(now())
+// ─── Resources ─────────────────────────────────────────────────────────────────
 
-  student   StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
+model Resource {
+  id             String           @id @default(cuid())
+  slug           String           @unique
+  title          String
+  excerpt        String?
+  content        String           @db.Text
+  category       ResourceCategory @default(GENERAL)
+  tags           String[]
+  language       String           @default("en")
+  readingMinutes Int?
+  isPublished    Boolean          @default(false)
+  publishedAt    DateTime?
+  seoTitle       String?
+  seoDescription String?
+  featuredImage  String?
+  authorId       String?
+  author         User?            @relation(fields: [authorId], references: [id])
+  reviewedBy     String?
+  reviewedAt     DateTime?
+  helpfulCount   Int              @default(0)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  deletedAt      DateTime?
 
-  @@index([studentId])
-  @@index([token])
+  @@index([category])
+  @@index([isPublished])
+  @@index([slug])
+  @@index([authorId])
 }
 
+// ─── Notifications ─────────────────────────────────────────────────────────────
+
 model Notification {
-  id          String @id @default(cuid())
-
-  userId      String
-  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  type        NotificationType
-  channel     NotificationChannel
-
-  title       String
-  body        String
-
-  isRead      Boolean @default(false)
-
-  sentAt      DateTime?
-  failedAt    DateTime?
-
-  metadata    Json?
-
-  createdAt   DateTime @default(now())
+  id        String              @id @default(cuid())
+  userId    String
+  user      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType
+  channel   NotificationChannel
+  title     String
+  body      String
+  isRead    Boolean             @default(false)
+  sentAt    DateTime?
+  failedAt  DateTime?
+  metadata  Json?
+  createdAt DateTime            @default(now())
 
   @@index([userId])
   @@index([isRead])
@@ -438,10 +811,9 @@ model Notification {
 }
 
 model NotificationPreference {
-  id                String @id @default(cuid())
-  userId            String @unique
-  user              User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  id                String  @id @default(cuid())
+  userId            String  @unique
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   appointmentEmails Boolean @default(true)
   reminderEmails    Boolean @default(true)
   marketingEmails   Boolean @default(false)
@@ -449,65 +821,47 @@ model NotificationPreference {
   @@index([userId])
 }
 
-model CounsellorPatientAssignment {
-  id              String   @id @default(cuid())
-  counsellorId    String
-  patientId       String
-  assignedAt      DateTime @default(now())
-  assignedBy      String?
+// ─── Audit ─────────────────────────────────────────────────────────────────────
 
-  counsellor      CounsellorProfile @relation(fields: [counsellorId], references: [id])
-  patient         StudentProfile    @relation(fields: [patientId], references: [id])
+model AuditLog {
+  id            String   @id @default(cuid())
+  userId        String?
+  action        String
+  resourceType  String?
+  resourceId    String?
+  details       String?
+  ipHash        String?
+  userAgentHash String?
+  metadata      Json?
+  createdAt     DateTime @default(now())
 
-  @@unique([counsellorId, patientId])
-  @@index([counsellorId])
-  @@index([patientId])
-}
+  user User? @relation(fields: [userId], references: [id])
 
-model ClinicalNote {
-  id              String   @id @default(cuid())
-  patientId       String
-  counsellorId    String
-  appointmentId   String?
-
-  contentEncrypted String  @db.Text
-  encryptionKeyVersion Int @default(1)
-  noteType        ClinicalNoteType
-
-  requiresElevatedAccess Boolean @default(false)
-
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  editedAt        DateTime?
-
-  patient         StudentProfile    @relation(fields: [patientId], references: [id])
-  counsellor      CounsellorProfile @relation(fields: [counsellorId], references: [id])
-  appointment     Appointment?      @relation(fields: [appointmentId], references: [id])
-
-  @@index([patientId])
-  @@index([counsellorId])
+  @@index([userId])
+  @@index([action])
+  @@index([resourceType, resourceId])
   @@index([createdAt])
+  @@index([userId, createdAt])
 }
 
-model Referral {
-  id              String   @id @default(cuid())
-  patientId       String
-  fromCounsellorId String
+// ─── Parents & Invitations ─────────────────────────────────────────────────────
 
-  referralType    String
-  notesEncrypted  String   @db.Text
-  encryptionKeyVersion Int @default(1)
-  status          String   @default("PENDING")
+model ParentInvitation {
+  id         String    @id @default(cuid())
+  studentId  String
+  email      String
+  token      String    @unique
+  expiry     DateTime
+  acceptedAt DateTime?
+  createdAt  DateTime  @default(now())
 
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  student StudentProfile @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-  patient         StudentProfile    @relation(fields: [patientId], references: [id])
-  fromCounsellor  CounsellorProfile @relation(fields: [fromCounsellorId], references: [id])
-
-  @@index([patientId])
-  @@index([fromCounsellorId])
+  @@index([studentId])
+  @@index([token])
 }
+
+// ─── Group Sessions (schema-only, future) ─────────────────────────────────────
 
 model GroupSession {
   id              String   @id @default(cuid())
@@ -517,54 +871,42 @@ model GroupSession {
   scheduledAt     DateTime
   maxParticipants Int      @default(10)
   jitsiRoom       String?
-
-  counsellor      CounsellorProfile @relation(fields: [counsellorId], references: [id])
-  attendees       GroupAttendance[]
-
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+
+  counsellor CounsellorProfile @relation(fields: [counsellorId], references: [id])
+  attendees  GroupAttendance[]
 
   @@index([counsellorId])
   @@index([scheduledAt])
 }
 
 model GroupAttendance {
-  id              String   @id @default(cuid())
-  groupSessionId  String
-  patientId       String
-  joinedAt        DateTime @default(now())
+  id             String   @id @default(cuid())
+  groupSessionId String
+  patientId      String
+  joinedAt       DateTime @default(now())
 
-  groupSession    GroupSession   @relation(fields: [groupSessionId], references: [id], onDelete: Cascade)
-  patient         StudentProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  groupSession GroupSession   @relation(fields: [groupSessionId], references: [id], onDelete: Cascade)
+  patient      StudentProfile @relation(fields: [patientId], references: [id], onDelete: Cascade)
 
   @@unique([groupSessionId, patientId])
   @@index([groupSessionId])
 }
 
-model AssessmentResult {
-  id                  String   @id @default(cuid())
+// ─── Counsellor-Patient Assignment (kept) ─────────────────────────────────────
 
-  assessmentType      AssessmentType
+model CounsellorPatientAssignment {
+  id           String   @id @default(cuid())
+  counsellorId String
+  patientId    String
+  assignedAt   DateTime @default(now())
+  assignedBy   String?
 
-  patientId           String?
-  anonymousSessionId  String?
+  counsellor CounsellorProfile @relation(fields: [counsellorId], references: [id])
+  patient    StudentProfile    @relation(fields: [patientId], references: [id])
 
-  answers             Json
-  score               Int
-
-  severity            AssessmentSeverity
-
-  triggeredCrisis     Boolean @default(false)
-
-  createdAt           DateTime @default(now())
-
-  patient             StudentProfile?  @relation(fields: [patientId], references: [id])
-  anonymousSession    AnonymousSession? @relation(fields: [anonymousSessionId], references: [id])
-
+  @@unique([counsellorId, patientId])
+  @@index([counsellorId])
   @@index([patientId])
-  @@index([anonymousSessionId])
-  @@index([createdAt])
-  @@index([assessmentType])
-  @@index([severity])
-  @@index([patientId, createdAt])
 }

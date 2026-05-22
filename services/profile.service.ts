@@ -28,12 +28,22 @@ export async function completeStudentOnboarding(userId: string, data: StudentOnb
       firstName: parsed.firstName,
       ageRange: parsed.ageRange,
       preferredLanguage: parsed.preferredLanguage,
+      ...(parsed.gender && { gender: parsed.gender as any }),
+      ...(parsed.grade && { grade: parsed.grade }),
+      ...(parsed.mobile && { mobile: parsed.mobile }),
+      ...(parsed.district && { district: parsed.district }),
+      ...(parsed.institutionId && { institutionId: parsed.institutionId }),
     },
     create: {
       userId,
       firstName: parsed.firstName,
       ageRange: parsed.ageRange,
       preferredLanguage: parsed.preferredLanguage,
+      ...(parsed.gender && { gender: parsed.gender as any }),
+      ...(parsed.grade && { grade: parsed.grade }),
+      ...(parsed.mobile && { mobile: parsed.mobile }),
+      ...(parsed.district && { district: parsed.district }),
+      ...(parsed.institutionId && { institutionId: parsed.institutionId }),
     },
   });
 

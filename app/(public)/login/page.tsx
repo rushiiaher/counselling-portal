@@ -40,7 +40,7 @@ export default function LoginPage() {
         const role = session?.user?.role;
         if (role === "ADMIN") router.push("/admin/dashboard");
         else if (role === "COUNSELLOR") router.push("/staff/dashboard");
-        else router.push("/student/counsellors");
+        else router.push("/student/dashboard");
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again.");

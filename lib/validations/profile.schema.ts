@@ -8,6 +8,11 @@ export const studentOnboardingSchema = z.object({
   preferredLanguage: z.enum(["en", "ur"], {
     errorMap: () => ({ message: "Please select a preferred language" })
   }),
+  gender: z.enum(["MALE", "FEMALE", "NON_BINARY", "PREFER_NOT_TO_SAY"]).optional(),
+  grade: z.string().max(20).optional(),
+  mobile: z.string().max(15).optional(),
+  district: z.string().max(100).optional(),
+  institutionId: z.string().optional(),
 });
 
 export const studentEnrichmentSchema = z.object({
