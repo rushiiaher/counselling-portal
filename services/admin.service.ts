@@ -33,7 +33,7 @@ export async function getAggregateOperationalMetrics() {
     prisma.appointment.count({ where: { createdAt: { gte: thirtyDaysAgo } } }),
     prisma.counsellorProfile.count({ where: { acceptingPatients: true, user: { isActive: true } } }),
     prisma.anonymousSession.count({ where: { status: "ESCALATED", crisisSeverity: { in: ["HIGH", "CRITICAL"] } } }),
-    prisma.anonymousSession.count({ where: { createdAt: { gte: thirtyDaysAgo } } }),
+    prisma.anonymousSession.count({ where: { startedAt: { gte: thirtyDaysAgo } } }),
     prisma.assessmentResult.count({ where: { createdAt: { gte: thirtyDaysAgo } } })
   ]);
 

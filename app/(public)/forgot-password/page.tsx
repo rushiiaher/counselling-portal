@@ -17,11 +17,13 @@ export default function ForgotPasswordPage() {
 
   const onSubmit = async (data: ForgotPasswordInput) => {
     setIsLoading(true);
-    // Simulate API call for now. Server action to be implemented with Resend.
-    setTimeout(() => {
+    try {
+      const { requestPasswordResetAction } = await import("@/app/actions/auth.actions");
+      await requestPasswordResetAction(data.email);
       setSuccess(true);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (

@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import React from "react";
-import AppShell from "@/components/layout/AppShell";
-import { counsellorNav } from "@/config/navigation";
+import StaffShell from "@/components/layout/StaffShell";
 
 export const metadata: Metadata = {
   title: 'Counsellor Console | Counselling Portal',
@@ -9,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function StaffLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <AppShell navigation={counsellorNav}>
-      {children}
-    </AppShell>
-  );
+  return <StaffShell>{children}</StaffShell>;
 }

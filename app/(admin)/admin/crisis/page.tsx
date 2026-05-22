@@ -3,8 +3,9 @@ import PageContainer from "@/components/shared/PageContainer";
 import { verifyAdminAccess } from "@/services/admin.service";
 import { format } from "date-fns";
 import { ShieldAlert, AlertTriangle } from "lucide-react";
-
+import Link from "next/link";
 import prisma from "@/lib/prisma";
+import CrisisActions from "@/components/admin/CrisisActions";
 
 export default async function AdminCrisisConsole() {
   await verifyAdminAccess();
@@ -28,7 +29,7 @@ export default async function AdminCrisisConsole() {
         {escalatedCases.length === 0 ? (
           <div className="p-12 text-center">
             <h3 className="text-lg font-bold text-slate-700">No Active Crises</h3>
-            <p className="text-slate-500 text-sm mt-1">All escalated cases have been resolved or closed.</p>
+            <p className="text-slate-500 text-sm mt-1">All escalated cases have been resolved.</p>
           </div>
         ) : (
           <table className="w-full text-left whitespace-nowrap">
@@ -38,7 +39,7 @@ export default async function AdminCrisisConsole() {
                 <th className="p-5 text-xs font-extrabold text-rose-800 uppercase tracking-widest">Last Activity</th>
                 <th className="p-5 text-xs font-extrabold text-rose-800 uppercase tracking-widest">Topic / Language</th>
                 <th className="p-5 text-xs font-extrabold text-rose-800 uppercase tracking-widest">Counsellor</th>
-                <th className="p-5 text-xs font-extrabold text-rose-800 uppercase tracking-widest">Action</th>
+                <th className="p-5 text-xs font-extrabold text-rose-800 uppercase tracking-widest">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -52,18 +53,13 @@ export default async function AdminCrisisConsole() {
                     </span>
                   </td>
                   <td className="p-5 text-sm font-medium text-slate-800">{format(new Date(c.lastActivityAt), "MMM d, HH:mm")}</td>
-                  <td className="p-5 text-sm text-slate-600 font-medium">{c.topic || "Unknown"} <span className="text-[10px] bg-slate-200 px-2 py-0.5 rounded ml-2 uppercase font-bold tracking-wider">{c.language}</span></td>
+                  <td className="p-5 text-sm text-slate-600 font-medium">
+                    {c.topic || "Unknown"}
+                    <span className="text-[10px] bg-slate-200 px-2 py-0.5 rounded ml-2 uppercase font-bold tracking-wider">{c.language}</span>
+                  </td>
                   <td className="p-5 text-sm font-bold text-slate-700">{c.counsellor?.user?.name || "Unassigned"}</td>
                   <td className="p-5">
-                    <form action={async () => {
-                      "use server";
-                      const { createAuditLog } = await import("@/services/audit.service");
-                      const { requireAuth } = await import("@/lib/auth/session");
-                      const session = await requireAuth();
-                      await createAuditLog({ userId: session.id, action: "SENSITIVE_RECORD_VIEWED", resourceType: "AnonymousSession", resourceId: c.id });
-                    }}>
-                      <button type="submit" className="text-xs font-bold text-blue-600 hover:underline">View Transcript</button>
-                    </form>
+                    <CrisisActions sessionId={c.id} />
                   </td>
                 </tr>
               ))}

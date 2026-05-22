@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import React from "react";
-import AppShell from "@/components/layout/AppShell";
-import { adminNav } from "@/config/navigation";
+import AdminShell from "@/components/layout/AdminShell";
 
 export const metadata: Metadata = {
   title: 'Admin Console | Counselling Portal',
@@ -9,9 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <AppShell navigation={adminNav}>
-      {children}
-    </AppShell>
-  );
+  return <AdminShell>{children}</AdminShell>;
 }

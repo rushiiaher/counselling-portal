@@ -3,6 +3,8 @@
 import { requireAuth } from "@/lib/auth/session";
 import { generateSlots, bookAppointmentTransaction } from "@/services/scheduling.service";
 import { SessionMode } from "@prisma/client";
+import prisma from "@/lib/prisma";
+import { createAuditLog } from "@/services/audit.service";
 
 export async function fetchAvailableSlots(counsellorId: string, dateIsoString: string) {
   try {
@@ -30,5 +32,37 @@ export async function bookSlotAction(data: { counsellorId: string, startTime: st
     return { success: true, id: appointment.id };
   } catch (error: any) {
     return { success: false, error: error.message || "Failed to book slot" };
+  }
+}
+
+export async function cancelAppointmentAction(appointmentId: string) {
+  try {
+    const session = await requireAuth();
+
+    const apt = await prisma.appointment.findUnique({
+      where: { id: appointmentId },
+      include: { student: { select: { userId: true } } }
+    });
+
+    if (!apt) return { success: false, error: "Not found" };
+
+    const isStudent = apt.student.userId === session.id;
+    const isCounsellor = session.role === "COUNSELLOR" || session.role === "ADMIN";
+    if (!isStudent && !isCounsellor) return { success: false, error: "Unauthorized" };
+
+    if (!["PENDING", "CONFIRMED"].includes(apt.status)) {
+      return { success: false, error: "Cannot cancel a completed or already cancelled appointment" };
+    }
+
+    await prisma.appointment.update({
+      where: { id: appointmentId },
+      data: { status: "CANCELLED" }
+    });
+
+    await createAuditLog({ userId: session.id, action: "APPOINTMENT_CANCELLED", resourceType: "Appointment", resourceId: appointmentId });
+
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, error: error.message || "Failed to cancel" };
   }
 }

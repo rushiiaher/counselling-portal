@@ -11,7 +11,7 @@ const staffRoutes = ["/staff"];
 const adminRoutes = ["/admin"];
 const studentRoutes = ["/student"];
 
-export async function proxy(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   // 0. Correlation ID for Request Tracing
   const correlationId = crypto.randomUUID();
   const requestStartTime = Date.now();
