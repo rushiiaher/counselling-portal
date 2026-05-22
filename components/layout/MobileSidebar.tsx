@@ -3,6 +3,8 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NavItem } from '@/config/navigation';
+import { signOut } from 'next-auth/react';
+import { LogOut } from 'lucide-react';
 
 export default function MobileSidebar({ navigation }: { navigation: NavItem[] }) {
   const pathname = usePathname();
@@ -14,7 +16,7 @@ export default function MobileSidebar({ navigation }: { navigation: NavItem[] })
         className="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around p-2 pb-safe z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]"
         aria-label="Mobile Navigation"
       >
-        {navigation.slice(0, 5).map((item) => {
+        {navigation.slice(0, 4).map((item) => {
           const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
           const Icon = item.icon;
           
@@ -32,6 +34,14 @@ export default function MobileSidebar({ navigation }: { navigation: NavItem[] })
             </Link>
           );
         })}
+        <button
+          onClick={() => signOut({ callbackUrl: "/login" })}
+          className="flex flex-col items-center justify-center p-2 rounded-lg min-w-[64px] min-h-[48px] text-red-500 hover:text-red-600 transition"
+          aria-label="Sign out"
+        >
+          <LogOut className="w-6 h-6 mb-1" />
+          <span className="text-[10px] font-medium">Sign Out</span>
+        </button>
       </nav>
     </div>
   );
