@@ -5,7 +5,7 @@ import LanguageSwitcher from '@/components/shared/LanguageSwitcher';
 import { useSession, signOut } from 'next-auth/react';
 import { LogOut, ChevronDown } from 'lucide-react';
 
-export default function TopNavbar({ navigation }: { navigation: any }) {
+export default function TopNavbar({ navigation: _ }: { navigation?: any }) {
   const { data: session } = useSession();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
