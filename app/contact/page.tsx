@@ -280,7 +280,7 @@ export default function ContactPage() {
                 <p className="text-sm text-blue-800 leading-relaxed">
                   <strong>📅 Book an Appointment:</strong> For counselling sessions, we recommend booking in advance. Walk-ins are accepted subject to counsellor availability.
                 </p>
-                <Link href="/book-appointment" className="inline-block mt-3 bg-[#1a3a6b] text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-[#2563eb] transition-colors">
+                <Link href="/student/counsellors" className="inline-block mt-3 bg-[#1a3a6b] text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-[#2563eb] transition-colors">
                   Book Appointment →
                 </Link>
               </div>

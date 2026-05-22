@@ -87,7 +87,7 @@ export default function HeroCarousel() {
       {/* BUTTONS BELOW IMAGE — exactly like reference */}
       <div className="bg-white py-8 flex flex-col sm:flex-row items-center justify-center gap-6 border-b border-gray-100">
         <Link
-          href="/book-appointment"
+          href="/student/counsellors"
           style={{ backgroundColor: '#16a34a', color: '#fff', fontWeight: 600, padding: '12px 40px', borderRadius: '4px', fontSize: '18px', display: 'inline-block', textDecoration: 'none' }}
         >
           Book an Appointment

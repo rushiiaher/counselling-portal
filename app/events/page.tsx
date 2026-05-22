@@ -228,7 +228,7 @@ export default function EventsPage() {
             <Link href="/contact" className="bg-white text-[#1a3a6b] px-8 py-3.5 rounded-lg font-semibold hover:bg-blue-50 transition-colors shadow-lg">
               📞 Contact Us
             </Link>
-            <Link href="/book-appointment" className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-[#1a3a6b] transition-colors">
+            <Link href="/student/counsellors" className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-[#1a3a6b] transition-colors">
               Book Appointment →
             </Link>
           </div>

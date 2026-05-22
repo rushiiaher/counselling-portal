@@ -215,7 +215,7 @@ export default function CounsellorsPage() {
                       <Link href={`/counselors/${counsellor.id}`} className="flex-1 text-center border border-[#1a3a6b] text-[#1a3a6b] py-2 rounded-lg text-xs font-semibold hover:bg-[#1a3a6b] hover:text-white transition-colors">
                         View Profile
                       </Link>
-                      <Link href="/book-appointment" className="flex-1 text-center bg-[#1a3a6b] text-white py-2 rounded-lg text-xs font-semibold hover:bg-[#2563eb] transition-colors">
+                      <Link href="/student/counsellors" className="flex-1 text-center bg-[#1a3a6b] text-white py-2 rounded-lg text-xs font-semibold hover:bg-[#2563eb] transition-colors">
                         Book Appointment
                       </Link>
                     </div>

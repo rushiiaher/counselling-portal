@@ -334,7 +334,7 @@ export default function ServicesPage() {
                 </div>
 
                 <Link
-                  href="/book-appointment"
+                  href="/student/counsellors"
                   className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors shadow-md"
                 >
                   📅 Book Free Appointment
@@ -364,7 +364,7 @@ export default function ServicesPage() {
             All our services are completely free for district residents. Book your appointment today and take the first step towards a better tomorrow.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/book-appointment" className="bg-orange-500 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-orange-600 transition-colors shadow-md">
+            <Link href="/student/counsellors" className="bg-orange-500 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-orange-600 transition-colors shadow-md">
               📅 Book Free Appointment
             </Link>
             <Link href="/counselors" className="border-2 border-orange-400 text-orange-600 px-8 py-3.5 rounded-lg font-semibold hover:bg-orange-500 hover:text-white transition-colors">
