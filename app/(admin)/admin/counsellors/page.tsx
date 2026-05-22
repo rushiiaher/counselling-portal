@@ -5,18 +5,22 @@ import { Users } from "lucide-react";
 import prisma from "@/lib/prisma";
 import AdminStaffTable from "@/components/admin/AdminStaffTable";
 
-export default async function AdminStaffPage() {
+export default async function AdminCounsellorsPage() {
   await verifyAdminAccess();
 
   const counsellors = await prisma.counsellorProfile.findMany({
     include: {
       user: { select: { id: true, name: true, email: true, isActive: true } },
-      _count: { select: { assignedRequests: true } }
+      _count: {
+        select: {
+          assignedRequests: { where: { status: { notIn: ["RESOLVED", "ESCALATED"] } } },
+        },
+      },
     },
-    orderBy: { createdAt: "desc" }
+    orderBy: { createdAt: "desc" },
   });
 
-  const data = counsellors.map(c => ({
+  const data = counsellors.map((c) => ({
     id: c.id,
     userId: c.user.id,
     name: c.user.name,
@@ -28,13 +32,14 @@ export default async function AdminStaffPage() {
 
   return (
     <PageContainer>
-      <div className="mb-8 border-b border-slate-200 pb-4">
-        <h1 className="text-3xl font-extrabold text-slate-800">Staff Management</h1>
-        <p className="text-slate-500 text-sm mt-2 flex items-center gap-1.5 font-medium">
-          <Users className="w-4 h-4 text-blue-500" /> Monitor workloads and verify credentials.
-        </p>
+      <div className="max-w-5xl mx-auto py-8 space-y-6">
+        <div className="flex items-center gap-2">
+          <Users className="w-5 h-5 text-blue-500" />
+          <h1 className="text-2xl font-bold text-slate-800">Counsellors</h1>
+          <span className="text-sm text-slate-400 ml-1">{data.length} registered</span>
+        </div>
+        <AdminStaffTable counsellors={data} />
       </div>
-      <AdminStaffTable counsellors={data} />
     </PageContainer>
   );
 }

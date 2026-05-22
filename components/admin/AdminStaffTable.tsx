@@ -51,7 +51,7 @@ export default function AdminStaffTable({ counsellors: initial }: { counsellors:
             <th className="p-5 text-xs font-extrabold text-slate-500 uppercase tracking-widest">Counsellor</th>
             <th className="p-5 text-xs font-extrabold text-slate-500 uppercase tracking-widest">Status</th>
             <th className="p-5 text-xs font-extrabold text-slate-500 uppercase tracking-widest">Verified</th>
-            <th className="p-5 text-xs font-extrabold text-slate-500 uppercase tracking-widest">Assigned Patients</th>
+            <th className="p-5 text-xs font-extrabold text-slate-500 uppercase tracking-widest">Active Cases</th>
             <th className="p-5 text-xs font-extrabold text-slate-500 uppercase tracking-widest">Actions</th>
           </tr>
         </thead>
@@ -77,7 +77,7 @@ export default function AdminStaffTable({ counsellors: initial }: { counsellors:
                 )}
               </td>
               <td className="p-5 text-sm font-medium text-slate-700">
-                <span className="bg-slate-100 px-3 py-1 rounded font-bold text-slate-800">{c.assignedPatients}</span> patients
+                <span className="bg-slate-100 px-3 py-1 rounded font-bold text-slate-800">{c.assignedPatients}</span> cases
               </td>
               <td className="p-5 flex items-center gap-3">
                 <button
