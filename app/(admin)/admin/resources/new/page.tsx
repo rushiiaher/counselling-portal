@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import PageContainer from "@/components/shared/PageContainer";
 import { Feedback } from "@/lib/feedback";
 import { createResourceAction } from "@/app/actions/resource.actions";
-import { ResourceCategory } from "@prisma/client";
+const RESOURCE_CATEGORIES = ["ANXIETY","DEPRESSION","PTSD","EXAM_STRESS","ADDICTION","FAMILY_CONFLICT","GRIEF","SLEEP","SELF_HARM","GENERAL"] as const;
 
 export default function AdminNewResource() {
   const router = useRouter();
@@ -71,7 +71,7 @@ export default function AdminNewResource() {
                 {...register("category")}
                 className="w-full px-4 py-2 border rounded focus:ring-2 focus:ring-slate-900 outline-none"
               >
-                {Object.keys(ResourceCategory).map(cat => (
+                {RESOURCE_CATEGORIES.map(cat => (
                   <option key={cat} value={cat}>{cat.replace("_", " ")}</option>
                 ))}
               </select>

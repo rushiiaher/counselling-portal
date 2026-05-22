@@ -3,6 +3,7 @@
 import { submitAssessment } from "@/services/assessment.service";
 import { AssessmentType } from "@prisma/client";
 import { requireAuth } from "@/lib/auth/session";
+import prisma from "@/lib/prisma";
 
 export async function submitAssessmentAction(
   type: AssessmentType, 
@@ -14,9 +15,6 @@ export async function submitAssessmentAction(
     try {
       const session = await requireAuth();
       if (session.role === "STUDENT") {
-        // Needs the studentProfile ID
-        const { PrismaClient } = await import("@prisma/client");
-        import prisma from "@/lib/prisma";
         const profile = await prisma.studentProfile.findUnique({ where: { userId: session.id } });
         if (profile) patientId = profile.id;
       }
