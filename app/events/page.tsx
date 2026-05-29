@@ -1,4 +1,10 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
+import SiteNavbar from '@/components/layout/SiteNavbar';
+import BookAppointmentButton from '@/components/shared/BookAppointmentButton';
+import EventRegistrationModal from '@/components/shared/EventRegistrationModal';
 
 const events = [
   {
@@ -77,63 +83,46 @@ const pastEvents = [
 ];
 
 export default function EventsPage() {
+  const [selectedEvent, setSelectedEvent] = useState<typeof events[0] | null>(null);
+
   return (
     <div className="min-h-screen bg-white font-sans">
-      {/* NAVBAR */}
-      <nav className="sticky top-0 z-50 bg-[#1a3a6b] shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <span className="text-[#1a3a6b] font-bold text-lg">🏛</span>
-              </div>
-              <div>
-                <p className="text-white font-bold text-sm leading-tight">District Counselling Center</p>
-                <p className="text-blue-200 text-xs">Govt. of India</p>
-              </div>
-            </div>
-            <div className="hidden lg:flex items-center gap-6">
-              <Link href="/" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Services</Link>
-              <Link href="/counselors" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Counsellors</Link>
-              <Link href="/events" className="text-blue-200 border-b-2 border-blue-300 text-sm font-medium">Events</Link>
-              <Link href="/contact" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Contact</Link>
-            </div>
-            <div className="flex items-center gap-3">
-              <Link href="/login" className="text-white border border-white px-4 py-1.5 rounded text-sm hover:bg-white hover:text-[#1a3a6b] transition-colors font-medium">Login</Link>
-              <Link href="/signup" className="bg-white text-[#1a3a6b] px-4 py-1.5 rounded text-sm hover:bg-blue-100 transition-colors font-medium">Register</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <SiteNavbar />
+      <EventRegistrationModal
+        isOpen={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        eventTitle={selectedEvent?.title}
+        eventDate={`${selectedEvent?.day} ${selectedEvent?.month} ${selectedEvent?.year}`}
+        eventLocation={selectedEvent?.location}
+      />
 
       {/* HERO BANNER */}
-      <section className="bg-gradient-to-br from-[#1a3a6b] via-[#1e4d8c] to-[#2563eb] py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-2 text-blue-200 text-sm mb-4">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-white">Events</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Events &amp; Workshops</h1>
-          <p className="text-blue-100 text-lg max-w-3xl leading-relaxed">
-            Stay connected with our upcoming workshops, seminars, awareness programs, and community events. All events are free and open to district residents.
-          </p>
-          <div className="flex flex-wrap gap-4 mt-8">
-            {['Workshop', 'Seminar', 'Program', 'Camp', 'Fair'].map((tag) => (
-              <span key={tag} className="bg-white bg-opacity-20 text-white text-xs px-3 py-1.5 rounded-full border border-white border-opacity-30">
-                {tag}
-              </span>
-            ))}
+      <section className="relative overflow-hidden">
+        <img
+          src="/event.jpg"
+          alt="Events & Workshops"
+          className="w-full h-[320px] object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[#1a3a6b]/65" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="flex items-center gap-2 text-blue-200 text-sm mb-4">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <span>/</span>
+              <span className="text-white">Events</span>
+            </div>
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>Events &amp; <em className="italic">Workshops</em></h1>
+            <p className="text-blue-100 text-base md:text-lg max-w-2xl leading-relaxed">
+              Free workshops, seminars, and community programs — open to all district residents.
+            </p>
           </div>
         </div>
       </section>
 
       {/* STATS STRIP */}
-      <section className="bg-white border-b border-gray-100 py-8 px-4">
+      <section className="bg-white border-b border-gray-100 py-6 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {[
               { icon: '📅', label: '6 Upcoming Events' },
               { icon: '🆓', label: 'All Events Free' },
@@ -150,11 +139,12 @@ export default function EventsPage() {
       </section>
 
       {/* UPCOMING EVENTS */}
-      <section className="bg-gray-50 py-20 px-4">
+      <section className="bg-gray-50 pt-10 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <span className="text-[#2563eb] font-semibold text-sm uppercase tracking-wider">Don&apos;t Miss Out</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a3a6b] mt-2 mb-4">Upcoming Events</h2>
+            <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Don&apos;t Miss Out</span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-2" style={{ fontFamily: 'Georgia, serif' }}>Upcoming <em className="italic">Events</em></h2>
+            <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mx-auto mb-4" />
             <p className="text-gray-600 max-w-2xl mx-auto">Register early to secure your spot. All events are conducted by certified professionals and are completely free of charge.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -179,7 +169,10 @@ export default function EventsPage() {
                     <p>🎤 {event.speaker}</p>
                     <p>🎟️ {event.seats}</p>
                   </div>
-                  <button className="w-full bg-[#1a3a6b] text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-[#2563eb] transition-colors">
+                  <button
+                    onClick={() => setSelectedEvent(event)}
+                    className="w-full bg-[#1a3a6b] text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-[#2563eb] transition-colors"
+                  >
                     Register Now →
                   </button>
                 </div>
@@ -190,11 +183,12 @@ export default function EventsPage() {
       </section>
 
       {/* PAST EVENTS */}
-      <section className="bg-white py-20 px-4">
+      <section className="bg-white pt-10 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
-            <span className="text-[#2563eb] font-semibold text-sm uppercase tracking-wider">Our Track Record</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a3a6b] mt-2 mb-4">Past Events</h2>
+            <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Our Track Record</span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-2" style={{ fontFamily: 'Georgia, serif' }}>Past <em className="italic">Events</em></h2>
+            <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mx-auto mb-4" />
             <p className="text-gray-600 max-w-2xl mx-auto">A glimpse of the impactful events we have organized to serve our community.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -220,7 +214,7 @@ export default function EventsPage() {
       {/* CTA */}
       <section className="bg-gradient-to-br from-[#1a3a6b] to-[#2563eb] py-16 px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Want to Organize an Event?</h2>
+          <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>Want to Organize <em className="italic">an Event?</em></h2>
           <p className="text-blue-100 mb-8 leading-relaxed">
             Schools, colleges, and community organizations can request a counselling workshop or awareness program at their premises. Contact us to schedule.
           </p>
@@ -228,9 +222,10 @@ export default function EventsPage() {
             <Link href="/contact" className="bg-white text-[#1a3a6b] px-8 py-3.5 rounded-lg font-semibold hover:bg-blue-50 transition-colors shadow-lg">
               📞 Contact Us
             </Link>
-            <Link href="/student/counsellors" className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-[#1a3a6b] transition-colors">
-              Book Appointment →
-            </Link>
+            <BookAppointmentButton
+              label="Book Appointment →"
+              className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-[#1a3a6b] transition-colors"
+            />
           </div>
         </div>
       </section>

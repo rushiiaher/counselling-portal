@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import SiteNavbar from '@/components/layout/SiteNavbar';
+import BookAppointmentModal from '@/components/shared/BookAppointmentModal';
 
 type Counsellor = {
   id: number;
@@ -30,20 +32,11 @@ const counsellors: Counsellor[] = [
 
 const allSpecializations = Array.from(new Set(counsellors.flatMap((c) => c.specializations))).sort();
 
-function StarRating({ rating, total = 5 }: { rating: number; total?: number }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: total }).map((_, i) => (
-        <span key={i} className={i < rating ? 'text-yellow-400' : 'text-gray-300'}>★</span>
-      ))}
-    </div>
-  );
-}
-
 export default function CounsellorsPage() {
   const [search, setSearch] = useState('');
   const [selectedSpec, setSelectedSpec] = useState('All');
   const [selectedRating, setSelectedRating] = useState('All');
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   const filtered = counsellors.filter((c) => {
     const matchesSearch = search === '' || c.name.toLowerCase().includes(search.toLowerCase()) || c.specializations.some((s) => s.toLowerCase().includes(search.toLowerCase())) || c.qualification.toLowerCase().includes(search.toLowerCase());
@@ -54,54 +47,28 @@ export default function CounsellorsPage() {
 
   return (
     <div className="min-h-screen bg-white font-sans">
-      {/* NAVBAR */}
-      <nav className="sticky top-0 z-50 bg-[#1a3a6b] shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <span className="text-[#1a3a6b] font-bold text-lg">🏛</span>
-              </div>
-              <div>
-                <p className="text-white font-bold text-sm leading-tight">District Counselling Center</p>
-                <p className="text-blue-200 text-xs">Govt. of India</p>
-              </div>
-            </div>
-            <div className="hidden lg:flex items-center gap-6">
-              <Link href="/" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Services</Link>
-              <Link href="/counselors" className="text-blue-200 border-b-2 border-blue-300 text-sm font-medium">Counsellors</Link>
-              <Link href="/events" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Events</Link>
-              <Link href="/contact" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Contact</Link>
-            </div>
-            <div className="flex items-center gap-3">
-              <Link href="/login" className="text-white border border-white px-4 py-1.5 rounded text-sm hover:bg-white hover:text-[#1a3a6b] transition-colors font-medium">Login</Link>
-              <Link href="/signup" className="bg-white text-[#1a3a6b] px-4 py-1.5 rounded text-sm hover:bg-blue-100 transition-colors font-medium">Register</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <BookAppointmentModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+      <SiteNavbar onBookClick={() => setBookingOpen(true)} />
 
       {/* HERO BANNER */}
-      <section className="bg-gradient-to-br from-[#1a3a6b] via-[#1e4d8c] to-[#2563eb] py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-2 text-blue-200 text-sm mb-4">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-white">Counsellors</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Expert Counsellors</h1>
-          <p className="text-blue-100 text-lg max-w-3xl leading-relaxed">
-            Meet our team of certified, experienced, and compassionate counsellors. All our counsellors are registered with the Rehabilitation Council of India (RCI) and follow strict ethical guidelines.
-          </p>
-          <div className="flex flex-wrap gap-4 mt-8">
-            {[{ icon: '🏅', label: 'RCI Certified' }, { icon: '🔒', label: 'Confidential Sessions' }, { icon: '🌐', label: 'Online & Offline' }, { icon: '🆓', label: 'Free Services' }].map((badge) => (
-              <div key={badge.label} className="flex items-center gap-2 bg-white bg-opacity-20 text-white text-sm px-4 py-2 rounded-full border border-white border-opacity-30">
-                <span>{badge.icon}</span>
-                <span>{badge.label}</span>
-              </div>
-            ))}
+      <section className="relative overflow-hidden">
+        <img
+          src="/coun.jpg"
+          alt="Our Counsellors"
+          className="w-full h-[420px] object-cover object-[center_20%]"
+        />
+        <div className="absolute inset-0 bg-[#1a3a6b]/65" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="flex items-center gap-2 text-blue-200 text-sm mb-4">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <span>/</span>
+              <span className="text-white">Counsellors</span>
+            </div>
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4">Our Expert <em className="italic">Counsellors</em></h1>
+            <p className="text-blue-100 text-base md:text-lg max-w-2xl leading-relaxed">
+              Certified, compassionate professionals here to guide you — free, confidential, and available in your language.
+            </p>
           </div>
         </div>
       </section>
@@ -178,46 +145,47 @@ export default function CounsellorsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filtered.map((counsellor) => (
                 <div key={counsellor.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-100 hover:border-blue-200 flex flex-col">
-                  <div className="bg-gradient-to-br from-[#1a3a6b] to-[#2563eb] p-6 text-center relative">
+                  <div className="bg-gradient-to-br from-[#1a3a6b] to-[#2563eb] p-3 text-center relative">
                     <img
                       src={`https://ui-avatars.com/api/?name=${encodeURIComponent(counsellor.name)}&background=1a3a6b&color=fff&size=128`}
                       alt={counsellor.name}
-                      className="w-24 h-24 rounded-full mx-auto border-4 border-white shadow-lg"
+                      className="w-16 h-16 rounded-full mx-auto border-4 border-white shadow-lg"
                     />
-                    <div className="absolute top-3 right-3 bg-green-400 text-white text-xs px-2 py-0.5 rounded-full font-medium">
+                    <div className="absolute top-2 right-2 bg-green-400 text-white text-xs px-2 py-0.5 rounded-full font-medium">
                       Available
                     </div>
                   </div>
-                  <div className="p-5 flex flex-col flex-1">
-                    <div className="text-center mb-4">
+                  <div className="p-3 flex flex-col flex-1">
+                    <div className="text-center mb-2">
                       <h3 className="font-bold text-[#1a3a6b] text-lg leading-tight">{counsellor.name}</h3>
                       <p className="text-[#2563eb] text-sm font-medium mt-0.5">{counsellor.qualification}</p>
-                      <p className="text-gray-500 text-xs mt-1">{counsellor.experience} Years Experience</p>
+                      <p className="text-gray-500 text-xs mt-0.5">{counsellor.experience} Years Experience</p>
                     </div>
-                    <div className="flex items-center justify-center gap-2 mb-4">
-                      <StarRating rating={counsellor.rating} />
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                      <div className="flex gap-0.5">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <span key={i} className={i < counsellor.rating ? 'text-yellow-400' : 'text-gray-300'}>★</span>
+                        ))}
+                      </div>
                       <span className="text-xs text-gray-500">({counsellor.reviews} reviews)</span>
                     </div>
-                    <div className="flex flex-wrap gap-1.5 justify-center mb-4">
+                    <div className="flex flex-wrap gap-1 justify-center mb-2">
                       {counsellor.specializations.map((spec) => (
                         <span key={spec} className="bg-blue-50 text-[#1a3a6b] text-xs px-2.5 py-1 rounded-full border border-blue-100 font-medium">
                           {spec}
                         </span>
                       ))}
                     </div>
-                    <div className="space-y-1.5 text-xs text-gray-500 mb-4">
+                    <div className="space-y-1 text-xs text-gray-500 mb-2">
                       <div className="flex items-center gap-2"><span>📍</span><span>{counsellor.location}</span></div>
                       <div className="flex items-center gap-2"><span>🗣</span><span>{counsellor.languages.join(', ')}</span></div>
                       <div className="flex items-center gap-2"><span>📅</span><span>{counsellor.availability}</span></div>
                     </div>
-                    <p className="text-gray-600 text-xs leading-relaxed mb-5 line-clamp-3 flex-1">{counsellor.bio}</p>
-                    <div className="flex gap-2 mt-auto">
-                      <Link href={`/counselors/${counsellor.id}`} className="flex-1 text-center border border-[#1a3a6b] text-[#1a3a6b] py-2 rounded-lg text-xs font-semibold hover:bg-[#1a3a6b] hover:text-white transition-colors">
-                        View Profile
-                      </Link>
-                      <Link href="/student/counsellors" className="flex-1 text-center bg-[#1a3a6b] text-white py-2 rounded-lg text-xs font-semibold hover:bg-[#2563eb] transition-colors">
+                    <p className="text-gray-600 text-xs leading-relaxed mb-3 md:h-[52px] md:overflow-y-auto pr-1 scrollbar-thin">{counsellor.bio}</p>
+                    <div className="mt-auto">
+                      <button onClick={() => setBookingOpen(true)} className="w-full text-center bg-[#1a3a6b] text-white py-2 rounded-lg text-xs font-semibold hover:bg-[#2563eb] transition-colors">
                         Book Appointment
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -232,7 +200,7 @@ export default function CounsellorsPage() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-10 border border-blue-100">
             <div className="text-5xl mb-4">👩‍⚕️</div>
-            <h2 className="text-2xl font-bold text-[#1a3a6b] mb-3">Are You a Qualified Counsellor?</h2>
+            <h2 className="text-2xl font-bold text-[#1a2e4a] mb-3">Are You a Qualified <em className="italic">Counsellor?</em></h2>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
               Join our growing network of certified counsellors and make a difference in the lives of students and families across the district. We welcome RCI-registered and qualified counselling professionals.
             </p>

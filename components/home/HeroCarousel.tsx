@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import BookAppointmentModal from '@/components/shared/BookAppointmentModal';
 
 const slides = [
   {
@@ -20,6 +21,7 @@ const slides = [
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -30,8 +32,9 @@ export default function HeroCarousel() {
 
   return (
     <div>
+      <BookAppointmentModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
       {/* CAROUSEL */}
-      <section className="relative w-full h-[600px] md:h-[700px] overflow-hidden">
+      <section className="relative w-full h-[320px] sm:h-[480px] md:h-[560px] overflow-hidden">
         {slides.map((slide, i) => (
           <div
             key={i}
@@ -50,7 +53,7 @@ export default function HeroCarousel() {
                 <p className="text-orange-400 font-semibold text-sm md:text-base uppercase tracking-widest mb-3">
                   {slide.tag}
                 </p>
-                <h2 className="text-white font-bold text-3xl md:text-4xl lg:text-5xl leading-tight max-w-2xl">
+                <h2 className="text-white font-bold text-2xl md:text-4xl lg:text-5xl leading-tight max-w-2xl">
                   {slide.heading}
                 </h2>
               </div>
@@ -69,32 +72,32 @@ export default function HeroCarousel() {
           ))}
         </div>
 
-        {/* Prev / Next arrows */}
+        {/* Prev / Next arrows — hidden on mobile */}
         <button
           onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/30 hover:bg-black/50 text-white rounded-full flex items-center justify-center text-xl transition-colors"
+          className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/30 hover:bg-black/50 text-white rounded-full items-center justify-center text-xl transition-colors"
         >
           ‹
         </button>
         <button
           onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/30 hover:bg-black/50 text-white rounded-full flex items-center justify-center text-xl transition-colors"
+          className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-black/30 hover:bg-black/50 text-white rounded-full items-center justify-center text-xl transition-colors"
         >
           ›
         </button>
       </section>
 
-      {/* BUTTONS BELOW IMAGE — exactly like reference */}
-      <div className="bg-white py-8 flex flex-col sm:flex-row items-center justify-center gap-6 border-b border-gray-100">
-        <Link
-          href="/student/counsellors"
-          style={{ backgroundColor: '#16a34a', color: '#fff', fontWeight: 600, padding: '12px 40px', borderRadius: '4px', fontSize: '18px', display: 'inline-block', textDecoration: 'none' }}
+      {/* BUTTONS BELOW IMAGE */}
+      <div className="bg-white py-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 px-4 sm:px-0 border-b border-gray-100">
+        <button
+          onClick={() => setBookingOpen(true)}
+          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded text-base transition-colors w-full sm:w-auto"
         >
           Book an Appointment
-        </Link>
+        </button>
         <Link
-          href="/services"
-          style={{ backgroundColor: '#16a34a', color: '#fff', fontWeight: 600, padding: '12px 40px', borderRadius: '4px', fontSize: '18px', display: 'inline-block', textDecoration: 'none' }}
+          href="/assessments"
+          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded text-base transition-colors text-center w-full sm:w-auto"
         >
           Free Self Assessments
         </Link>

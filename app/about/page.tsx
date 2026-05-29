@@ -1,49 +1,31 @@
 import Link from 'next/link';
+import SiteNavbar from '@/components/layout/SiteNavbar';
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white font-sans">
-      {/* NAVBAR */}
-      <nav className="sticky top-0 z-50 bg-[#1a3a6b] shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <span className="text-[#1a3a6b] font-bold text-lg">🏛</span>
-              </div>
-              <div>
-                <p className="text-white font-bold text-sm leading-tight">District Counselling Center</p>
-                <p className="text-blue-200 text-xs">Govt. of India</p>
-              </div>
-            </div>
-            <div className="hidden lg:flex items-center gap-6">
-              <Link href="/" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-blue-200 border-b-2 border-blue-300 text-sm font-medium">About</Link>
-              <Link href="/services" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Services</Link>
-              <Link href="/counselors" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Counsellors</Link>
-              <Link href="/events" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Events</Link>
-              <Link href="/contact" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Contact</Link>
-            </div>
-            <div className="flex items-center gap-3">
-              <Link href="/login" className="text-white border border-white px-4 py-1.5 rounded text-sm hover:bg-white hover:text-[#1a3a6b] transition-colors font-medium">Login</Link>
-              <Link href="/signup" className="bg-white text-[#1a3a6b] px-4 py-1.5 rounded text-sm hover:bg-blue-100 transition-colors font-medium">Register</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <SiteNavbar />
 
       {/* HERO BANNER */}
-      <section className="bg-gradient-to-br from-[#1a3a6b] via-[#1e4d8c] to-[#2563eb] py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-2 text-blue-200 text-sm mb-4">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span>/</span>
-            <span className="text-white">About Us</span>
+      <section className="relative overflow-hidden">
+        <img
+          src="/con4.jpg"
+          alt="About Us"
+          className="w-full h-[320px] object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[#1a3a6b]/65" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="flex items-center gap-2 text-blue-200 text-sm mb-4">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <span>/</span>
+              <span className="text-white">About Us</span>
+            </div>
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>About District <em className="italic">Counselling Center</em></h1>
+            <p className="text-blue-100 text-base md:text-lg max-w-2xl leading-relaxed">
+              Empowering individuals through professional, free, and confidential counselling since 2010.
+            </p>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">About District Counselling Center</h1>
-          <p className="text-blue-100 text-lg max-w-3xl leading-relaxed">
-            Learn about our history, mission, and the dedicated team working to empower every individual through professional counselling and guidance services.
-          </p>
         </div>
       </section>
 
@@ -53,7 +35,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <span className="text-[#2563eb] font-semibold text-sm uppercase tracking-wider">Who We Are</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1a3a6b] mt-2 mb-6">About the Center</h2>
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-6" style={{ fontFamily: 'Georgia, serif' }}>About <em className="italic">the Center</em></h2>
               <p className="text-gray-600 leading-relaxed mb-4">
                 The District Counselling Center (DCC) was established under the Ministry of Education, Government of India, with the primary objective of providing free, professional, and confidential counselling services to students, youth, and families across the district.
               </p>
@@ -108,7 +90,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#2563eb] font-semibold text-sm uppercase tracking-wider">Our Direction</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a3a6b] mt-2 mb-4">Mission, Vision &amp; Objectives</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-4" style={{ fontFamily: 'Georgia, serif' }}>Mission, Vision &amp; <em className="italic">Objectives</em></h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
@@ -153,7 +135,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#2563eb] font-semibold text-sm uppercase tracking-wider">Why It Matters</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a3a6b] mt-2 mb-4">Importance of Counselling</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-4" style={{ fontFamily: 'Georgia, serif' }}>Importance of <em className="italic">Counselling</em></h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Professional counselling plays a vital role in individual and community well-being. Here is why it matters.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -182,7 +164,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#2563eb] font-semibold text-sm uppercase tracking-wider">Leadership</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1a3a6b] mt-2 mb-4">Our Leadership Team</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-4" style={{ fontFamily: 'Georgia, serif' }}>Our Leadership <em className="italic">Team</em></h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Experienced professionals leading the District Counselling Center with dedication and expertise.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -217,7 +199,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-blue-200 font-semibold text-sm uppercase tracking-wider">Official Affiliations</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">Government Affiliations &amp; Accreditations</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2 mb-4" style={{ fontFamily: 'Georgia, serif' }}>Government Affiliations &amp; <em className="italic">Accreditations</em></h2>
             <p className="text-blue-100 max-w-2xl mx-auto">We operate under the aegis of the Government of India and are affiliated with leading national bodies.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

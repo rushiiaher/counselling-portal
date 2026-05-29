@@ -2,6 +2,7 @@ import React from "react";
 import PageContainer from "@/components/shared/PageContainer";
 import { AlertTriangle, Info, ArrowRight, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import BookAppointmentButton from "@/components/shared/BookAppointmentButton";
 
 import prisma from "@/lib/prisma";
 
@@ -77,7 +78,10 @@ export default async function AssessmentResultPage({ params }: { params: Promise
                   <h4 className="font-bold text-blue-900 text-lg">Professional Support Recommended</h4>
                   <p className="text-sm text-blue-700 mt-1 mb-4 leading-relaxed">Your score suggests you may benefit from speaking with a clinical professional to explore what you're experiencing.</p>
                   <div className="flex gap-3">
-                    <Link href="/counsellors" className="text-sm font-bold bg-blue-600 text-white px-5 py-2.5 rounded-lg shadow-sm hover:bg-blue-700 transition">Book Session</Link>
+                    <BookAppointmentButton
+                      label="Book Session"
+                      className="text-sm font-bold bg-blue-600 text-white px-5 py-2.5 rounded-lg shadow-sm hover:bg-blue-700 transition"
+                    />
                     <Link href="/chat" className="text-sm font-bold text-blue-700 bg-white border border-blue-200 px-5 py-2.5 rounded-lg hover:bg-blue-50 transition">Chat Anonymously</Link>
                   </div>
                 </div>

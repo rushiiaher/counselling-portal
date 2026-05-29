@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { useState, useRef } from 'react';
+import SiteNavbar from '@/components/layout/SiteNavbar';
+import BookAppointmentModal from '@/components/shared/BookAppointmentModal';
 
 const services = [
   {
@@ -177,6 +179,7 @@ const services = [
 export default function ServicesPage() {
   const [activeService, setActiveService] = useState<string | null>(null);
   const detailRef = useRef<HTMLDivElement>(null);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   const handleServiceClick = (title: string) => {
     if (activeService === title) {
@@ -193,41 +196,15 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased">
-      {/* NAVBAR */}
-      <nav className="sticky top-0 z-50 bg-[#1a3a6b] shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <span className="text-[#1a3a6b] font-bold text-lg">🏛</span>
-              </div>
-              <div>
-                <p className="text-white font-bold text-sm leading-tight">District Counselling Center</p>
-                <p className="text-blue-200 text-xs">Govt. of India</p>
-              </div>
-            </div>
-            <div className="hidden lg:flex items-center gap-6">
-              <Link href="/" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Home</Link>
-              <Link href="/about" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">About</Link>
-              <Link href="/services" className="text-blue-200 border-b-2 border-blue-300 text-sm font-medium">Services</Link>
-              <Link href="/counselors" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Counsellors</Link>
-              <Link href="/events" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Events</Link>
-              <Link href="/contact" className="text-white hover:text-blue-200 text-sm font-medium transition-colors">Contact</Link>
-            </div>
-            <div className="flex items-center gap-3">
-              <Link href="/login" className="text-white border border-white px-4 py-1.5 rounded text-sm hover:bg-white hover:text-[#1a3a6b] transition-colors font-medium">Login</Link>
-              <Link href="/signup" className="bg-white text-[#1a3a6b] px-4 py-1.5 rounded text-sm hover:bg-blue-100 transition-colors font-medium">Register</Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <BookAppointmentModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+      <SiteNavbar onBookClick={() => setBookingOpen(true)} />
 
       {/* HERO BANNER */}
       <section className="relative overflow-hidden">
         <img
           src="/con2.jpg"
           alt="Counselling Services"
-          className="w-full h-[320px] object-cover"
+          className="w-full h-[320px] object-cover object-center"
         />
         <div className="absolute inset-0 bg-[#1a3a6b]/65" />
         <div className="absolute inset-0 flex items-center">
@@ -237,8 +214,8 @@ export default function ServicesPage() {
               <span>/</span>
               <span className="text-white">Services</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Counselling Services</h1>
-            <p className="text-blue-100 text-lg max-w-2xl leading-relaxed">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>Our Counselling <em className="italic">Services</em></h1>
+            <p className="text-blue-100 text-base md:text-lg max-w-2xl leading-relaxed">
               Comprehensive, free, and professional counselling services designed to support every individual at every stage of life.
             </p>
           </div>
@@ -249,26 +226,27 @@ export default function ServicesPage() {
       <section className="bg-white py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Counselling Services We Offer</h2>
-            <div className="w-24 h-1 bg-orange-400 mx-auto mt-3 mb-6 rounded-full" />
+            <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Our Services</span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-2" style={{ fontFamily: 'Georgia, serif' }}>Counselling Services <em className="italic">We Offer</em></h2>
+            <div className="w-16 h-[2px] bg-[#c07a2a] mx-auto mt-3 mb-6 rounded-full" />
             <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed text-sm md:text-base">
               We offer a team of the most trusted and experienced psychologists, best therapists, certified counsellors, and mental health professionals to take care of your mind and well-being. Click on any service below to learn more.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {services.map((service) => (
               <div
                 key={service.title}
                 onClick={() => handleServiceClick(service.title)}
-                className={`group relative overflow-hidden rounded-lg cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 ${activeService === service.title ? 'ring-4 ring-orange-400 ring-offset-2' : ''}`}
+                className={`group relative overflow-hidden rounded-lg cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 ${activeService === service.title ? 'ring-4 ring-[#1a2e4a] ring-offset-2' : ''}`}
               >
                 <img
                   src={service.img}
                   alt={service.title}
                   className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className={`absolute bottom-0 left-0 right-0 py-3 px-4 text-center transition-colors duration-200 ${activeService === service.title ? 'bg-orange-600' : 'bg-orange-500 group-hover:bg-orange-600'}`}>
+                <div className={`absolute bottom-0 left-0 right-0 py-3 px-4 text-center transition-colors duration-200 ${activeService === service.title ? 'bg-[#1a2e4a]' : 'bg-[#1a2e4a]/80 group-hover:bg-[#1a2e4a]'}`}>
                   <p className="text-white font-semibold text-sm">{service.title}</p>
                 </div>
               </div>
@@ -279,13 +257,13 @@ export default function ServicesPage() {
 
       {/* SERVICE DETAIL PANEL — shown on click, reference design */}
       {selected && (
-        <section ref={detailRef} className="bg-gray-50 py-16 px-4 border-t-4 border-orange-400">
+        <section ref={detailRef} className="bg-gray-50 py-16 px-4 border-t-4 border-[#1a2e4a]">
           <div className="max-w-7xl mx-auto">
             {/* Close button */}
             <div className="flex justify-between items-center mb-10">
               <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-snug">{selected.heading}</h2>
-                <div className="w-16 h-1 bg-orange-400 mt-2 rounded-full" />
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-snug" style={{ fontFamily: 'Georgia, serif' }}>{selected.heading}</h2>
+                <div className="w-16 h-[2px] bg-[#c07a2a] mt-2 rounded-full" />
               </div>
               <button
                 onClick={() => setActiveService(null)}
@@ -311,7 +289,7 @@ export default function ServicesPage() {
                 <ul className="space-y-2 mb-8">
                   {selected.highlights.map((h) => (
                     <li key={h} className="flex items-start gap-2 text-sm text-gray-700">
-                      <span className="w-5 h-5 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">✓</span>
+                      <span className="w-5 h-5 bg-blue-100 text-[#1a2e4a] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">✓</span>
                       {h}
                     </li>
                   ))}
@@ -323,9 +301,9 @@ export default function ServicesPage() {
                     <p className="text-blue-400 text-xs font-medium mb-0.5">For</p>
                     <p className="text-blue-900 font-semibold">{selected.audience}</p>
                   </div>
-                  <div className="bg-orange-50 border border-orange-100 rounded-lg px-4 py-3 text-sm">
-                    <p className="text-orange-400 text-xs font-medium mb-0.5">Duration</p>
-                    <p className="text-orange-900 font-semibold">{selected.duration}</p>
+                  <div className="bg-blue-50 border border-blue-100 rounded-lg px-4 py-3 text-sm">
+                    <p className="text-blue-400 text-xs font-medium mb-0.5">Duration</p>
+                    <p className="text-blue-900 font-semibold">{selected.duration}</p>
                   </div>
                   <div className="bg-green-50 border border-green-100 rounded-lg px-4 py-3 text-sm">
                     <p className="text-green-400 text-xs font-medium mb-0.5">Sessions</p>
@@ -333,12 +311,12 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                <Link
-                  href="/student/counsellors"
-                  className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors shadow-md"
+                <button
+                  onClick={() => setBookingOpen(true)}
+                  className="inline-flex items-center gap-2 bg-[#1a2e4a] hover:bg-[#2d5fa6] text-white px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors shadow-md"
                 >
                   📅 Book Free Appointment
-                </Link>
+                </button>
               </div>
 
               {/* RIGHT — image */}
@@ -357,17 +335,17 @@ export default function ServicesPage() {
 
 
       {/* CTA SECTION */}
-      <section className="bg-gradient-to-br from-orange-50 via-amber-50 to-orange-100 py-16 px-4 border-t border-orange-100">
+      <section className="bg-[#eef2f9] py-16 px-4 border-t border-blue-100">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to Take the First Step?</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Georgia, serif' }}>Ready to Take <em className="italic">the First Step?</em></h2>
           <p className="text-gray-600 mb-8 leading-relaxed">
             All our services are completely free for district residents. Book your appointment today and take the first step towards a better tomorrow.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/student/counsellors" className="bg-orange-500 text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-orange-600 transition-colors shadow-md">
+            <button onClick={() => setBookingOpen(true)} className="bg-[#1a2e4a] text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-[#2d5fa6] transition-colors shadow-md">
               📅 Book Free Appointment
-            </Link>
-            <Link href="/counselors" className="border-2 border-orange-400 text-orange-600 px-8 py-3.5 rounded-lg font-semibold hover:bg-orange-500 hover:text-white transition-colors">
+            </button>
+            <Link href="/counselors" className="border-2 border-[#1a2e4a] text-[#1a2e4a] px-8 py-3.5 rounded-lg font-semibold hover:bg-[#1a2e4a] hover:text-white transition-colors">
               Meet Our Counsellors →
             </Link>
           </div>
