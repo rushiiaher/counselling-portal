@@ -74,8 +74,7 @@ export default function SiteNavbar({ onBookClick }: { onBookClick?: () => void }
               onClick={onBookClick}
               className="bg-[#c07a2a] hover:bg-[#a8661f] text-white rounded-lg text-xs sm:text-sm transition-colors font-semibold px-2.5 py-1.5 sm:px-3"
             >
-              <span className="hidden sm:inline">Book Free Session</span>
-              <span className="sm:hidden">Book</span>
+              Book Free Session
             </button>
 
             {/* MOBILE HAMBURGER */}
