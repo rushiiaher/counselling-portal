@@ -5,6 +5,7 @@ import Link from 'next/link';
 import HeroCarousel from '@/components/home/HeroCarousel';
 import SiteNavbar from '@/components/layout/SiteNavbar';
 import BookAppointmentModal from '@/components/shared/BookAppointmentModal';
+import { ChevronRight, ArrowRight, Building2 } from 'lucide-react';
 
 export default function HomePage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,59 +20,59 @@ export default function HomePage() {
       <HeroCarousel />
 
       {/* STATISTICS SECTION */}
-      <section className="bg-gradient-to-r from-[#1a2e4a] to-[#2d5fa6] py-10 px-4">
+      <section className="bg-[#eef4fb] py-10 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
 
             {/* Certified Counsellors */}
-            <div className="stat-slide-up group flex items-center gap-4 bg-white/10 hover:bg-blue-400/20 border border-white/10 hover:border-blue-300/60 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(59,130,246,0.3)]">
-              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-blue-400/20 group-hover:bg-blue-400/40 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
-                <svg className="w-5 h-5 text-blue-200" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+            <div className="stat-slide-up group flex items-center gap-4 bg-white hover:bg-blue-50 border border-blue-100 hover:border-blue-300 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(59,130,246,0.15)]">
+              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-blue-100 group-hover:bg-blue-200 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
                 </svg>
               </div>
               <div>
-                <div className="text-2xl font-bold text-white group-hover:text-blue-100 leading-tight transition-colors duration-300">150+</div>
-                <div className="text-blue-200 text-xs font-medium mt-0.5">Certified Counsellors</div>
+                <div className="text-2xl font-bold text-[#1a2e4a] leading-tight">150+</div>
+                <div className="text-gray-500 text-xs font-medium mt-0.5">Certified Counsellors</div>
               </div>
             </div>
 
             {/* Students Guided */}
-            <div className="stat-slide-up group flex items-center gap-4 bg-white/10 hover:bg-emerald-400/20 border border-white/10 hover:border-emerald-300/60 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(52,211,153,0.3)]">
-              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-emerald-400/20 group-hover:bg-emerald-400/40 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
-                <svg className="w-5 h-5 text-emerald-200" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+            <div className="stat-slide-up group flex items-center gap-4 bg-white hover:bg-emerald-50 border border-emerald-100 hover:border-emerald-300 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(52,211,153,0.15)]">
+              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-emerald-100 group-hover:bg-emerald-200 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+                <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
                 </svg>
               </div>
               <div>
-                <div className="text-2xl font-bold text-white group-hover:text-emerald-100 leading-tight transition-colors duration-300">25,000+</div>
-                <div className="text-blue-200 text-xs font-medium mt-0.5">Students Guided</div>
+                <div className="text-2xl font-bold text-[#1a2e4a] leading-tight">25,000+</div>
+                <div className="text-gray-500 text-xs font-medium mt-0.5">Students Guided</div>
               </div>
             </div>
 
             {/* Sessions Conducted */}
-            <div className="stat-slide-up group flex items-center gap-4 bg-white/10 hover:bg-violet-400/20 border border-white/10 hover:border-violet-300/60 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(167,139,250,0.3)]">
-              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-violet-400/20 group-hover:bg-violet-400/40 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
-                <svg className="w-5 h-5 text-violet-200" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+            <div className="stat-slide-up group flex items-center gap-4 bg-white hover:bg-violet-50 border border-violet-100 hover:border-violet-300 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(167,139,250,0.15)]">
+              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-violet-100 group-hover:bg-violet-200 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+                <svg className="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
                 </svg>
               </div>
               <div>
-                <div className="text-2xl font-bold text-white group-hover:text-violet-100 leading-tight transition-colors duration-300">50,000+</div>
-                <div className="text-blue-200 text-xs font-medium mt-0.5">Sessions Conducted</div>
+                <div className="text-2xl font-bold text-[#1a2e4a] leading-tight">50,000+</div>
+                <div className="text-gray-500 text-xs font-medium mt-0.5">Sessions Conducted</div>
               </div>
             </div>
 
             {/* Workshops Completed */}
-            <div className="stat-slide-up group flex items-center gap-4 bg-white/10 hover:bg-amber-400/20 border border-white/10 hover:border-amber-300/60 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(251,191,36,0.3)]">
-              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-amber-400/20 group-hover:bg-amber-400/40 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
-                <svg className="w-5 h-5 text-amber-200" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+            <div className="stat-slide-up group flex items-center gap-4 bg-white hover:bg-amber-50 border border-amber-100 hover:border-amber-300 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(251,191,36,0.15)]">
+              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-amber-100 group-hover:bg-amber-200 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+                <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
                 </svg>
               </div>
               <div>
-                <div className="text-2xl font-bold text-white group-hover:text-amber-100 leading-tight transition-colors duration-300">500+</div>
-                <div className="text-blue-200 text-xs font-medium mt-0.5">Workshops Completed</div>
+                <div className="text-2xl font-bold text-[#1a2e4a] leading-tight">500+</div>
+                <div className="text-gray-500 text-xs font-medium mt-0.5">Workshops Completed</div>
               </div>
             </div>
 
@@ -96,7 +97,7 @@ export default function HomePage() {
               </p>
             </div>
             <Link href="/services" className="text-[#1a2e4a] text-sm font-medium hover:underline flex items-center gap-1 self-start md:self-auto whitespace-nowrap">
-              View all services →
+              View all services <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -204,7 +205,7 @@ export default function HomePage() {
                     onClick={() => setModalOpen(true)}
                     className="text-[#1a2e4a] text-sm font-medium hover:text-[#2d5fa6] transition-colors flex items-center gap-1"
                   >
-                    Book Session →
+                    Book Session <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -345,8 +346,8 @@ export default function HomePage() {
             ))}
           </div>
           <div className="text-center mt-10">
-            <Link href="/counselors" className="inline-block bg-[#1a3a6b] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#2563eb] transition-colors">
-              View All Counsellors →
+            <Link href="/counselors" className="inline-block bg-[#1a3a6b] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#2563eb] transition-colors flex items-center gap-2">
+              View All Counsellors <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -366,7 +367,7 @@ export default function HomePage() {
               <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mt-2" />
             </div>
             <Link href="/events" className="text-[#1a2e4a] text-sm font-medium hover:underline flex items-center gap-1 whitespace-nowrap mb-2">
-              See all events →
+              See all events <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -447,9 +448,9 @@ export default function HomePage() {
                 {/* Register button */}
                 <Link
                   href="/events"
-                  className={`flex-shrink-0 text-xs font-semibold font-sans px-4 py-2 rounded-lg transition-colors duration-200 self-start sm:self-auto ${event.registerStyle}`}
+                  className={`flex-shrink-0 text-xs font-semibold font-sans px-4 py-2 rounded-lg transition-colors duration-200 self-start sm:self-auto flex items-center gap-1 ${event.registerStyle}`}
                 >
-                  Register →
+                  Register <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             ))}
@@ -533,56 +534,60 @@ export default function HomePage() {
       </section>
 
       {/* 3 EASY STEPS SECTION */}
-      <section className="bg-[#eef2f9] py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Simple Process</span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-3 mb-2" style={{ fontFamily: 'Georgia, serif' }}>
-            Get Help in <em className="italic">3 Easy Steps</em>
-          </h2>
-          <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mx-auto mb-4" />
-          <p className="text-gray-500 text-base mb-16">
-            No complicated forms, no long waits. Start your wellness journey today.
-          </p>
+      <section className="bg-[#eef2f9] py-10 md:py-20 px-4">
+        <div className="max-w-4xl mx-auto">
+          {/* Header — centered */}
+          <div className="text-center mb-8 md:mb-14">
+            <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Simple Process</span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-3 mb-2">
+              Get Help in <em className="italic">3 Easy Steps</em>
+            </h2>
+            <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mx-auto mb-3" />
+            <p className="text-gray-500 text-sm md:text-base">
+              No complicated forms, no long waits. Start your wellness journey today.
+            </p>
+          </div>
 
-          {/* Steps */}
-          <div className="relative flex flex-col md:flex-row items-start justify-between gap-10 md:gap-0">
-            {/* Dotted connector line (desktop only) */}
-            <div
-              className="hidden md:block absolute top-[38px] left-[calc(16.67%+24px)] right-[calc(16.67%+24px)] border-t-2 border-dashed border-[#c07a2a]/40"
-              aria-hidden="true"
-            />
-
-            {/* Step 1 */}
-            <div className="flex-1 flex flex-col items-center px-4 relative z-10">
-              <div className="w-[72px] h-[72px] rounded-full bg-[#fdecd6] flex items-center justify-center mb-6 shadow-sm">
-                <span className="text-[#c07a2a] font-bold text-2xl" style={{ fontFamily: 'Georgia, serif' }}>1</span>
+          {/* Steps — horizontal card on mobile, centered column on desktop */}
+          <div className="flex flex-col gap-4 md:hidden">
+            {[
+              { n: '1', title: 'Choose Your Service', desc: 'Pick from career, mental health, academic, group therapy or family counselling — in-person or online.' },
+              { n: '2', title: 'Pick a Counsellor & Slot', desc: 'Browse certified counsellors by specialty and language, then select an available time slot.' },
+              { n: '3', title: 'Attend Your Session', desc: 'Visit our center or join via video call. Free, confidential, and conducted by certified professionals.' },
+            ].map((step) => (
+              <div key={step.n} className="flex items-start gap-4 bg-white rounded-2xl px-5 py-4 shadow-sm border border-[#c07a2a]/10">
+                <div className="w-10 h-10 rounded-full bg-[#fdecd6] flex items-center justify-center flex-shrink-0">
+                  <span className="text-[#c07a2a] font-bold text-lg">{step.n}</span>
+                </div>
+                <div>
+                  <h3 className="font-bold text-[#1a3a6b] text-sm mb-1">{step.title}</h3>
+                  <p className="text-gray-500 text-xs leading-relaxed">{step.desc}</p>
+                </div>
               </div>
-              <h3 className="font-bold text-[#1a3a6b] text-base mb-3">Choose Your Service</h3>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-[220px] mx-auto">
-                Pick from career, mental health, academic, group therapy or family counselling — in-person or online. Anonymous option available.
-              </p>
-            </div>
+            ))}
+          </div>
 
-            {/* Step 2 */}
-            <div className="flex-1 flex flex-col items-center px-4 relative z-10">
-              <div className="w-[72px] h-[72px] rounded-full bg-[#fdecd6] flex items-center justify-center mb-6 shadow-sm">
-                <span className="text-[#c07a2a] font-bold text-2xl" style={{ fontFamily: 'Georgia, serif' }}>2</span>
-              </div>
-              <h3 className="font-bold text-[#1a3a6b] text-base mb-3">Pick a Counsellor &amp; Slot</h3>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-[220px] mx-auto">
-                Browse certified counsellors by specialty, language (Kashmiri/Urdu/Hindi/English), and select an available time slot.
-              </p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="flex-1 flex flex-col items-center px-4 relative z-10">
-              <div className="w-[72px] h-[72px] rounded-full bg-[#fdecd6] flex items-center justify-center mb-6 shadow-sm">
-                <span className="text-[#c07a2a] font-bold text-2xl" style={{ fontFamily: 'Georgia, serif' }}>3</span>
-              </div>
-              <h3 className="font-bold text-[#1a3a6b] text-base mb-3">Attend Your Session</h3>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-[220px] mx-auto">
-                Visit our center or join via video call. All sessions are completely free, confidential, and conducted by certified professionals.
-              </p>
+          {/* Desktop layout — original centered columns */}
+          <div className="hidden md:block">
+            <div className="relative flex flex-row items-start justify-between">
+              {/* Dotted connector line */}
+              <div
+                className="absolute top-[38px] left-[calc(16.67%+24px)] right-[calc(16.67%+24px)] border-t-2 border-dashed border-[#c07a2a]/40"
+                aria-hidden="true"
+              />
+              {[
+                { n: '1', title: 'Choose Your Service', desc: 'Pick from career, mental health, academic, group therapy or family counselling — in-person or online. Anonymous option available.' },
+                { n: '2', title: 'Pick a Counsellor & Slot', desc: 'Browse certified counsellors by specialty, language (Kashmiri/Urdu/Hindi/English), and select an available time slot.' },
+                { n: '3', title: 'Attend Your Session', desc: 'Visit our center or join via video call. All sessions are completely free, confidential, and conducted by certified professionals.' },
+              ].map((step) => (
+                <div key={step.n} className="flex-1 flex flex-col items-center px-4 relative z-10 text-center">
+                  <div className="w-[72px] h-[72px] rounded-full bg-[#fdecd6] flex items-center justify-center mb-6 shadow-sm">
+                    <span className="text-[#c07a2a] font-bold text-2xl">{step.n}</span>
+                  </div>
+                  <h3 className="font-bold text-[#1a3a6b] text-base mb-3">{step.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -590,25 +595,31 @@ export default function HomePage() {
 
       {/* FOOTER */}
       <footer className="bg-[#1a3a6b] text-white">
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                  <span className="text-[#1a3a6b] font-bold">🏛</span>
+        <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
+
+          {/* Mobile: compact 2-col, Desktop: 4-col */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-8">
+
+            {/* Brand — full width on mobile */}
+            <div className="col-span-2 md:col-span-1">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Building2 className="w-5 h-5 text-[#1a3a6b]" />
                 </div>
                 <div>
-                  <p className="font-bold text-sm">District Counselling Center</p>
-                  <p className="text-blue-300 text-xs">Govt. of India</p>
+                  <p className="font-bold text-sm leading-tight">District Counselling Center</p>
+                  <p className="text-blue-300 text-xs">Anantnag, J&K</p>
                 </div>
               </div>
-              <p className="text-blue-200 text-sm leading-relaxed">
-                Providing professional counselling and guidance services to empower the youth and families of our district.
+              <p className="text-blue-200 text-xs leading-relaxed">
+                Free, professional counselling for students, youth and families across the district.
               </p>
             </div>
+
+            {/* Quick Links */}
             <div>
-              <h4 className="font-bold text-base mb-4 text-blue-100">Quick Links</h4>
-              <ul className="space-y-2">
+              <h4 className="font-bold text-sm mb-3 text-blue-100">Quick Links</h4>
+              <ul className="space-y-1.5">
                 {[
                   { label: 'Home', href: '/' },
                   { label: 'Services', href: '/services' },
@@ -617,43 +628,56 @@ export default function HomePage() {
                   { label: 'Contact', href: '/contact' },
                 ].map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="text-blue-300 hover:text-white text-sm transition-colors">→ {link.label}</Link>
+                    <Link href={link.href} className="text-blue-300 hover:text-white text-xs transition-colors">
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
+
+            {/* Our Services */}
             <div>
-              <h4 className="font-bold text-base mb-4 text-blue-100">Our Services</h4>
-              <ul className="space-y-2">
-                {['Career Counselling', 'Educational Guidance', 'Mental Wellness', 'Youth Guidance', 'Skill Development', 'Family Counselling', 'Personal Counselling'].map((service) => (
+              <h4 className="font-bold text-sm mb-3 text-blue-100">Services</h4>
+              <ul className="space-y-1.5">
+                {['Career Counselling', 'Mental Wellness', 'Educational Guidance', 'Family Counselling', 'Group Therapy'].map((service) => (
                   <li key={service}>
-                    <Link href="/services" className="text-blue-300 hover:text-white text-sm transition-colors">→ {service}</Link>
+                    <Link href="/services" className="text-blue-300 hover:text-white text-xs transition-colors">
+                      {service}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
-            <div>
-              <h4 className="font-bold text-base mb-4 text-blue-100">Important Links</h4>
-              <ul className="space-y-2">
+
+            {/* Important Links — hidden on mobile */}
+            <div className="hidden md:block">
+              <h4 className="font-bold text-sm mb-3 text-blue-100">Important Links</h4>
+              <ul className="space-y-1.5">
                 {['Ministry of Education', 'NCERT', 'UGC', 'AICTE', 'National Career Service', 'Skill India', 'Digital India'].map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-blue-300 hover:text-white text-sm transition-colors">→ {link}</a>
+                    <a href="#" className="text-blue-300 hover:text-white text-xs transition-colors">
+                      {link}
+                    </a>
                   </li>
                 ))}
               </ul>
             </div>
+
           </div>
-          <div className="border-t border-blue-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-blue-300 text-sm text-center md:text-left">
-              © 2025 District Counselling Center, Government of India. All Rights Reserved.
+
+          {/* Bottom bar */}
+          <div className="border-t border-blue-800 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-blue-300 text-xs text-center sm:text-left">
+              © 2025 District Counselling Center, Govt. of India. All Rights Reserved.
             </p>
-            <div className="flex gap-4 text-sm">
-              <a href="#" className="text-blue-300 hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="text-blue-300 hover:text-white transition-colors">Terms of Use</a>
-              <a href="#" className="text-blue-300 hover:text-white transition-colors">Accessibility</a>
+            <div className="flex gap-3 text-xs">
+              <a href="#" className="text-blue-300 hover:text-white transition-colors">Privacy</a>
+              <a href="#" className="text-blue-300 hover:text-white transition-colors">Terms</a>
               <a href="#" className="text-blue-300 hover:text-white transition-colors">Sitemap</a>
             </div>
           </div>
+
         </div>
       </footer>
     </div>

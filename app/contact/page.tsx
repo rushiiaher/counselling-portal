@@ -1,5 +1,15 @@
 import Link from 'next/link';
 import SiteNavbar from '@/components/layout/SiteNavbar';
+import {
+  Phone,
+  MessageCircle,
+  Mail,
+  MapPin,
+  Clock,
+  CalendarDays,
+  Building2,
+  ChevronRight,
+} from 'lucide-react';
 
 const faqs = [
   {
@@ -120,18 +130,20 @@ export default function ContactPage() {
 
               {/* Quick contact */}
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                <h3 className="font-bold text-[#1a2e4a] text-base mb-4">📬 Contact Details</h3>
+                <h3 className="font-bold text-[#1a2e4a] text-base mb-4 flex items-center gap-2">
+                  <Mail className="w-4 h-4 text-[#c07a2a]" /> Contact Details
+                </h3>
                 <ul className="space-y-3 text-sm">
                   {[
-                    { icon: '📞', label: 'Helpline (Toll-free)', value: '1800-XXX-XXXX' },
-                    { icon: '📞', label: 'Office Direct', value: '+91-XXXXX-XXXXX' },
-                    { icon: '💬', label: 'WhatsApp', value: '+91-XXXXX-XXXXX' },
-                    { icon: '📧', label: 'General Enquiry', value: 'info@dcc.gov.in' },
-                    { icon: '📧', label: 'Appointments', value: 'appointments@dcc.gov.in' },
-                    { icon: '📍', label: 'Address', value: 'Civil Lines, Near Collectorate, District HQ – 110001' },
+                    { icon: <Phone className="w-4 h-4 text-[#1a2e4a]" />, label: 'Helpline (Toll-free)', value: '1800-XXX-XXXX' },
+                    { icon: <Phone className="w-4 h-4 text-[#1a2e4a]" />, label: 'Office Direct', value: '+91-XXXXX-XXXXX' },
+                    { icon: <MessageCircle className="w-4 h-4 text-[#1a2e4a]" />, label: 'WhatsApp', value: '+91-XXXXX-XXXXX' },
+                    { icon: <Mail className="w-4 h-4 text-[#1a2e4a]" />, label: 'General Enquiry', value: 'info@dcc.gov.in' },
+                    { icon: <Mail className="w-4 h-4 text-[#1a2e4a]" />, label: 'Appointments', value: 'appointments@dcc.gov.in' },
+                    { icon: <MapPin className="w-4 h-4 text-[#1a2e4a]" />, label: 'Address', value: 'Civil Lines, Near Collectorate, District HQ – 110001' },
                   ].map((item) => (
                     <li key={item.label} className="flex items-start gap-3">
-                      <span className="text-base w-5 flex-shrink-0">{item.icon}</span>
+                      <span className="w-5 flex-shrink-0 mt-0.5">{item.icon}</span>
                       <span className="text-gray-500 w-32 flex-shrink-0 text-xs pt-0.5">{item.label}</span>
                       <span className="text-[#1a2e4a] font-medium text-xs">{item.value}</span>
                     </li>
@@ -141,7 +153,9 @@ export default function ContactPage() {
 
               {/* Office hours */}
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                <h3 className="font-bold text-[#1a2e4a] text-base mb-4">🕐 Office Timings</h3>
+                <h3 className="font-bold text-[#1a2e4a] text-base mb-4 flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-[#c07a2a]" /> Office Timings
+                </h3>
                 <div className="space-y-2">
                   {[
                     { day: 'Monday – Friday', time: '9:00 AM – 5:00 PM', open: true },
@@ -164,7 +178,7 @@ export default function ContactPage() {
 
               {/* Book appointment nudge */}
               <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5 flex gap-3">
-                <span className="text-2xl flex-shrink-0">📅</span>
+                <CalendarDays className="w-6 h-6 text-amber-700 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-amber-900 text-sm font-semibold mb-1">Book an Appointment</p>
                   <p className="text-amber-800 text-xs leading-relaxed">For counselling sessions, we recommend booking in advance. Walk-ins are accepted subject to counsellor availability.</p>
@@ -204,7 +218,7 @@ export default function ContactPage() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                  <span className="text-[#1a3a6b] font-bold">🏛</span>
+                  <Building2 className="w-5 h-5 text-[#1a3a6b]" />
                 </div>
                 <div>
                   <p className="font-bold text-sm">District Counselling Center</p>
@@ -219,7 +233,11 @@ export default function ContactPage() {
               <h4 className="font-bold text-base mb-4 text-blue-100">Quick Links</h4>
               <ul className="space-y-2">
                 {[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: 'Counsellors', href: '/counselors' }, { label: 'Events', href: '/events' }, { label: 'Contact', href: '/contact' }].map((link) => (
-                  <li key={link.label}><Link href={link.href} className="text-blue-300 hover:text-white text-sm transition-colors">→ {link.label}</Link></li>
+                  <li key={link.label}>
+                    <Link href={link.href} className="text-blue-300 hover:text-white text-sm transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -227,17 +245,21 @@ export default function ContactPage() {
               <h4 className="font-bold text-base mb-4 text-blue-100">Our Services</h4>
               <ul className="space-y-2">
                 {['Career Counselling', 'Educational Guidance', 'Mental Wellness', 'Youth Guidance', 'Family Counselling'].map((service) => (
-                  <li key={service}><Link href="/services" className="text-blue-300 hover:text-white text-sm transition-colors">→ {service}</Link></li>
+                  <li key={service}>
+                    <Link href="/services" className="text-blue-300 hover:text-white text-sm transition-colors">
+                      {service}
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-base mb-4 text-blue-100">Contact</h4>
               <ul className="space-y-2 text-blue-300 text-sm">
-                <li>📍 Civil Lines, District HQ – 110001</li>
-                <li>📞 Helpline: 1800-XXX-XXXX</li>
-                <li>📧 info@dcc.gov.in</li>
-                <li>🕐 Mon–Fri: 9 AM – 5 PM</li>
+                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" /> Civil Lines, District HQ – 110001</li>
+                <li className="flex items-center gap-2"><Phone className="w-4 h-4 flex-shrink-0" /> Helpline: 1800-XXX-XXXX</li>
+                <li className="flex items-center gap-2"><Mail className="w-4 h-4 flex-shrink-0" /> info@dcc.gov.in</li>
+                <li className="flex items-center gap-2"><Clock className="w-4 h-4 flex-shrink-0" /> Mon–Fri: 9 AM – 5 PM</li>
               </ul>
             </div>
           </div>

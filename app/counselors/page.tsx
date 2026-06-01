@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import SiteNavbar from '@/components/layout/SiteNavbar';
 import BookAppointmentModal from '@/components/shared/BookAppointmentModal';
+import { Building2, MapPin, Phone, Mail, Clock, Languages, CalendarDays, Search, UserRound } from 'lucide-react';
 
 type Counsellor = {
   id: number;
@@ -78,7 +79,9 @@ export default function CounsellorsPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1 relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">🔍</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <Search className="w-4 h-4" />
+              </span>
               <input
                 type="text"
                 placeholder="Search by name, specialization, or qualification..."
@@ -131,7 +134,9 @@ export default function CounsellorsPage() {
         <div className="max-w-7xl mx-auto">
           {filtered.length === 0 ? (
             <div className="text-center py-20">
-              <div className="text-6xl mb-4">🔍</div>
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Search className="w-8 h-8 text-gray-400" />
+              </div>
               <h3 className="text-xl font-bold text-[#1a3a6b] mb-2">No counsellors found</h3>
               <p className="text-gray-500 mb-6">Try adjusting your search or filter criteria.</p>
               <button
@@ -177,9 +182,9 @@ export default function CounsellorsPage() {
                       ))}
                     </div>
                     <div className="space-y-1 text-xs text-gray-500 mb-2">
-                      <div className="flex items-center gap-2"><span>📍</span><span>{counsellor.location}</span></div>
-                      <div className="flex items-center gap-2"><span>🗣</span><span>{counsellor.languages.join(', ')}</span></div>
-                      <div className="flex items-center gap-2"><span>📅</span><span>{counsellor.availability}</span></div>
+                      <div className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5 flex-shrink-0 text-gray-400" /><span>{counsellor.location}</span></div>
+                      <div className="flex items-center gap-2"><Languages className="w-3.5 h-3.5 flex-shrink-0 text-gray-400" /><span>{counsellor.languages.join(', ')}</span></div>
+                      <div className="flex items-center gap-2"><CalendarDays className="w-3.5 h-3.5 flex-shrink-0 text-gray-400" /><span>{counsellor.availability}</span></div>
                     </div>
                     <p className="text-gray-600 text-xs leading-relaxed mb-3 md:h-[52px] md:overflow-y-auto pr-1 scrollbar-thin">{counsellor.bio}</p>
                     <div className="mt-auto">
@@ -199,7 +204,9 @@ export default function CounsellorsPage() {
       <section className="bg-white py-16 px-4 border-t border-gray-100">
         <div className="max-w-4xl mx-auto text-center">
           <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-10 border border-blue-100">
-            <div className="text-5xl mb-4">👩‍⚕️</div>
+            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <UserRound className="w-8 h-8 text-[#1a3a6b]" />
+            </div>
             <h2 className="text-2xl font-bold text-[#1a2e4a] mb-3">Are You a Qualified <em className="italic">Counsellor?</em></h2>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
               Join our growing network of certified counsellors and make a difference in the lives of students and families across the district. We welcome RCI-registered and qualified counselling professionals.
@@ -223,7 +230,7 @@ export default function CounsellorsPage() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                  <span className="text-[#1a3a6b] font-bold">🏛</span>
+                  <Building2 className="w-5 h-5 text-[#1a3a6b]" />
                 </div>
                 <div>
                   <p className="font-bold text-sm">District Counselling Center</p>
@@ -236,7 +243,7 @@ export default function CounsellorsPage() {
               <h4 className="font-bold text-base mb-4 text-blue-100">Quick Links</h4>
               <ul className="space-y-2">
                 {[{ label: 'Home', href: '/' }, { label: 'About Us', href: '/about' }, { label: 'Services', href: '/services' }, { label: 'Counsellors', href: '/counselors' }, { label: 'Contact', href: '/contact' }].map((link) => (
-                  <li key={link.label}><Link href={link.href} className="text-blue-300 hover:text-white text-sm transition-colors">→ {link.label}</Link></li>
+                  <li key={link.label}><Link href={link.href} className="text-blue-300 hover:text-white text-sm transition-colors">{link.label}</Link></li>
                 ))}
               </ul>
             </div>
@@ -244,17 +251,17 @@ export default function CounsellorsPage() {
               <h4 className="font-bold text-base mb-4 text-blue-100">Our Services</h4>
               <ul className="space-y-2">
                 {['Career Counselling', 'Educational Guidance', 'Mental Wellness', 'Youth Guidance', 'Skill Development', 'Family Counselling', 'Personal Counselling'].map((service) => (
-                  <li key={service}><Link href="/services" className="text-blue-300 hover:text-white text-sm transition-colors">→ {service}</Link></li>
+                  <li key={service}><Link href="/services" className="text-blue-300 hover:text-white text-sm transition-colors">{service}</Link></li>
                 ))}
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-base mb-4 text-blue-100">Contact</h4>
               <ul className="space-y-2 text-blue-300 text-sm">
-                <li>📍 Civil Lines, District HQ – 110001</li>
-                <li>📞 Helpline: 1800-XXX-XXXX</li>
-                <li>📧 info@dcc.gov.in</li>
-                <li>🕐 Mon–Fri: 9 AM – 5 PM</li>
+                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" /> Civil Lines, District HQ – 110001</li>
+                <li className="flex items-center gap-2"><Phone className="w-4 h-4 flex-shrink-0" /> Helpline: 1800-XXX-XXXX</li>
+                <li className="flex items-center gap-2"><Mail className="w-4 h-4 flex-shrink-0" /> info@dcc.gov.in</li>
+                <li className="flex items-center gap-2"><Clock className="w-4 h-4 flex-shrink-0" /> Mon–Fri: 9 AM – 5 PM</li>
               </ul>
             </div>
           </div>

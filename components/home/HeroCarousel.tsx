@@ -91,13 +91,13 @@ export default function HeroCarousel() {
       <div className="bg-white py-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 px-4 sm:px-0 border-b border-gray-100">
         <button
           onClick={() => setBookingOpen(true)}
-          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded text-base transition-colors w-full sm:w-auto"
+          className="bg-[#1a3a6b] hover:bg-[#2563eb] text-white font-semibold py-3 px-8 rounded-md text-base transition-colors w-full sm:w-auto"
         >
           Book an Appointment
         </button>
         <Link
           href="/assessments"
-          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded text-base transition-colors text-center w-full sm:w-auto"
+          className="bg-[#c07a2a] hover:bg-[#a8651f] text-white font-semibold py-3 px-8 rounded-md text-base transition-colors text-center w-full sm:w-auto"
         >
           Free Self Assessments
         </Link>

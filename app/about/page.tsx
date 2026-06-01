@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import SiteNavbar from '@/components/layout/SiteNavbar';
+import { ChevronRight, Building2, MapPin, Phone, Mail, Clock, BookOpen, GraduationCap, HeartPulse, Briefcase, Globe } from 'lucide-react';
 
 export default function AboutPage() {
   return (
@@ -228,7 +229,7 @@ export default function AboutPage() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                  <span className="text-[#1a3a6b] font-bold">🏛</span>
+                  <Building2 className="w-5 h-5 text-[#1a3a6b]" />
                 </div>
                 <div>
                   <p className="font-bold text-sm">District Counselling Center</p>
@@ -243,7 +244,7 @@ export default function AboutPage() {
               <h4 className="font-bold text-base mb-4 text-blue-100">Quick Links</h4>
               <ul className="space-y-2">
                 {[{ label: 'Home', href: '/' }, { label: 'About Us', href: '/about' }, { label: 'Services', href: '/services' }, { label: 'Counsellors', href: '/counselors' }, { label: 'Contact', href: '/contact' }].map((link) => (
-                  <li key={link.label}><Link href={link.href} className="text-blue-300 hover:text-white text-sm transition-colors">→ {link.label}</Link></li>
+                  <li key={link.label}><Link href={link.href} className="text-blue-300 hover:text-white text-sm transition-colors">{link.label}</Link></li>
                 ))}
               </ul>
             </div>
@@ -251,17 +252,17 @@ export default function AboutPage() {
               <h4 className="font-bold text-base mb-4 text-blue-100">Our Services</h4>
               <ul className="space-y-2">
                 {['Career Counselling', 'Educational Guidance', 'Mental Wellness', 'Youth Guidance', 'Skill Development', 'Family Counselling'].map((service) => (
-                  <li key={service}><Link href="/services" className="text-blue-300 hover:text-white text-sm transition-colors">→ {service}</Link></li>
+                  <li key={service}><Link href="/services" className="text-blue-300 hover:text-white text-sm transition-colors">{service}</Link></li>
                 ))}
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-base mb-4 text-blue-100">Contact</h4>
               <ul className="space-y-2 text-blue-300 text-sm">
-                <li>📍 Civil Lines, District HQ – 110001</li>
-                <li>📞 Helpline: 1800-XXX-XXXX</li>
-                <li>📧 info@dcc.gov.in</li>
-                <li>🕐 Mon–Fri: 9 AM – 5 PM</li>
+                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" /> Civil Lines, District HQ – 110001</li>
+                <li className="flex items-center gap-2"><Phone className="w-4 h-4 flex-shrink-0" /> Helpline: 1800-XXX-XXXX</li>
+                <li className="flex items-center gap-2"><Mail className="w-4 h-4 flex-shrink-0" /> info@dcc.gov.in</li>
+                <li className="flex items-center gap-2"><Clock className="w-4 h-4 flex-shrink-0" /> Mon–Fri: 9 AM – 5 PM</li>
               </ul>
             </div>
           </div>

@@ -5,17 +5,17 @@ import { useRouter } from "next/navigation";
 import PageContainer from "@/components/shared/PageContainer";
 import { submitSupportRequestAction } from "@/app/actions/support-request.actions";
 import { Feedback } from "@/lib/feedback";
-import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowLeft, CheckCircle2, Briefcase, BookOpen, HeartPulse, Users, Zap, Home, MessageCircle, AlertTriangle } from "lucide-react";
 
 const SERVICES = [
-  { id: "CAREER_COUNSELLING", label: "Career Counselling", desc: "Career paths, job guidance, professional development", icon: "🎯" },
-  { id: "EDUCATIONAL_GUIDANCE", label: "Educational Guidance", desc: "Academic support, subject help, learning challenges", icon: "📚" },
-  { id: "MENTAL_WELLNESS", label: "Mental Wellness", desc: "Stress, anxiety, emotional well-being", icon: "🌱" },
-  { id: "YOUTH_GUIDANCE", label: "Youth Guidance", desc: "Life skills, peer pressure, identity, relationships", icon: "🌟" },
-  { id: "SKILL_DEVELOPMENT", label: "Skill Development", desc: "Vocational skills, personality, communication", icon: "⚡" },
-  { id: "FAMILY_COUNSELLING", label: "Family Counselling", desc: "Family conflicts, parent-child relations", icon: "🏠" },
-  { id: "PERSONAL_COUNSELLING", label: "Personal Counselling", desc: "Personal issues, self-esteem, life challenges", icon: "💬" },
-  { id: "CRISIS_SUPPORT", label: "Crisis Support", desc: "Immediate help for serious distress or danger", icon: "🆘" },
+  { id: "CAREER_COUNSELLING", label: "Career Counselling", desc: "Career paths, job guidance, professional development", icon: <Briefcase className="w-5 h-5" /> },
+  { id: "EDUCATIONAL_GUIDANCE", label: "Educational Guidance", desc: "Academic support, subject help, learning challenges", icon: <BookOpen className="w-5 h-5" /> },
+  { id: "MENTAL_WELLNESS", label: "Mental Wellness", desc: "Stress, anxiety, emotional well-being", icon: <HeartPulse className="w-5 h-5" /> },
+  { id: "YOUTH_GUIDANCE", label: "Youth Guidance", desc: "Life skills, peer pressure, identity, relationships", icon: <Users className="w-5 h-5" /> },
+  { id: "SKILL_DEVELOPMENT", label: "Skill Development", desc: "Vocational skills, personality, communication", icon: <Zap className="w-5 h-5" /> },
+  { id: "FAMILY_COUNSELLING", label: "Family Counselling", desc: "Family conflicts, parent-child relations", icon: <Home className="w-5 h-5" /> },
+  { id: "PERSONAL_COUNSELLING", label: "Personal Counselling", desc: "Personal issues, self-esteem, life challenges", icon: <MessageCircle className="w-5 h-5" /> },
+  { id: "CRISIS_SUPPORT", label: "Crisis Support", desc: "Immediate help for serious distress or danger", icon: <AlertTriangle className="w-5 h-5" /> },
 ];
 
 const URGENCY_OPTIONS = [
@@ -112,7 +112,7 @@ export default function StudentServicesPage() {
                 <button key={s.id} type="button" onClick={() => toggleService(s.id)}
                   className={`text-left p-4 rounded-xl border-2 transition ${selected.includes(s.id) ? "border-slate-900 bg-slate-900 text-white" : "border-slate-100 bg-white hover:border-slate-300"}`}>
                   <div className="flex items-start gap-3">
-                    <span className="text-2xl">{s.icon}</span>
+                    <span className={`flex-shrink-0 mt-0.5 ${selected.includes(s.id) ? "text-white" : "text-slate-500"}`}>{s.icon}</span>
                     <div>
                       <p className="font-semibold text-sm">{s.label}</p>
                       <p className={`text-xs mt-0.5 ${selected.includes(s.id) ? "text-slate-300" : "text-slate-400"}`}>{s.desc}</p>

@@ -4,48 +4,36 @@ import Link from "next/link";
 const assessments = [
   {
     type: "phq9",
-    title: "Mental Wellbeing (PHQ-9)",
-    desc: "Clinically-validated depression & emotional wellbeing screening. 9 questions. Trusted by WHO and health systems worldwide.",
-    minutes: 3,
-    questions: 9,
+    title: "Mental Wellbeing",
+    subtitle: "PHQ-9 Screening",
+    desc: "Clinically-validated depression & emotional wellbeing screening. Trusted by WHO and health systems worldwide.",
     badge: "Most Popular",
-    badgeColor: "text-emerald-600 bg-emerald-50 border border-emerald-200",
-    icon: (
-      <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
-      </svg>
-    ),
-    iconBg: "bg-emerald-50",
+    badgeColor: "text-emerald-700 bg-emerald-100",
+    accentBar: "bg-emerald-500",
+    cardBorder: "border-emerald-100 hover:border-emerald-300",
+    titleColor: "text-emerald-700",
   },
   {
     type: "gad7",
-    title: "Anxiety Check (GAD-7)",
-    desc: "Assess generalized anxiety levels with this 7-question standardized tool. Widely used in clinical settings and campus health programs globally.",
-    minutes: 2,
-    questions: 7,
+    title: "Anxiety Check",
+    subtitle: "GAD-7 Screening",
+    desc: "Assess generalized anxiety levels with this 7-question standardized tool. Widely used in clinical and campus health settings.",
     badge: null,
     badgeColor: "",
-    icon: (
-      <svg className="w-6 h-6 text-[#1a2e4a]" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-      </svg>
-    ),
-    iconBg: "bg-slate-100",
+    accentBar: "bg-[#1a3a6b]",
+    cardBorder: "border-blue-100 hover:border-blue-300",
+    titleColor: "text-[#1a3a6b]",
   },
   {
     type: "career",
     title: "Career Readiness",
+    subtitle: "Aptitude Assessment",
     desc: "Discover your strengths, interests and career aptitude. Get personalized suggestions aligned with your natural abilities and goals.",
-    minutes: 5,
-    questions: 12,
     badge: "New",
-    badgeColor: "text-amber-600 bg-amber-50 border border-amber-200",
-    icon: (
-      <svg className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
-      </svg>
-    ),
-    iconBg: "bg-amber-50",
+    badgeColor: "text-amber-700 bg-amber-100",
+    accentBar: "bg-amber-500",
+    cardBorder: "border-amber-100 hover:border-amber-300",
+    titleColor: "text-amber-700",
   },
 ];
 
@@ -80,7 +68,7 @@ export default function AssessmentsDirectoryPage() {
       </section>
 
       {/* CHOOSE YOUR ASSESSMENT */}
-      <section className="bg-white py-16 px-4">
+      <section className="bg-[#f7f8fa] py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Take a Test</span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-2">
@@ -89,44 +77,43 @@ export default function AssessmentsDirectoryPage() {
           <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mb-10" />
 
           {/* Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {assessments.map((a) => (
               <Link
                 key={a.type}
                 href={`/assessments/${a.type}`}
-                className="group relative bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-gray-300 transition-all duration-200 flex flex-col gap-4"
+                className={`group relative bg-white border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col ${a.cardBorder}`}
               >
-                {/* Badge */}
-                {a.badge && (
-                  <span className={`absolute top-4 right-4 text-xs font-semibold px-2.5 py-0.5 rounded-full ${a.badgeColor}`}>
-                    {a.badge}
-                  </span>
-                )}
+                {/* Colored top accent bar */}
+                <div className={`h-1.5 w-full ${a.accentBar}`} />
 
-                {/* Icon */}
-                <div className={`w-11 h-11 rounded-xl ${a.iconBg} flex items-center justify-center`}>
-                  {a.icon}
-                </div>
+                <div className="p-6 flex flex-col flex-1">
+                  {/* Badge */}
+                  {a.badge && (
+                    <span className={`self-start text-xs font-semibold px-2.5 py-0.5 rounded-full mb-4 ${a.badgeColor}`}>
+                      {a.badge}
+                    </span>
+                  )}
+                  {!a.badge && <div className="mb-4 h-5" />}
 
-                {/* Title */}
-                <h3 className="font-bold text-[#1a2e4a] text-base leading-snug">{a.title}</h3>
+                  {/* Title block */}
+                  <div className="mb-3">
+                    <p className={`text-xs font-semibold uppercase tracking-widest mb-1 ${a.titleColor}`}>{a.subtitle}</p>
+                    <h3 className="font-bold text-[#1a2e4a] text-xl leading-snug">{a.title}</h3>
+                  </div>
 
-                {/* Description */}
-                <p className="text-gray-500 text-sm leading-relaxed flex-1">{a.desc}</p>
+                  {/* Divider */}
+                  <div className="w-8 h-[2px] bg-gray-200 rounded-full mb-4" />
 
-                {/* Meta */}
-                <div className="flex items-center gap-1.5 text-gray-400 text-xs mt-1">
-                  <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span>{a.minutes} minutes · {a.questions} questions</span>
+                  {/* Description */}
+                  <p className="text-gray-500 text-sm leading-relaxed flex-1">{a.desc}</p>
                 </div>
               </Link>
             ))}
           </div>
 
           {/* Anonymous notice */}
-          <div className="mt-8 bg-emerald-50 border border-emerald-100 rounded-xl px-5 py-4 flex items-start gap-3 max-w-2xl mx-auto">
+          <div className="mt-10 bg-emerald-50 border border-emerald-100 rounded-xl px-5 py-4 flex items-start gap-3 max-w-2xl mx-auto">
             <svg className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
             </svg>
