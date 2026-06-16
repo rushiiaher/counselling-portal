@@ -57,10 +57,10 @@ export default function HeroCarousel() {
             {/* Caption */}
             <div className="absolute inset-0 flex items-center">
               <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
-                <p className="text-orange-400 font-semibold text-sm md:text-base uppercase tracking-widest mb-3">
+                <p className="text-orange-400 font-semibold text-xs sm:text-sm md:text-base uppercase tracking-widest mb-2 sm:mb-3">
                   {slide.tag}
                 </p>
-                <h2 className="text-white font-bold text-2xl md:text-4xl lg:text-5xl leading-tight max-w-2xl">
+                <h2 className="text-white font-bold text-base sm:text-2xl md:text-4xl lg:text-5xl leading-tight max-w-2xl">
                   {slide.heading}
                 </h2>
               </div>
@@ -70,18 +70,18 @@ export default function HeroCarousel() {
 
         {/* District Stats Bar */}
         <div className="absolute bottom-0 left-0 right-0 z-20 bg-black/40 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-center sm:justify-between divide-x divide-white/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 sm:grid-cols-4 divide-x-0 sm:divide-x divide-white/20">
             {districtStats.map((stat) => (
-              <div key={stat.label} className="px-4 sm:px-6 py-4 text-center sm:text-left">
-                <p className="text-white text-2xl sm:text-3xl font-bold leading-tight">{stat.value}</p>
-                <p className="text-white/80 text-xs sm:text-sm font-medium uppercase tracking-wide leading-tight mt-1">{stat.label}</p>
+              <div key={stat.label} className="px-3 sm:px-6 py-2 sm:py-4 text-center sm:text-left border-b sm:border-b-0 border-white/10 last:border-b-0">
+                <p className="text-white text-lg sm:text-3xl font-bold leading-tight">{stat.value}</p>
+                <p className="text-white/80 text-[10px] sm:text-sm font-medium uppercase tracking-wide leading-tight mt-0.5">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Dot indicators */}
-        <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        <div className="absolute bottom-24 sm:bottom-24 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {slides.map((_, i) => (
             <button
               key={i}

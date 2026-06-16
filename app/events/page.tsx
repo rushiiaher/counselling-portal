@@ -159,8 +159,8 @@ export default function EventsPage() {
                   {item.icon}
                 </div>
                 <div>
-                  <p className="text-white font-bold text-lg leading-none">{item.value}</p>
-                  <p className="text-white/60 text-xs mt-1 leading-tight">{item.label}</p>
+                  <p className="text-white font-bold text-base lg:text-lg leading-none">{item.value}</p>
+                  <p className="text-white/60 text-[11px] sm:text-xs mt-1 leading-tight">{item.label}</p>
                 </div>
               </div>
             ))}

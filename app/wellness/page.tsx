@@ -172,7 +172,7 @@ export default function WellnessHubPage() {
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-150 ${
+              className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-150 ${
                 activeFilter === f
                   ? 'bg-[#1a2e4a] text-white'
                   : 'bg-white border border-gray-200 text-gray-600 hover:border-gray-400'
@@ -194,7 +194,7 @@ export default function WellnessHubPage() {
                 className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col cursor-pointer"
               >
                 {/* Thumbnail */}
-                <div className={`relative ${r.thumbBg} h-44 flex items-center justify-center overflow-hidden`}>
+                <div className={`relative ${r.thumbBg} h-36 sm:h-44 flex items-center justify-center overflow-hidden`}>
                   {r.id === 1 ? (
                     <img src="/stress.jpg" alt={r.title} className="w-full h-full object-cover object-center" />
                   ) : r.id === 2 ? (

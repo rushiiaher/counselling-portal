@@ -10,6 +10,7 @@ import { ArrowRight, Building2, ShieldCheck, Pause, Play, MapPin, Phone, Mail, C
 export default function HomePage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [logosPaused, setLogosPaused] = useState(false);
+  const [flippedCard, setFlippedCard] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-white" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
@@ -120,10 +121,11 @@ export default function HomePage() {
             ].map((service) => (
               <div
                 key={service.title}
-                className="group relative h-64"
+                className="group relative h-64 cursor-pointer"
                 style={{ perspective: '1000px' }}
+                onClick={() => setFlippedCard(flippedCard === service.title ? null : service.title)}
               >
-                <div className="relative w-full h-full transition-transform duration-500 transform-3d group-hover:rotate-y-180">
+                <div className={`relative w-full h-full transition-transform duration-500 transform-3d md:group-hover:rotate-y-180 ${flippedCard === service.title ? 'rotate-y-180' : ''}`}>
 
                   {/* FRONT FACE */}
                   <div className={`absolute inset-0 backface-hidden ${service.cardBg} rounded-xl p-5 border ${service.border} ${service.hoverBorder} border-t-4 ${service.accent} shadow-sm flex flex-col items-center justify-center text-center gap-4`}>
@@ -312,33 +314,33 @@ export default function HomePage() {
       {/* EXPLORE COUNSELLING BANNER */}
       <section className="bg-[#f7f8fa] py-6 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="relative bg-[#2160c4] rounded-2xl overflow-hidden px-8 md:px-12 py-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl min-h-32.5">
-            {/* Decorative circles — NCS style */}
+          <div className="relative bg-[#2160c4] rounded-2xl overflow-hidden px-5 md:px-12 py-5 flex flex-row items-center justify-between gap-3 shadow-xl min-h-32.5">
+            {/* Decorative circles */}
             <div className="absolute right-32 md:right-48 top-1/2 -translate-y-1/2 w-52 h-52 rounded-full bg-white/5 pointer-events-none" />
             <div className="absolute right-24 md:right-40 top-1/2 -translate-y-1/2 w-36 h-36 rounded-full bg-white/5 pointer-events-none" />
 
             {/* LEFT — text */}
-            <div className="relative z-10 flex-1">
-              <h2 className="text-white text-xl md:text-2xl font-bold leading-snug mb-1.5">
-                Explore Your Counselling <span className="text-[#f5c842]">Journey Today! 🎓</span>
+            <div className="relative z-10 flex-1 min-w-0">
+              <h2 className="text-white text-sm sm:text-xl md:text-2xl font-bold leading-snug mb-1.5">
+                Explore Your Counselling <span className="text-[#f5c842]">Journey Today!</span>
               </h2>
-              <p className="text-blue-100 text-sm mb-4 max-w-md">
+              <p className="text-blue-100 text-xs sm:text-sm mb-3 sm:mb-4 max-w-md">
                 Connect with certified counsellors, take free self-assessments, and get expert guidance for career, education &amp; mental wellness.
               </p>
               <button
                 onClick={() => setModalOpen(true)}
-                className="flex items-center gap-2 bg-[#f5c842] text-[#1a3a6b] font-bold px-5 py-2 rounded-lg hover:bg-[#e6b800] transition-colors text-sm shadow"
+                className="flex items-center gap-2 bg-[#f5c842] text-[#1a3a6b] font-bold px-3 sm:px-5 py-1.5 sm:py-2 rounded-lg hover:bg-[#e6b800] transition-colors text-xs sm:text-sm shadow"
               >
                 <span className="text-base">+</span> Start Your Counselling
               </button>
             </div>
 
             {/* RIGHT — earth image */}
-            <div className="relative z-10 flex-shrink-0 self-end">
+            <div className="relative z-10 shrink-0 self-end">
               <img
                 src="/earth.png"
                 alt="Explore Counselling"
-                className="h-32 md:h-36 object-contain drop-shadow-2xl"
+                className="h-20 sm:h-32 md:h-36 object-contain drop-shadow-2xl"
               />
             </div>
           </div>
@@ -350,14 +352,14 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto">
 
           {/* Header */}
-          <div className="flex items-end justify-between mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8 gap-2">
             <div>
               <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Upcoming</span>
               <h2 className="bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-1 mb-1 leading-tight px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
                 Events &amp; <em className="italic">Workshops</em>
               </h2>
             </div>
-            <Link href="/events" className="text-[#1a2e4a] text-sm font-medium hover:underline flex items-center gap-1 whitespace-nowrap mb-2">
+            <Link href="/events" className="text-[#1a2e4a] text-sm font-medium hover:underline flex items-center gap-1 whitespace-nowrap sm:mb-2 self-start sm:self-auto">
               See all events <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

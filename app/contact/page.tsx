@@ -73,10 +73,10 @@ export default function ContactPage() {
             <h2 className="block w-fit bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-2 mb-8 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Get <em className="italic">In Touch</em></h2>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
 
             {/* LEFT — FORM */}
-            <form className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 space-y-5">
+            <form className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-8 space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name <span className="text-red-400">*</span></label>
@@ -144,7 +144,7 @@ export default function ContactPage() {
                   ].map((item) => (
                     <li key={item.label} className="flex items-start gap-3">
                       <span className="w-5 flex-shrink-0 mt-0.5">{item.icon}</span>
-                      <span className="text-gray-500 w-32 flex-shrink-0 text-xs pt-0.5">{item.label}</span>
+                      <span className="text-gray-500 w-24 sm:w-32 shrink-0 text-xs pt-0.5">{item.label}</span>
                       <span className="text-[#1a2e4a] font-medium text-xs">{item.value}</span>
                     </li>
                   ))}

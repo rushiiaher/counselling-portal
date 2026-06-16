@@ -161,7 +161,7 @@ export default function CounsellorsPage() {
                   </div>
                   <div className="p-3 flex flex-col flex-1">
                     <div className="text-center mb-2">
-                      <h3 className="font-bold text-[#1a3a6b] text-lg leading-tight">{counsellor.name}</h3>
+                      <h3 className="font-bold text-[#1a3a6b] text-base leading-tight">{counsellor.name}</h3>
                       <p className="text-[#2563eb] text-sm font-medium mt-0.5">{counsellor.qualification}</p>
                       <p className="text-gray-500 text-xs mt-0.5">{counsellor.experience} Years Experience</p>
                     </div>

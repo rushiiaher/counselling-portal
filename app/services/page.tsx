@@ -247,7 +247,7 @@ export default function ServicesPage() {
                 <img
                   src={service.img}
                   alt={service.title}
-                  className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-40 sm:h-52 object-cover group-hover:scale-110 transition-transform duration-700"
                 />
 
                 {/* Normal title bar — slides away on hover */}
@@ -288,7 +288,7 @@ export default function ServicesPage() {
             </div>
 
             {/* Main content — left text, right image */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start">
               {/* LEFT — text */}
               <div>
                 <p className="text-gray-700 leading-relaxed mb-5 text-[15px]">{selected.para1}</p>
@@ -310,7 +310,7 @@ export default function ServicesPage() {
                 </ul>
 
                 {/* Meta info */}
-                <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex flex-wrap gap-3 mb-8">
                   <div className="bg-blue-50 border border-blue-100 rounded-lg px-4 py-3 text-sm">
                     <p className="text-blue-400 text-xs font-medium mb-0.5">For</p>
                     <p className="text-blue-900 font-semibold">{selected.audience}</p>

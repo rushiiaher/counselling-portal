@@ -88,7 +88,7 @@ export default function AssessmentsDirectoryPage() {
                 {/* Colored top accent bar */}
                 <div className={`h-1.5 w-full ${a.accentBar}`} />
 
-                <div className="p-6 flex flex-col flex-1">
+                <div className="p-4 sm:p-6 flex flex-col flex-1">
                   {/* Badge */}
                   {a.badge && (
                     <span className={`self-start text-xs font-semibold px-2.5 py-0.5 rounded-full mb-4 ${a.badgeColor}`}>
@@ -114,7 +114,7 @@ export default function AssessmentsDirectoryPage() {
           </div>
 
           {/* Anonymous notice */}
-          <div className="mt-10 bg-emerald-50 border border-emerald-100 rounded-xl px-5 py-4 flex items-start gap-3 max-w-2xl mx-auto">
+          <div className="mt-10 bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-4 flex items-start gap-2 sm:gap-3 max-w-2xl mx-auto">
             <svg className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
             </svg>
