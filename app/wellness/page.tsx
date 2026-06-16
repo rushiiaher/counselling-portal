@@ -18,7 +18,7 @@ const resources = [
     categoryColor: 'text-[#c07a2a]',
     title: '5-Minute Breathing Technique for Exam Stress',
     desc: 'A simple box-breathing exercise proven to reduce exam anxiety in under 5 minutes.',
-    author: 'Dr. Priya Sharma',
+    author: 'Dr. Aamir Wani',
     meta: '3,200 views',
     duration: '8:45',
     filter: 'Stress & Anxiety',
@@ -99,7 +99,7 @@ const resources = [
     categoryColor: 'text-[#c07a2a]',
     title: 'How to Build Effective Study Habits in 7 Days',
     desc: 'Science-backed study techniques that work even when you\'re struggling emotionally or mentally.',
-    author: 'Dr. Anita Verma',
+    author: 'Dr. Nighat Bhat',
     meta: '6 min read',
     duration: null,
     filter: 'Study Skills',
@@ -145,9 +145,9 @@ export default function WellnessHubPage() {
       {/* HERO BANNER */}
       <section className="relative overflow-hidden">
         <img
-          src="/wellness.jpg"
+          src="/well.jpg"
           alt="Wellness Hub"
-          className="w-full h-[320px] object-cover object-center"
+          className="w-full h-80 object-cover object-center"
         />
         <div className="absolute inset-0 bg-[#1a3a6b]/65" />
         <div className="absolute inset-0 flex items-center">

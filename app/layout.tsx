@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Noto_Sans } from 'next/font/google'
 import { Toaster } from 'sonner'
 import './globals.css'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
@@ -9,6 +9,7 @@ import { getLocale, getMessages } from 'next-intl/server'
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-geist' })
 const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
+const notoSans = Noto_Sans({ subsets: ['latin'], variable: '--font-noto-sans' })
 
 export const metadata: Metadata = {
   title: 'District Counselling Center | Government of India',
@@ -28,7 +29,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={dir} className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${geist.variable} ${geistMono.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
+      <body className={`${geist.variable} ${geistMono.variable} ${notoSans.variable} font-sans antialiased bg-slate-50 text-slate-900`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
             <AuthProvider>

@@ -17,7 +17,7 @@ const events = [
     typeColor: 'bg-blue-100 text-blue-800',
     desc: 'A comprehensive workshop helping Class 12 students explore career options, understand entrance exams, and plan their higher education journey with expert counsellors.',
     seats: '150 seats available',
-    speaker: 'Dr. Priya Sharma, Career Counsellor',
+    speaker: 'Dr. Aamir Wani, Career Counsellor',
   },
   {
     day: '05', month: 'FEB', year: '2026',
@@ -28,7 +28,7 @@ const events = [
     typeColor: 'bg-green-100 text-green-800',
     desc: 'An awareness seminar focused on recognizing signs of mental health challenges, reducing stigma, and promoting help-seeking behavior among students and youth.',
     seats: '300 seats available',
-    speaker: 'Dr. Anita Verma, Clinical Psychologist',
+    speaker: 'Dr. Nighat Bhat, Clinical Psychologist',
   },
   {
     day: '15', month: 'FEB', year: '2026',
@@ -39,7 +39,7 @@ const events = [
     typeColor: 'bg-purple-100 text-purple-800',
     desc: 'A full-day immersive program designed to build leadership skills, communication abilities, and decision-making capabilities in youth aged 16–25.',
     seats: '60 seats available',
-    speaker: 'Mr. Rajesh Kumar, Youth Development Expert',
+    speaker: 'Mr. Tariq Ahmed Lone, Youth Development Expert',
   },
   {
     day: '22', month: 'FEB', year: '2026',
@@ -50,7 +50,7 @@ const events = [
     typeColor: 'bg-blue-100 text-blue-800',
     desc: 'A practical workshop helping parents understand digital safety, screen time management, and how to support their children\'s mental health in the digital era.',
     seats: '100 seats available',
-    speaker: 'Ms. Sunita Patel, Family Counsellor',
+    speaker: 'Ms. Iqra Mir, Family Counsellor',
   },
   {
     day: '10', month: 'MAR', year: '2026',
@@ -72,7 +72,7 @@ const events = [
     typeColor: 'bg-blue-100 text-blue-800',
     desc: 'Learn practical mindfulness techniques, breathing exercises, and stress management strategies to improve mental well-being and academic/work performance.',
     seats: '80 seats available',
-    speaker: 'Dr. Kavita Singh, Mindfulness Practitioner',
+    speaker: 'Ms. Sana Malik, Mindfulness Practitioner',
   },
 ];
 
@@ -100,9 +100,9 @@ export default function EventsPage() {
       {/* HERO BANNER */}
       <section className="relative overflow-hidden">
         <img
-          src="/event.jpg"
+          src="/events.jpg"
           alt="Events & Workshops"
-          className="w-full h-[320px] object-cover object-center"
+          className="w-full h-80 object-cover object-center"
         />
         <div className="absolute inset-0 bg-[#1a3a6b]/65" />
         <div className="absolute inset-0 flex items-center">
@@ -121,30 +121,47 @@ export default function EventsPage() {
       </section>
 
       {/* STATS STRIP */}
-      <section className="bg-white border-b border-gray-100 py-6 px-4">
+      <section className="bg-gradient-to-r from-[#1a3a6b] to-[#0a1628] py-5 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               {
-                label: '6 Upcoming Events',
-                icon: <svg className="w-5 h-5 text-[#1a2e4a]" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>,
+                value: '6',
+                label: 'Upcoming Events',
+                iconBg: 'bg-blue-500/20',
+                iconColor: 'text-blue-300',
+                icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>,
               },
               {
+                value: '100%',
                 label: 'All Events Free',
-                icon: <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>,
+                iconBg: 'bg-emerald-500/20',
+                iconColor: 'text-emerald-300',
+                icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>,
               },
               {
-                label: 'Multiple Venues',
-                icon: <svg className="w-5 h-5 text-rose-500" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>,
+                value: '10+',
+                label: 'Venues Across District',
+                iconBg: 'bg-rose-500/20',
+                iconColor: 'text-rose-300',
+                icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>,
               },
               {
+                value: 'Free',
                 label: 'Registration Required',
-                icon: <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" /></svg>,
+                iconBg: 'bg-amber-500/20',
+                iconColor: 'text-amber-300',
+                icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" /></svg>,
               },
             ].map((item) => (
-              <div key={item.label} className="flex items-center justify-center gap-2 text-sm text-gray-700 font-medium">
-                {item.icon}
-                <span>{item.label}</span>
+              <div key={item.label} className="flex items-center gap-3 bg-white/5 hover:bg-white/10 transition-colors rounded-xl px-4 py-3 border border-white/10">
+                <div className={`${item.iconBg} ${item.iconColor} p-2 rounded-lg shrink-0`}>
+                  {item.icon}
+                </div>
+                <div>
+                  <p className="text-white font-bold text-lg leading-none">{item.value}</p>
+                  <p className="text-white/60 text-xs mt-1 leading-tight">{item.label}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -156,8 +173,9 @@ export default function EventsPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Don&apos;t Miss Out</span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-2" style={{ fontFamily: 'Georgia, serif' }}>Upcoming <em className="italic">Events</em></h2>
-            <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mx-auto mb-4" />
+            <div className="text-center">
+              <h2 className="inline-block bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-2 mb-3 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Upcoming <em className="italic">Events</em></h2>
+            </div>
             <p className="text-gray-600 max-w-2xl mx-auto">Register early to secure your spot. All events are conducted by certified professionals and are completely free of charge.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -207,13 +225,16 @@ export default function EventsPage() {
         </div>
       </section>
 
+      <div className="h-1 bg-[#c07a2a]" />
+
       {/* PAST EVENTS */}
-      <section className="bg-white pt-10 pb-16 px-4">
+      <section className="bg-[#f7f8fa] pt-10 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-14">
             <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Our Track Record</span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-2" style={{ fontFamily: 'Georgia, serif' }}>Past <em className="italic">Events</em></h2>
-            <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mx-auto mb-4" />
+            <div className="text-center">
+              <h2 className="inline-block bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-2 mb-3 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Past <em className="italic">Events</em></h2>
+            </div>
             <p className="text-gray-600 max-w-2xl mx-auto">A glimpse of the impactful events we have organized to serve our community.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -232,25 +253,6 @@ export default function EventsPage() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-gradient-to-br from-[#1a3a6b] to-[#2563eb] py-16 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Georgia, serif' }}>Want to Organize <em className="italic">an Event?</em></h2>
-          <p className="text-blue-100 mb-8 leading-relaxed">
-            Schools, colleges, and community organizations can request a counselling workshop or awareness program at their premises. Contact us to schedule.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="bg-white text-[#1a3a6b] px-8 py-3.5 rounded-lg font-semibold hover:bg-blue-50 transition-colors shadow-lg">
-              📞 Contact Us
-            </Link>
-            <BookAppointmentButton
-              label="Book Appointment →"
-              className="border-2 border-white text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-white hover:text-[#1a3a6b] transition-colors"
-            />
           </div>
         </div>
       </section>

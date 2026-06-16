@@ -14,21 +14,20 @@ type Counsellor = {
   specializations: string[];
   rating: number;
   reviews: number;
-  location: string;
   languages: string[];
   availability: string;
   bio: string;
 };
 
 const counsellors: Counsellor[] = [
-  { id: 1, name: 'Dr. Priya Sharma', qualification: 'Ph.D. Psychology', experience: 15, specializations: ['Career Counselling', 'Mental Wellness', 'Anxiety'], rating: 5, reviews: 128, location: 'District HQ Center', languages: ['Hindi', 'English'], availability: 'Mon–Fri', bio: 'Dr. Priya Sharma is a senior psychologist with 15 years of experience in career counselling and mental wellness. She has guided over 2,000 students in making informed career decisions.' },
-  { id: 2, name: 'Mr. Rajesh Kumar', qualification: 'M.A. Counselling Psychology', experience: 10, specializations: ['Youth Guidance', 'Family Counselling', 'Peer Pressure'], rating: 5, reviews: 94, location: 'Block A Center', languages: ['Hindi', 'English', 'Bhojpuri'], availability: 'Mon–Sat', bio: 'Mr. Rajesh Kumar specializes in youth development and family counselling. His community-based approach has helped hundreds of families strengthen their bonds.' },
-  { id: 3, name: 'Dr. Anita Verma', qualification: 'Ph.D. Educational Psychology', experience: 18, specializations: ['Educational Guidance', 'Learning Disabilities', 'Academic Stress'], rating: 5, reviews: 156, location: 'District HQ Center', languages: ['Hindi', 'English', 'Urdu'], availability: 'Mon–Fri', bio: 'Dr. Anita Verma is an expert in educational psychology with 18 years of experience. She has helped thousands of students overcome academic challenges and achieve their educational goals.' },
-  { id: 4, name: 'Ms. Sunita Patel', qualification: 'M.Sc. Clinical Psychology', experience: 8, specializations: ['Personal Counselling', 'Grief Counselling', 'Self-Esteem'], rating: 4, reviews: 72, location: 'Block B Center', languages: ['Hindi', 'Gujarati', 'English'], availability: 'Tue–Sat', bio: 'Ms. Sunita Patel is a compassionate counsellor specializing in personal development and grief counselling. She creates a safe, non-judgmental space for her clients.' },
-  { id: 5, name: 'Dr. Arun Mishra', qualification: 'Ph.D. Counselling', experience: 20, specializations: ['Career Counselling', 'Skill Development', 'Entrepreneurship'], rating: 5, reviews: 203, location: 'District HQ Center', languages: ['Hindi', 'English'], availability: 'Mon–Fri', bio: 'Dr. Arun Mishra is the Head of Career Guidance with 20 years of experience. He has helped over 5,000 youth find their career path and develop entrepreneurial skills.' },
-  { id: 6, name: 'Ms. Kavita Singh', qualification: 'M.A. Psychology, B.Ed.', experience: 12, specializations: ['Educational Guidance', 'Career Counselling', 'Study Skills'], rating: 4, reviews: 88, location: 'Block C Center', languages: ['Hindi', 'English', 'Maithili'], availability: 'Mon–Sat', bio: 'Ms. Kavita Singh combines her psychology and education background to provide holistic guidance to students. She is known for her practical and student-friendly approach.' },
-  { id: 7, name: 'Dr. Suresh Yadav', qualification: 'Ph.D. Clinical Psychology', experience: 14, specializations: ['Mental Wellness', 'Trauma Counselling', 'Stress Management'], rating: 5, reviews: 117, location: 'District HQ Center', languages: ['Hindi', 'English'], availability: 'Mon–Fri', bio: 'Dr. Suresh Yadav is a clinical psychologist specializing in trauma-informed care and stress management. He uses evidence-based CBT and mindfulness techniques.' },
-  { id: 8, name: 'Ms. Rekha Gupta', qualification: 'M.Sc. Psychology, RCI Certified', experience: 9, specializations: ['Family Counselling', 'Personal Counselling', 'Women Empowerment'], rating: 4, reviews: 65, location: 'Block D Center', languages: ['Hindi', 'English', 'Punjabi'], availability: 'Mon–Sat', bio: 'Ms. Rekha Gupta is an RCI-certified counsellor with a focus on family therapy and women empowerment. She runs special programs for women and girls in the district.' },
+  { id: 1, name: 'Dr. Aamir Wani', qualification: 'Ph.D. Psychology', experience: 15, specializations: ['Career Counselling', 'Mental Wellness', 'Anxiety'], rating: 5, reviews: 128, languages: ['Kashmiri', 'Urdu', 'English'], availability: 'Mon–Fri', bio: 'Dr. Aamir Wani is a senior psychologist with 15 years of experience in career counselling and mental wellness. He has guided over 2,000 students across Srinagar in making informed career decisions.' },
+  { id: 2, name: 'Mr. Tariq Ahmed Lone', qualification: 'M.A. Counselling Psychology', experience: 10, specializations: ['Youth Guidance', 'Family Counselling', 'Peer Pressure'], rating: 5, reviews: 94, languages: ['Kashmiri', 'Urdu', 'English'], availability: 'Mon–Sat', bio: 'Mr. Tariq Ahmed Lone specializes in youth development and family counselling. His community-based approach has helped hundreds of families in Baramulla strengthen their bonds.' },
+  { id: 3, name: 'Dr. Nighat Bhat', qualification: 'Ph.D. Educational Psychology', experience: 18, specializations: ['Educational Guidance', 'Learning Disabilities', 'Academic Stress'], rating: 5, reviews: 156, languages: ['Kashmiri', 'Urdu', 'English'], availability: 'Mon–Fri', bio: 'Dr. Nighat Bhat is an expert in educational psychology with 18 years of experience. She has helped thousands of students in Anantnag overcome academic challenges and achieve their educational goals.' },
+  { id: 4, name: 'Ms. Iqra Mir', qualification: 'M.Sc. Clinical Psychology', experience: 8, specializations: ['Personal Counselling', 'Grief Counselling', 'Self-Esteem'], rating: 4, reviews: 72, languages: ['Kashmiri', 'Urdu', 'English'], availability: 'Tue–Sat', bio: 'Ms. Iqra Mir is a compassionate counsellor specializing in personal development and grief counselling. She creates a safe, non-judgmental space for her clients in Budgam.' },
+  { id: 5, name: 'Dr. Mudasir Khan', qualification: 'Ph.D. Counselling', experience: 20, specializations: ['Career Counselling', 'Skill Development', 'Entrepreneurship'], rating: 5, reviews: 203, languages: ['Kashmiri', 'Urdu', 'English'], availability: 'Mon–Fri', bio: 'Dr. Mudasir Khan is the Head of Career Guidance with 20 years of experience. He has helped over 5,000 youth in Pulwama find their career path and develop entrepreneurial skills.' },
+  { id: 6, name: 'Ms. Sana Malik', qualification: 'M.A. Psychology, B.Ed.', experience: 12, specializations: ['Educational Guidance', 'Career Counselling', 'Study Skills'], rating: 4, reviews: 88, languages: ['Kashmiri', 'Urdu', 'English'], availability: 'Mon–Sat', bio: 'Ms. Sana Malik combines her psychology and education background to provide holistic guidance to students. She is known for her practical and student-friendly approach in Kupwara.' },
+  { id: 7, name: 'Dr. Imran Dar', qualification: 'Ph.D. Clinical Psychology', experience: 14, specializations: ['Mental Wellness', 'Trauma Counselling', 'Stress Management'], rating: 5, reviews: 117, languages: ['Dogri', 'Hindi', 'Urdu', 'English'], availability: 'Mon–Fri', bio: 'Dr. Imran Dar is a clinical psychologist specializing in trauma-informed care and stress management. He uses evidence-based CBT and mindfulness techniques with clients across Jammu.' },
+  { id: 8, name: 'Ms. Farida Sheikh', qualification: 'M.Sc. Psychology, RCI Certified', experience: 9, specializations: ['Family Counselling', 'Personal Counselling', 'Women Empowerment'], rating: 4, reviews: 65, languages: ['Dogri', 'Hindi', 'English'], availability: 'Mon–Sat', bio: 'Ms. Farida Sheikh is an RCI-certified counsellor with a focus on family therapy and women empowerment. She runs special programs for women and girls in Kathua district.' },
 ];
 
 const allSpecializations = Array.from(new Set(counsellors.flatMap((c) => c.specializations))).sort();
@@ -54,9 +53,9 @@ export default function CounsellorsPage() {
       {/* HERO BANNER */}
       <section className="relative overflow-hidden">
         <img
-          src="/coun.jpg"
+          src="/con3.webp"
           alt="Our Counsellors"
-          className="w-full h-[420px] object-cover object-[center_20%]"
+          className="w-full h-80 object-cover object-top"
         />
         <div className="absolute inset-0 bg-[#1a3a6b]/65" />
         <div className="absolute inset-0 flex items-center">
@@ -182,7 +181,6 @@ export default function CounsellorsPage() {
                       ))}
                     </div>
                     <div className="space-y-1 text-xs text-gray-500 mb-2">
-                      <div className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5 flex-shrink-0 text-gray-400" /><span>{counsellor.location}</span></div>
                       <div className="flex items-center gap-2"><Languages className="w-3.5 h-3.5 flex-shrink-0 text-gray-400" /><span>{counsellor.languages.join(', ')}</span></div>
                       <div className="flex items-center gap-2"><CalendarDays className="w-3.5 h-3.5 flex-shrink-0 text-gray-400" /><span>{counsellor.availability}</span></div>
                     </div>
@@ -215,9 +213,6 @@ export default function CounsellorsPage() {
               <Link href="/signup" className="bg-[#1a3a6b] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#2563eb] transition-colors">
                 Apply to Join Our Team
               </Link>
-              <Link href="/about" className="border border-[#1a3a6b] text-[#1a3a6b] px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-                Learn More About Us
-              </Link>
             </div>
           </div>
         </div>
@@ -242,7 +237,7 @@ export default function CounsellorsPage() {
             <div>
               <h4 className="font-bold text-base mb-4 text-blue-100">Quick Links</h4>
               <ul className="space-y-2">
-                {[{ label: 'Home', href: '/' }, { label: 'About Us', href: '/about' }, { label: 'Services', href: '/services' }, { label: 'Counsellors', href: '/counselors' }, { label: 'Contact', href: '/contact' }].map((link) => (
+                {[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: 'Counsellors', href: '/counselors' }, { label: 'Contact', href: '/contact' }].map((link) => (
                   <li key={link.label}><Link href={link.href} className="text-blue-300 hover:text-white text-sm transition-colors">{link.label}</Link></li>
                 ))}
               </ul>

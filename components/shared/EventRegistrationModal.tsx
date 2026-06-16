@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { CalendarDays, MapPin } from "lucide-react";
 
 interface EventRegistrationModalProps {
   isOpen: boolean;
@@ -102,8 +103,8 @@ export default function EventRegistrationModal({
         {/* Event info strip */}
         {(eventDate || eventLocation) && !submitted && (
           <div className="bg-amber-50 border-b border-amber-100 px-6 py-3 flex gap-4 text-xs font-sans text-amber-800 flex-shrink-0">
-            {eventDate && <span>📅 {eventDate}</span>}
-            {eventLocation && <span>📍 {eventLocation}</span>}
+            {eventDate && <span className="inline-flex items-center gap-1.5"><CalendarDays className="w-3.5 h-3.5" /> {eventDate}</span>}
+            {eventLocation && <span className="inline-flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> {eventLocation}</span>}
           </div>
         )}
 

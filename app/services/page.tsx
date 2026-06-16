@@ -4,13 +4,13 @@ import Link from 'next/link';
 import { useState, useRef } from 'react';
 import SiteNavbar from '@/components/layout/SiteNavbar';
 import BookAppointmentModal from '@/components/shared/BookAppointmentModal';
-import { ChevronRight, ArrowRight, Building2, MapPin, Phone, Mail, Clock, CalendarDays } from 'lucide-react';
+import { ChevronRight, ArrowRight, Building2, MapPin, Phone, Mail, Clock, CalendarDays, ShieldCheck } from 'lucide-react';
 
 const services = [
   {
     title: 'Career Counselling',
-    img: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&h=500&fit=crop',
-    detailImg: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&h=500&fit=crop',
+    img: '/career.jpg',
+    detailImg: '/study.jpg',
     heading: 'Complete Solution For Career Growth & Professional Development',
     para1: 'Our Career Counselling service is a comprehensive, evidence-based program designed to help students, graduates, and working professionals make informed and confident career decisions. We understand that choosing the right career path is one of the most important decisions in a person\'s life, and our certified career counsellors are here to guide you every step of the way.',
     para2: 'We use scientifically validated tools such as <strong>Holland\'s Career Interest Inventory</strong>, <strong>MBTI Personality Assessment</strong>, and <strong>Multiple Intelligence Tests</strong> to map your strengths, interests, and aptitudes to the most suitable career options. Our counsellors then work with you to build a personalised career roadmap.',
@@ -30,8 +30,8 @@ const services = [
   },
   {
     title: 'Educational Guidance',
-    img: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=700&h=500&fit=crop',
-    detailImg: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=700&h=500&fit=crop',
+    img: '/study.jpg',
+    detailImg: '/career.jpg',
     heading: 'Complete Solution For Academic Excellence & Higher Education',
     para1: 'Educational Guidance services are designed to help students navigate the complex landscape of academic choices and challenges. From selecting the right subjects in school to choosing the best college and course for higher education, our educational counsellors provide evidence-based guidance tailored to each student\'s unique profile.',
     para2: 'We address a wide range of academic concerns including <strong>subject and stream selection</strong>, <strong>study skills coaching</strong>, <strong>learning disability assessment</strong>, and <strong>higher education planning</strong>. Our counsellors work closely with students and parents to create a structured academic plan.',
@@ -51,8 +51,8 @@ const services = [
   },
   {
     title: 'Mental Wellness',
-    img: 'https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=700&h=500&fit=crop',
-    detailImg: 'https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=700&h=500&fit=crop',
+    img: '/wellness.jpg',
+    detailImg: '/stress.jpg',
     heading: 'Complete Solution For Psychological Well-being & Mental Health',
     para1: 'Our Mental Wellness program offers a safe, confidential, and non-judgmental space for individuals to address mental health challenges. Our licensed clinical psychologists and counsellors use evidence-based therapeutic approaches to help you achieve emotional balance and lasting mental well-being.',
     para2: 'We focus on a range of therapeutic approaches, each tailored to the specific requirements of our clients. Our team utilises advanced approaches such as <strong>Cognitive Behavioral Therapy (CBT)</strong>, <strong>Mindfulness-Based Stress Reduction (MBSR)</strong>, <strong>Solution-Focused Brief Therapy (SFBT)</strong>, and Acceptance & Commitment Therapy (ACT) to ensure each individual receives a comprehensive, personalised treatment plan.',
@@ -72,8 +72,8 @@ const services = [
   },
   {
     title: 'Youth Guidance',
-    img: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=700&h=500&fit=crop',
-    detailImg: 'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=700&h=500&fit=crop',
+    img: '/con1.jpg',
+    detailImg: '/coun.jpg',
     heading: 'Complete Solution For Youth Development & Life Skills',
     para1: 'The Youth Guidance program is specifically designed for young people aged 13–25 who are navigating the challenges of adolescence and early adulthood. Our youth counsellors provide a supportive environment to address issues related to identity, peer pressure, relationships, and life skills development.',
     para2: 'We address critical youth issues including <strong>identity and self-esteem development</strong>, <strong>peer pressure and bullying</strong>, <strong>substance abuse prevention</strong>, and <strong>digital wellness</strong>. Our programs are interactive, engaging, and designed to resonate with today\'s youth.',
@@ -93,8 +93,8 @@ const services = [
   },
   {
     title: 'Skill Development',
-    img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=700&h=500&fit=crop',
-    detailImg: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&h=500&fit=crop',
+    img: '/con4.jpg',
+    detailImg: '/career.jpg',
     heading: 'Complete Solution For Vocational Training & Employment Readiness',
     para1: 'Our Skill Development Counselling service bridges the gap between education and employment by helping individuals identify their vocational strengths and connect them with appropriate skill development opportunities. We work in close collaboration with the Skill India Mission and NSDC.',
     para2: 'We provide guidance on <strong>government skill development schemes</strong>, <strong>ITI and polytechnic courses</strong>, <strong>PMKVY enrollment</strong>, and <strong>entrepreneurship development</strong>. Our counsellors help you identify the right vocational path based on your aptitude and market demand.',
@@ -114,8 +114,8 @@ const services = [
   },
   {
     title: 'Family Counselling',
-    img: 'https://images.unsplash.com/photo-1511895426328-dc8714191011?w=700&h=500&fit=crop',
-    detailImg: 'https://images.unsplash.com/photo-1609220136736-443140cffec6?w=700&h=500&fit=crop',
+    img: '/con2.jpg',
+    detailImg: '/con3.webp',
     heading: 'Complete Solution For Family Harmony & Relationship Wellness',
     para1: 'Family Counselling services focus on improving family dynamics, communication patterns, and relationships. Our family therapists work with the entire family unit to identify and resolve conflicts, improve understanding, and build a healthier, more supportive home environment.',
     para2: 'We address issues ranging from <strong>parent-child conflicts</strong> to <strong>marital challenges</strong>, <strong>blended family adjustments</strong>, and <strong>elder care concerns</strong>. Our therapists use Emotionally Focused Therapy (EFT), Narrative Therapy, and Structural Family Therapy to bring lasting positive change.',
@@ -135,8 +135,8 @@ const services = [
   },
   {
     title: 'Personal Counselling',
-    img: 'https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=700&h=500&fit=crop',
-    detailImg: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&h=500&fit=crop',
+    img: '/self.jpg',
+    detailImg: '/con4.jpg',
     heading: 'Complete Solution For Personal Growth & Emotional Well-being',
     para1: 'Personal Counselling provides individualized support for a wide range of personal challenges that affect daily functioning and quality of life. Whether you are dealing with low self-esteem, relationship difficulties, grief, life transitions, or simply feeling stuck, our counsellors offer a compassionate and professional space.',
     para2: 'Our counsellors are trained in <strong>Person-Centered Therapy</strong>, <strong>Cognitive Behavioral Therapy (CBT)</strong>, <strong>Motivational Interviewing</strong>, and <strong>Narrative Therapy</strong> to help you explore your concerns, understand your patterns, and develop effective coping strategies tailored to your unique situation.',
@@ -156,8 +156,8 @@ const services = [
   },
   {
     title: 'Crisis Support',
-    img: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=700&h=500&fit=crop',
-    detailImg: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=700&h=500&fit=crop',
+    img: '/trauma.jpg',
+    detailImg: '/stress.jpg',
     heading: 'Complete Solution For Crisis Intervention & Emergency Mental Health',
     para1: 'Our Crisis Support service provides immediate, compassionate, and professional intervention for individuals experiencing acute mental health crises, emotional breakdowns, or situations of immediate risk. Our trained crisis counsellors are available to provide rapid response and stabilisation.',
     para2: 'We are equipped to handle a wide range of crisis situations including <strong>suicidal ideation</strong>, <strong>acute anxiety and panic attacks</strong>, <strong>trauma and PTSD episodes</strong>, <strong>domestic violence situations</strong>, and <strong>substance abuse crises</strong>. Our team follows evidence-based crisis intervention protocols to ensure safety and stabilisation.',
@@ -205,7 +205,7 @@ export default function ServicesPage() {
         <img
           src="/con2.jpg"
           alt="Counselling Services"
-          className="w-full h-[320px] object-cover object-center"
+          className="w-full h-80 object-cover object-center"
         />
         <div className="absolute inset-0 bg-[#1a3a6b]/65" />
         <div className="absolute inset-0 flex items-center">
@@ -224,12 +224,13 @@ export default function ServicesPage() {
       </section>
 
       {/* SERVICES IMAGE GRID */}
-      <section className="bg-white py-16 px-4">
+      <section className="bg-gradient-to-b from-[#fff5e6] via-white to-[#eaf6ea] py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Our Services</span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-2" style={{ fontFamily: 'Georgia, serif' }}>Counselling Services <em className="italic">We Offer</em></h2>
-            <div className="w-16 h-[2px] bg-[#c07a2a] mx-auto mt-3 mb-6 rounded-full" />
+            <div className="text-center">
+              <h2 className="inline-block bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-2 mb-3 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Counselling Services <em className="italic">We Offer</em></h2>
+            </div>
             <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed text-sm md:text-base">
               We offer a team of the most trusted and experienced psychologists, best therapists, certified counsellors, and mental health professionals to take care of your mind and well-being. Click on any service below to learn more.
             </p>
@@ -240,15 +241,27 @@ export default function ServicesPage() {
               <div
                 key={service.title}
                 onClick={() => handleServiceClick(service.title)}
-                className={`group relative overflow-hidden rounded-lg cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 ${activeService === service.title ? 'ring-4 ring-[#1a2e4a] ring-offset-2' : ''}`}
+                className={`group relative overflow-hidden rounded-xl cursor-pointer shadow-md hover:shadow-2xl transition-all duration-300 border-t-4 border-[#1a3a6b] ${activeService === service.title ? 'ring-4 ring-[#c07a2a] ring-offset-2' : ''}`}
               >
+                {/* Image */}
                 <img
                   src={service.img}
                   alt={service.title}
-                  className="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className={`absolute bottom-0 left-0 right-0 py-3 px-4 text-center transition-colors duration-200 ${activeService === service.title ? 'bg-[#1a2e4a]' : 'bg-[#1a2e4a]/80 group-hover:bg-[#1a2e4a]'}`}>
+
+                {/* Normal title bar — slides away on hover */}
+                <div className="absolute bottom-0 left-0 right-0 bg-[#1a2e4a] py-3 px-4 text-center translate-y-0 group-hover:translate-y-full transition-transform duration-300 z-10">
                   <p className="text-white font-semibold text-sm">{service.title}</p>
+                </div>
+
+                {/* Hover overlay — slides up */}
+                <div className="absolute inset-0 bg-linear-to-t from-[#0f2545] via-[#1a3a6b]/92 to-[#1a3a6b]/70 translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex flex-col justify-end p-5 z-10">
+                  <h3 className="text-white font-bold text-base mb-2 leading-snug">{service.title}</h3>
+                  <p className="text-blue-200 text-xs leading-relaxed mb-4 line-clamp-2">{service.highlights[0]}</p>
+                  <span className="inline-flex items-center gap-1 text-[#f5c842] text-xs font-semibold">
+                    Click to Explore <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
                 </div>
               </div>
             ))}
@@ -264,7 +277,7 @@ export default function ServicesPage() {
             <div className="flex justify-between items-center mb-10">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-snug" style={{ fontFamily: 'Georgia, serif' }}>{selected.heading}</h2>
-                <div className="w-16 h-[2px] bg-[#c07a2a] mt-2 rounded-full" />
+                <div className="w-16 h-0.5 bg-[#c07a2a] mt-2 rounded-full" />
               </div>
               <button
                 onClick={() => setActiveService(null)}
@@ -290,7 +303,7 @@ export default function ServicesPage() {
                 <ul className="space-y-2 mb-8">
                   {selected.highlights.map((h) => (
                     <li key={h} className="flex items-start gap-2 text-sm text-gray-700">
-                      <span className="w-5 h-5 bg-blue-100 text-[#1a2e4a] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">✓</span>
+                      <span className="w-5 h-5 bg-blue-100 text-[#1a2e4a] rounded-full flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</span>
                       {h}
                     </li>
                   ))}
@@ -316,7 +329,7 @@ export default function ServicesPage() {
                   onClick={() => setBookingOpen(true)}
                   className="inline-flex items-center gap-2 bg-[#1a2e4a] hover:bg-[#2d5fa6] text-white px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors shadow-md"
                 >
-                  📅 Book Free Appointment
+                  <CalendarDays className="w-4 h-4" /> Book Free Appointment
                 </button>
               </div>
 
@@ -325,7 +338,7 @@ export default function ServicesPage() {
                 <img
                   src={selected.detailImg}
                   alt={selected.title}
-                  className="w-full h-[420px] object-cover"
+                  className="w-full h-105 object-cover"
                 />
               </div>
             </div>
@@ -343,8 +356,8 @@ export default function ServicesPage() {
             All our services are completely free for district residents. Book your appointment today and take the first step towards a better tomorrow.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => setBookingOpen(true)} className="bg-[#1a2e4a] text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-[#2d5fa6] transition-colors shadow-md">
-              📅 Book Free Appointment
+            <button onClick={() => setBookingOpen(true)} className="inline-flex items-center justify-center gap-2 bg-[#1a2e4a] text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-[#2d5fa6] transition-colors shadow-md">
+              <CalendarDays className="w-4 h-4" /> Book Free Appointment
             </button>
             <Link href="/counselors" className="border-2 border-[#1a2e4a] text-[#1a2e4a] px-8 py-3.5 rounded-lg font-semibold hover:bg-[#1a2e4a] hover:text-white transition-colors">
               Meet Our Counsellors →
@@ -388,9 +401,9 @@ export default function ServicesPage() {
             <div>
               <h4 className="font-bold text-base mb-4 text-blue-100">Contact</h4>
               <ul className="space-y-2 text-blue-300 text-sm">
-                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" /> Civil Lines, District HQ – 110001</li>
-                <li className="flex items-center gap-2"><Phone className="w-4 h-4 flex-shrink-0" /> Helpline: 1800-XXX-XXXX</li>
-                <li className="flex items-center gap-2"><Mail className="w-4 h-4 flex-shrink-0" /> info@dcc.gov.in</li>
+                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 shrink-0 mt-0.5" /> Civil Lines, District HQ – 110001</li>
+                <li className="flex items-center gap-2"><Phone className="w-4 h-4 shrink-0" /> Helpline: 1800-XXX-XXXX</li>
+                <li className="flex items-center gap-2"><Mail className="w-4 h-4 shrink-0" /> info@dcc.gov.in</li>
                 <li className="flex items-center gap-2"><Clock className="w-4 h-4 flex-shrink-0" /> Mon–Fri: 9 AM – 5 PM</li>
               </ul>
             </div>

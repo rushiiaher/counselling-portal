@@ -90,7 +90,7 @@ export default function BookAppointmentModal({ isOpen, onClose }: BookAppointmen
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+      className="fixed inset-0 z-10000 flex items-end sm:items-center justify-center p-0 sm:p-4"
       style={{ backgroundColor: "rgba(10,20,40,0.55)", backdropFilter: "blur(4px)" }}
       onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}
     >

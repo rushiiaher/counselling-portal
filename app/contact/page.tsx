@@ -6,7 +6,6 @@ import {
   Mail,
   MapPin,
   Clock,
-  CalendarDays,
   Building2,
   ChevronRight,
 } from 'lucide-react';
@@ -46,9 +45,9 @@ export default function ContactPage() {
       {/* HERO BANNER */}
       <section className="relative overflow-hidden">
         <img
-          src="/con2.jpg"
+          src="/contact.jpg"
           alt="Contact Us"
-          className="w-full h-[320px] object-cover object-center"
+          className="w-full h-80 object-cover object-center"
         />
         <div className="absolute inset-0 bg-[#1a3a6b]/65" />
         <div className="absolute inset-0 flex items-center">
@@ -67,11 +66,12 @@ export default function ContactPage() {
       </section>
 
       {/* GET IN TOUCH */}
-      <section className="bg-gray-50 py-16 px-4">
+      <section className="bg-gradient-to-b from-[#fff5e6] via-white to-[#eaf6ea] py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Send a Message</span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-2">Get <em className="italic">In Touch</em></h2>
-          <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mb-8" />
+          <div className="text-left">
+            <h2 className="block w-fit bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-2 mb-8 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Get <em className="italic">In Touch</em></h2>
+          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
@@ -177,12 +177,9 @@ export default function ContactPage() {
               </div>
 
               {/* Book appointment nudge */}
-              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5 flex gap-3">
-                <CalendarDays className="w-6 h-6 text-amber-700 flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-amber-900 text-sm font-semibold mb-1">Book an Appointment</p>
-                  <p className="text-amber-800 text-xs leading-relaxed">For counselling sessions, we recommend booking in advance. Walk-ins are accepted subject to counsellor availability.</p>
-                </div>
+              <div className="bg-amber-50 border border-amber-100 rounded-2xl p-5">
+                <p className="text-amber-900 text-sm font-semibold mb-1">Book an Appointment</p>
+                <p className="text-amber-800 text-xs leading-relaxed">For counselling sessions, we recommend booking in advance. Walk-ins are accepted subject to counsellor availability.</p>
               </div>
 
             </div>
@@ -194,8 +191,9 @@ export default function ContactPage() {
       <section className="bg-white py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Common Questions</span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-2">Frequently Asked <em className="italic">Questions</em></h2>
-          <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mb-8" />
+          <div className="text-left">
+            <h2 className="block w-fit bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-2 mb-8 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Frequently Asked <em className="italic">Questions</em></h2>
+          </div>
 
           <div className="space-y-4">
             {faqs.map((faq) => (

@@ -44,9 +44,9 @@ export default function AssessmentsDirectoryPage() {
       {/* HERO BANNER */}
       <section className="relative overflow-hidden">
         <img
-          src="/self.jpg"
+          src="/muslim.jpg"
           alt="Self Assessments"
-          className="w-full h-[420px] object-cover object-[center_20%]"
+          className="w-full h-80 object-cover object-center"
         />
         <div className="absolute inset-0 bg-[#1a3a6b]/65" />
         <div className="absolute inset-0 flex items-center">
@@ -71,10 +71,11 @@ export default function AssessmentsDirectoryPage() {
       <section className="bg-[#f7f8fa] py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Take a Test</span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a2e4a] mt-2 mb-2">
-            Choose Your <em className="italic">Assessment</em>
-          </h2>
-          <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mb-10" />
+          <div className="text-left">
+            <h2 className="block w-fit bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-2 mb-10 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
+              Choose Your <em className="italic">Assessment</em>
+            </h2>
+          </div>
 
           {/* Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -103,7 +104,7 @@ export default function AssessmentsDirectoryPage() {
                   </div>
 
                   {/* Divider */}
-                  <div className="w-8 h-[2px] bg-gray-200 rounded-full mb-4" />
+                  <div className="w-8 h-0.5 bg-gray-200 rounded-full mb-4" />
 
                   {/* Description */}
                   <p className="text-gray-500 text-sm leading-relaxed flex-1">{a.desc}</p>
@@ -114,7 +115,7 @@ export default function AssessmentsDirectoryPage() {
 
           {/* Anonymous notice */}
           <div className="mt-10 bg-emerald-50 border border-emerald-100 rounded-xl px-5 py-4 flex items-start gap-3 max-w-2xl mx-auto">
-            <svg className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
             </svg>
             <p className="text-sm text-emerald-800 leading-relaxed">

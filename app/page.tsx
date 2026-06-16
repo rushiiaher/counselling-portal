@@ -5,13 +5,14 @@ import Link from 'next/link';
 import HeroCarousel from '@/components/home/HeroCarousel';
 import SiteNavbar from '@/components/layout/SiteNavbar';
 import BookAppointmentModal from '@/components/shared/BookAppointmentModal';
-import { ChevronRight, ArrowRight, Building2 } from 'lucide-react';
+import { ArrowRight, Building2, ShieldCheck, Pause, Play, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 export default function HomePage() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [logosPaused, setLogosPaused] = useState(false);
 
   return (
-    <div className="min-h-screen bg-white font-sans">
+    <div className="min-h-screen bg-white" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
       <BookAppointmentModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
       <SiteNavbar onBookClick={() => setModalOpen(true)} />
@@ -19,79 +20,17 @@ export default function HomePage() {
       {/* CAROUSEL SECTION */}
       <HeroCarousel />
 
-      {/* STATISTICS SECTION */}
-      <section className="bg-[#eef4fb] py-10 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-
-            {/* Certified Counsellors */}
-            <div className="stat-slide-up group flex items-center gap-4 bg-white hover:bg-blue-50 border border-blue-100 hover:border-blue-300 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(59,130,246,0.15)]">
-              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-blue-100 group-hover:bg-blue-200 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
-                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
-                </svg>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-[#1a2e4a] leading-tight">150+</div>
-                <div className="text-gray-500 text-xs font-medium mt-0.5">Certified Counsellors</div>
-              </div>
-            </div>
-
-            {/* Students Guided */}
-            <div className="stat-slide-up group flex items-center gap-4 bg-white hover:bg-emerald-50 border border-emerald-100 hover:border-emerald-300 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(52,211,153,0.15)]">
-              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-emerald-100 group-hover:bg-emerald-200 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
-                <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-                </svg>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-[#1a2e4a] leading-tight">25,000+</div>
-                <div className="text-gray-500 text-xs font-medium mt-0.5">Students Guided</div>
-              </div>
-            </div>
-
-            {/* Sessions Conducted */}
-            <div className="stat-slide-up group flex items-center gap-4 bg-white hover:bg-violet-50 border border-violet-100 hover:border-violet-300 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(167,139,250,0.15)]">
-              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-violet-100 group-hover:bg-violet-200 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
-                <svg className="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-                </svg>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-[#1a2e4a] leading-tight">50,000+</div>
-                <div className="text-gray-500 text-xs font-medium mt-0.5">Sessions Conducted</div>
-              </div>
-            </div>
-
-            {/* Workshops Completed */}
-            <div className="stat-slide-up group flex items-center gap-4 bg-white hover:bg-amber-50 border border-amber-100 hover:border-amber-300 rounded-2xl px-5 py-5 transition-all duration-300 cursor-default hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(251,191,36,0.15)]">
-              <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-amber-100 group-hover:bg-amber-200 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
-                <svg className="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
-                </svg>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-[#1a2e4a] leading-tight">500+</div>
-                <div className="text-gray-500 text-xs font-medium mt-0.5">Workshops Completed</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
       {/* SERVICES SECTION */}
       <section className="bg-[#f7f8fa] py-10 md:py-20 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Header row */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10 gap-3">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-10 gap-3 gov-fade-up">
             <div>
               <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">What We Offer</span>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-1.5 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
+              <h2 className="bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-1.5 leading-tight px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
                 Counselling for{' '}
-                <em className="italic" style={{ fontFamily: 'Georgia, serif' }}>Every Need</em>
+                <em className="italic" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Every Need</em>
               </h2>
-              <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mt-3" />
               <p className="text-gray-500 text-sm mt-3 max-w-sm leading-relaxed">
                 From career guidance to trauma therapy — expert, free support for J&amp;K youth.
               </p>
@@ -102,7 +41,7 @@ export default function HomePage() {
           </div>
 
           {/* Cards grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 gov-stagger-child">
             {[
               {
                 icon: (
@@ -115,6 +54,7 @@ export default function HomePage() {
                 iconBg: 'bg-blue-100',
                 border: 'border-blue-200',
                 hoverBorder: 'hover:border-blue-400',
+                accent: 'border-t-[#1a3a6b]',
                 title: 'Career Counselling',
                 desc: 'Aptitude assessments, career mapping, stream selection for class 11–12, and professional development for graduates.',
                 tags: [
@@ -132,6 +72,7 @@ export default function HomePage() {
                 iconBg: 'bg-emerald-100',
                 border: 'border-emerald-200',
                 hoverBorder: 'hover:border-emerald-400',
+                accent: 'border-t-emerald-600',
                 title: 'Mental Wellness',
                 desc: 'Trauma-informed therapy, PTSD support, anxiety & depression counselling in a completely confidential setting. Available in Kashmiri, Urdu & Hindi.',
                 tags: [
@@ -150,6 +91,7 @@ export default function HomePage() {
                 iconBg: 'bg-violet-100',
                 border: 'border-violet-200',
                 hoverBorder: 'hover:border-violet-400',
+                accent: 'border-t-violet-600',
                 title: 'Educational Guidance',
                 desc: 'Academic support, scholarship guidance, higher education planning, and study skill coaching from class 11 through PG.',
                 tags: [
@@ -167,6 +109,7 @@ export default function HomePage() {
                 iconBg: 'bg-rose-100',
                 border: 'border-rose-200',
                 hoverBorder: 'hover:border-rose-400',
+                accent: 'border-t-rose-500',
                 title: 'Group Therapy',
                 desc: 'Facilitated groups for peer support — conflict recovery, academic stress, identity building. 6–10 students, confidential environment.',
                 tags: [
@@ -177,36 +120,48 @@ export default function HomePage() {
             ].map((service) => (
               <div
                 key={service.title}
-                className={`${service.cardBg} rounded-xl p-5 border ${service.border} ${service.hoverBorder} hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex flex-col`}
+                className="group relative h-64"
+                style={{ perspective: '1000px' }}
               >
-                {/* Icon */}
-                <div className={`w-10 h-10 rounded-lg ${service.iconBg} flex items-center justify-center mb-4`}>
-                  {service.icon}
-                </div>
+                <div className="relative w-full h-full transition-transform duration-500 transform-3d group-hover:rotate-y-180">
 
-                {/* Title — plain sans-serif, no Georgia */}
-                <h3 className="font-semibold text-[#1a2e4a] text-[15px] mb-2 leading-snug tracking-tight">{service.title}</h3>
-
-                {/* Description */}
-                <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4">{service.desc}</p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {service.tags.map((tag) => (
-                    <span key={tag.label} className={`text-xs px-2.5 py-1 rounded-full font-medium ${tag.color}`}>
-                      {tag.label}
+                  {/* FRONT FACE */}
+                  <div className={`absolute inset-0 backface-hidden ${service.cardBg} rounded-xl p-5 border ${service.border} ${service.hoverBorder} border-t-4 ${service.accent} shadow-sm flex flex-col items-center justify-center text-center gap-4`}>
+                    <span className="absolute top-3 right-3 flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-[#1a2e4a]/70 bg-white/70 px-2 py-0.5 rounded-full border border-gray-200">
+                      <ShieldCheck className="w-3 h-3" /> Govt. Certified
                     </span>
-                  ))}
-                </div>
+                    <div className={`w-14 h-14 rounded-lg ${service.iconBg} flex items-center justify-center`}>
+                      {service.icon}
+                    </div>
+                    <h3 className="font-semibold text-[#1a2e4a] text-base leading-snug tracking-tight">{service.title}</h3>
+                    <span className="text-[11px] font-semibold uppercase tracking-widest text-[#c07a2a]">Free Service</span>
+                  </div>
 
-                {/* Divider */}
-                <div className="border-t border-gray-100 pt-3">
-                  <button
-                    onClick={() => setModalOpen(true)}
-                    className="text-[#1a2e4a] text-sm font-medium hover:text-[#2d5fa6] transition-colors flex items-center gap-1"
-                  >
-                    Book Session <ArrowRight className="w-4 h-4" />
-                  </button>
+                  {/* BACK FACE */}
+                  <div className={`absolute inset-0 backface-hidden rotate-y-180 bg-white rounded-xl p-5 border ${service.border} border-t-4 ${service.accent} shadow-lg flex flex-col`}>
+                    {/* Description */}
+                    <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4">{service.desc}</p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {service.tags.map((tag) => (
+                        <span key={tag.label} className={`text-xs px-2.5 py-1 rounded-full font-medium ${tag.color}`}>
+                          {tag.label}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Divider */}
+                    <div className="border-t border-gray-100 pt-3">
+                      <button
+                        onClick={() => setModalOpen(true)}
+                        className="text-[#1a2e4a] text-sm font-medium hover:text-[#2d5fa6] transition-colors flex items-center gap-1"
+                      >
+                        Book Session <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             ))}
@@ -220,12 +175,11 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
             {/* LEFT */}
-            <div>
+            <div className="gov-slide-left">
               <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">About Us</span>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+              <h2 className="inline-block bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-2 mb-4 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
                 Dedicated to Empowering <em className="italic">Every Individual</em>
               </h2>
-              <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mb-4" />
               <p className="text-gray-500 text-sm leading-relaxed mb-6 max-w-lg">
                 The District Counselling Center is a government-established institution providing accessible, professional, and confidential counselling to students, youth, and families across the district.
               </p>
@@ -278,7 +232,7 @@ export default function HomePage() {
             </div>
 
             {/* RIGHT — Why Choose Us — image style */}
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 md:p-7">
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 md:p-7 gov-slide-right">
               <h3 className="text-2xl font-bold text-[#1a2e4a] mb-1">Why Choose Us</h3>
               <p className="text-gray-500 text-sm mb-6">What sets our counselling center apart.</p>
 
@@ -310,20 +264,21 @@ export default function HomePage() {
       </section>
 
       {/* COUNSELLORS SECTION */}
-      <section className="bg-[#f7f8fa] pt-0 pb-16 px-4">
+      <section className="bg-gradient-to-b from-[#fff5e6] via-white to-[#eaf6ea] pt-0 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Meet Our Team</span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-2" style={{ fontFamily: 'Georgia, serif' }}>Our Expert <em className="italic">Counsellors</em></h2>
-            <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mx-auto mb-4" />
+          <div className="text-center mb-14 gov-fade-up">
+            <div className="text-left">
+              <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Meet Our Team</span>
+              <h2 className="block w-fit bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-2 mb-4 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Our Expert <em className="italic">Counsellors</em></h2>
+            </div>
             <p className="text-gray-600 max-w-2xl mx-auto">Our team of certified professionals brings years of experience and compassion to every counselling session.</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 gov-stagger-child">
             {[
-              { name: 'Dr. Priya Sharma', qual: 'Ph.D. Psychology', spec: 'Career & Mental Wellness', exp: '15 Years' },
-              { name: 'Mr. Rajesh Kumar', qual: 'M.A. Counselling', spec: 'Youth & Family Guidance', exp: '10 Years' },
-              { name: 'Dr. Anita Verma', qual: 'Ph.D. Education', spec: 'Educational Guidance', exp: '18 Years' },
-              { name: 'Ms. Sunita Patel', qual: 'M.Sc. Psychology', spec: 'Personal Counselling', exp: '8 Years' },
+              { name: 'Dr. Aamir Wani', qual: 'Ph.D. Psychology', spec: 'Career & Mental Wellness', exp: '15 Years', district: 'Srinagar' },
+              { name: 'Mr. Tariq Ahmed Lone', qual: 'M.A. Counselling', spec: 'Youth & Family Guidance', exp: '10 Years', district: 'Baramulla' },
+              { name: 'Dr. Nighat Bhat', qual: 'Ph.D. Education', spec: 'Educational Guidance', exp: '18 Years', district: 'Anantnag' },
+              { name: 'Ms. Iqra Mir', qual: 'M.Sc. Psychology', spec: 'Personal Counselling', exp: '8 Years', district: 'Budgam' },
             ].map((counsellor) => (
               <div key={counsellor.name} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-gray-100 text-center">
                 <div className="bg-gradient-to-br from-[#1a3a6b] to-[#2563eb] p-6">
@@ -337,7 +292,8 @@ export default function HomePage() {
                   <h3 className="font-bold text-[#1a3a6b] text-lg mb-1">{counsellor.name}</h3>
                   <p className="text-[#2563eb] text-sm font-medium mb-1">{counsellor.qual}</p>
                   <p className="text-gray-500 text-xs mb-1">{counsellor.spec}</p>
-                  <p className="text-gray-400 text-xs mb-4">{counsellor.exp} Experience</p>
+                  <p className="text-gray-400 text-xs mb-1">{counsellor.exp} Experience</p>
+                  <p className="text-gray-400 text-xs mb-4">District: {counsellor.district}</p>
                   <Link href="/counselors" className="block w-full bg-[#1a3a6b] text-white py-2 rounded-lg text-sm font-medium hover:bg-[#2563eb] transition-colors">
                     View Profile
                   </Link>
@@ -346,9 +302,45 @@ export default function HomePage() {
             ))}
           </div>
           <div className="text-center mt-10">
-            <Link href="/counselors" className="inline-block bg-[#1a3a6b] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#2563eb] transition-colors flex items-center gap-2">
+            <Link href="/counselors" className="inline-flex items-center gap-2 bg-[#1a3a6b] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#2563eb] transition-colors">
               View All Counsellors <ArrowRight className="w-4 h-4" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* EXPLORE COUNSELLING BANNER */}
+      <section className="bg-[#f7f8fa] py-6 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="relative bg-[#2160c4] rounded-2xl overflow-hidden px-8 md:px-12 py-5 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl min-h-32.5">
+            {/* Decorative circles — NCS style */}
+            <div className="absolute right-32 md:right-48 top-1/2 -translate-y-1/2 w-52 h-52 rounded-full bg-white/5 pointer-events-none" />
+            <div className="absolute right-24 md:right-40 top-1/2 -translate-y-1/2 w-36 h-36 rounded-full bg-white/5 pointer-events-none" />
+
+            {/* LEFT — text */}
+            <div className="relative z-10 flex-1">
+              <h2 className="text-white text-xl md:text-2xl font-bold leading-snug mb-1.5">
+                Explore Your Counselling <span className="text-[#f5c842]">Journey Today! 🎓</span>
+              </h2>
+              <p className="text-blue-100 text-sm mb-4 max-w-md">
+                Connect with certified counsellors, take free self-assessments, and get expert guidance for career, education &amp; mental wellness.
+              </p>
+              <button
+                onClick={() => setModalOpen(true)}
+                className="flex items-center gap-2 bg-[#f5c842] text-[#1a3a6b] font-bold px-5 py-2 rounded-lg hover:bg-[#e6b800] transition-colors text-sm shadow"
+              >
+                <span className="text-base">+</span> Start Your Counselling
+              </button>
+            </div>
+
+            {/* RIGHT — earth image */}
+            <div className="relative z-10 flex-shrink-0 self-end">
+              <img
+                src="/earth.png"
+                alt="Explore Counselling"
+                className="h-32 md:h-36 object-contain drop-shadow-2xl"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -361,10 +353,9 @@ export default function HomePage() {
           <div className="flex items-end justify-between mb-8">
             <div>
               <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Upcoming</span>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-1 mb-1 leading-tight" style={{ fontFamily: 'Georgia, serif' }}>
+              <h2 className="bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-1 mb-1 leading-tight px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
                 Events &amp; <em className="italic">Workshops</em>
               </h2>
-              <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mt-2" />
             </div>
             <Link href="/events" className="text-[#1a2e4a] text-sm font-medium hover:underline flex items-center gap-1 whitespace-nowrap mb-2">
               See all events <ArrowRight className="w-4 h-4" />
@@ -417,7 +408,7 @@ export default function HomePage() {
               >
                 {/* Date block */}
                 <div className={`flex-shrink-0 w-14 h-14 rounded-xl flex flex-col items-center justify-center text-white ${event.dateBg}`}>
-                  <span className="text-xl font-bold leading-none" style={{ fontFamily: 'Georgia, serif' }}>{event.day}</span>
+                  <span className="text-xl font-bold leading-none" style={{ fontFamily: "'Noto Sans', sans-serif" }}>{event.day}</span>
                   <span className="text-[10px] font-semibold uppercase tracking-wider mt-0.5 text-white/80">{event.month}</span>
                 </div>
 
@@ -466,12 +457,15 @@ export default function HomePage() {
           {/* Header */}
           <div className="text-center mb-12">
             <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Student Voices</span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-2 mb-2" style={{ fontFamily: 'Georgia, serif' }}>
-              Stories of{' '}
-              <em className="italic" style={{ fontFamily: 'Georgia, serif' }}>Healing &amp; Growth</em>
-            </h2>
-            <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mx-auto mb-3" />
-            <p className="text-gray-500 text-sm">Real experiences from students and families across Anantnag.</p>
+            <div className="text-center">
+              <h2 className="inline-block bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-2 mb-3 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
+                Stories of{' '}
+                <em className="italic" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Healing &amp; Growth</em>
+              </h2>
+            </div>
+            <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm">
+              Hear from the students and families we've helped on their journey toward healing, growth, and success.
+            </p>
           </div>
 
           {/* Cards */}
@@ -504,7 +498,7 @@ export default function HomePage() {
             ].map((t) => (
               <div
                 key={t.name}
-                className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col gap-4"
+                className="bg-white rounded-2xl p-6 border-2 border-[#1a3a6b] shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col gap-4"
               >
                 {/* Stars */}
                 <div className="flex gap-0.5">
@@ -534,21 +528,22 @@ export default function HomePage() {
       </section>
 
       {/* 3 EASY STEPS SECTION */}
-      <section className="bg-[#eef2f9] py-10 md:py-20 px-4">
+      <section className="bg-[#f7f8fa] py-10 md:py-20 px-4">
         <div className="max-w-4xl mx-auto">
           {/* Header — centered */}
           <div className="text-center mb-8 md:mb-14">
             <span className="text-[#c07a2a] font-semibold text-xs uppercase tracking-widest">Simple Process</span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-3 mb-2">
-              Get Help in <em className="italic">3 Easy Steps</em>
-            </h2>
-            <div className="w-16 h-[2px] bg-[#c07a2a] rounded-full mx-auto mb-3" />
+            <div className="text-center">
+              <h2 className="inline-block bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mt-3 mb-3 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]">
+                Get Help in <em className="italic">3 Easy Steps</em>
+              </h2>
+            </div>
             <p className="text-gray-500 text-sm md:text-base">
               No complicated forms, no long waits. Start your wellness journey today.
             </p>
           </div>
 
-          {/* Steps — horizontal card on mobile, centered column on desktop */}
+          {/* Steps — horizontal card on mobile */}
           <div className="flex flex-col gap-4 md:hidden">
             {[
               { n: '1', title: 'Choose Your Service', desc: 'Pick from career, mental health, academic, group therapy or family counselling — in-person or online.' },
@@ -556,7 +551,7 @@ export default function HomePage() {
               { n: '3', title: 'Attend Your Session', desc: 'Visit our center or join via video call. Free, confidential, and conducted by certified professionals.' },
             ].map((step) => (
               <div key={step.n} className="flex items-start gap-4 bg-white rounded-2xl px-5 py-4 shadow-sm border border-[#c07a2a]/10">
-                <div className="w-10 h-10 rounded-full bg-[#fdecd6] flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#fdecd6] flex items-center justify-center shrink-0">
                   <span className="text-[#c07a2a] font-bold text-lg">{step.n}</span>
                 </div>
                 <div>
@@ -567,12 +562,12 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Desktop layout — original centered columns */}
+          {/* Desktop layout — centered columns */}
           <div className="hidden md:block">
             <div className="relative flex flex-row items-start justify-between">
               {/* Dotted connector line */}
               <div
-                className="absolute top-[38px] left-[calc(16.67%+24px)] right-[calc(16.67%+24px)] border-t-2 border-dashed border-[#c07a2a]/40"
+                className="absolute top-9.5 left-[calc(16.67%+24px)] right-[calc(16.67%+24px)] border-t-2 border-dashed border-[#c07a2a]/40"
                 aria-hidden="true"
               />
               {[
@@ -581,11 +576,11 @@ export default function HomePage() {
                 { n: '3', title: 'Attend Your Session', desc: 'Visit our center or join via video call. All sessions are completely free, confidential, and conducted by certified professionals.' },
               ].map((step) => (
                 <div key={step.n} className="flex-1 flex flex-col items-center px-4 relative z-10 text-center">
-                  <div className="w-[72px] h-[72px] rounded-full bg-[#fdecd6] flex items-center justify-center mb-6 shadow-sm">
+                  <div className="w-18 h-18 rounded-full bg-[#fdecd6] flex items-center justify-center mb-6 shadow-sm">
                     <span className="text-[#c07a2a] font-bold text-2xl">{step.n}</span>
                   </div>
                   <h3 className="font-bold text-[#1a3a6b] text-base mb-3">{step.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed max-w-[220px] mx-auto">{step.desc}</p>
+                  <p className="text-gray-500 text-sm leading-relaxed max-w-55 mx-auto">{step.desc}</p>
                 </div>
               ))}
             </div>
@@ -593,91 +588,146 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* GOVERNMENT LOGOS / PARTNER PORTALS SECTION */}
+      <section className="bg-[#eef0f7] pt-8 pb-4 px-4 overflow-hidden">
+        <div className="max-w-7xl mx-auto relative">
+          <div className="overflow-hidden">
+            <div
+              className="flex gap-5 w-max animate-scroll-logos"
+              style={{ animationPlayState: logosPaused ? 'paused' : 'running' }}
+            >
+              {[...Array(2)].map((_, dup) => (
+                [
+                  /* 1. Digital India */
+                  <div key={`digital-india-${dup}`} className="flex-shrink-0 w-52 h-24 bg-white rounded-xl shadow-md flex items-center justify-center px-4">
+                    <img src="/digital-india.png" alt="Digital India" className="h-14 object-contain" />
+                  </div>,
+
+                  /* 2. gov.in */
+                  <div key={`gov-in-${dup}`} className="flex-shrink-0 w-52 h-24 bg-white rounded-xl shadow-md flex items-center justify-center gap-3 px-5">
+                    <div className="w-10 h-10 rounded-full bg-[#0066cc] flex items-center justify-center shrink-0 shadow">
+                      <span className="text-white font-extrabold text-xl leading-none">@</span>
+                    </div>
+                    <p className="text-[22px] font-extrabold leading-none tracking-tight">
+                      <span className="text-[#0066cc]">gov</span><span className="text-[#FF6600]">.in</span>
+                    </p>
+                  </div>,
+
+                  /* 3. MeitY — Ashoka emblem (☸) + text, no wrong icon */
+                  <div key={`meity-${dup}`} className="flex-shrink-0 w-72 h-24 bg-white rounded-xl shadow-md flex items-center gap-3 px-5">
+                    <div className="shrink-0 flex flex-col items-center">
+                      <span className="text-[28px] leading-none">☸</span>
+                      <span className="text-[8px] text-gray-500 tracking-widest uppercase mt-0.5">सत्यमेव जयते</span>
+                    </div>
+                    <div>
+                      <p className="text-lg font-extrabold text-[#003087] leading-tight">MeitY</p>
+                      <p className="text-[10px] text-gray-600 leading-snug max-w-[170px]">Ministry of Electronics &amp; Information Technology, Government of India</p>
+                    </div>
+                  </div>,
+
+                  /* 4. myGOV */
+                  <div key={`mygov-${dup}`} className="flex-shrink-0 w-52 h-24 bg-white rounded-xl shadow-md flex flex-col items-center justify-center px-4">
+                    <p className="font-extrabold leading-none" style={{ fontSize: '30px' }}>
+                      <span className="text-[#00A651]">my</span><span className="text-[#0057A8]">GOV</span>
+                    </p>
+                    <p className="text-[#FF6600] font-bold text-sm mt-1">मेरी सरकार</p>
+                  </div>,
+
+                  /* 5. National Knowledge Network */
+                  <div key={`nkn-${dup}`} className="flex-shrink-0 w-64 h-24 bg-white rounded-xl shadow-md flex items-center gap-3 px-5">
+                    <div className="shrink-0 flex flex-col gap-1">
+                      <div className="flex gap-1">
+                        <span className="w-4 h-4 rounded bg-[#0057A8] block"></span>
+                        <span className="w-4 h-4 rounded bg-[#0057A8] block opacity-60"></span>
+                      </div>
+                      <div className="flex gap-1">
+                        <span className="w-4 h-4 rounded bg-[#00A651] block opacity-60"></span>
+                        <span className="w-4 h-4 rounded bg-[#00A651] block"></span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-sm font-extrabold text-[#0057A8] leading-tight uppercase tracking-wide">National</p>
+                      <p className="text-sm font-extrabold text-[#0057A8] leading-tight uppercase tracking-wide">Knowledge</p>
+                      <p className="text-sm font-extrabold text-[#0057A8] leading-tight uppercase tracking-wide">Network</p>
+                    </div>
+                  </div>,
+
+                  /* 6. ServicePlus */
+                  <div key={`serviceplus-${dup}`} className="flex-shrink-0 w-64 h-24 bg-white rounded-xl shadow-md flex items-center gap-3 px-5">
+                    <div className="shrink-0 w-10 h-10 rounded-full border-2 border-[#c0392b] flex items-center justify-center">
+                      <span className="text-[#c0392b] font-extrabold text-lg leading-none">SP</span>
+                    </div>
+                    <div>
+                      <p className="text-base font-extrabold text-[#1a3a6b] leading-tight">ServicePlus</p>
+                      <p className="text-[9px] text-gray-500 leading-tight max-w-[150px]">Metadata-based Integrated eService Delivery Framework</p>
+                    </div>
+                  </div>,
+                ]
+              ))}
+            </div>
+          </div>
+          <button
+            onClick={() => setLogosPaused((p) => !p)}
+            aria-label={logosPaused ? 'Play logo scroll' : 'Pause logo scroll'}
+            className="mt-3 ml-1 w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md text-[#1a3a6b] hover:bg-gray-100 transition-colors"
+          >
+            {logosPaused ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+          </button>
+        </div>
+      </section>
+
       {/* FOOTER */}
-      <footer className="bg-[#1a3a6b] text-white">
-        <div className="max-w-7xl mx-auto px-4 py-8 md:py-12">
-
-          {/* Mobile: compact 2-col, Desktop: 4-col */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-8">
-
-            {/* Brand — full width on mobile */}
-            <div className="col-span-2 md:col-span-1">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+      <footer className="bg-[#1a3a6b] text-white border-t border-blue-800">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
                   <Building2 className="w-5 h-5 text-[#1a3a6b]" />
                 </div>
                 <div>
-                  <p className="font-bold text-sm leading-tight">District Counselling Center</p>
-                  <p className="text-blue-300 text-xs">Anantnag, J&K</p>
+                  <p className="font-bold text-sm">District Counselling Center</p>
+                  <p className="text-blue-300 text-xs">Govt. of India</p>
                 </div>
               </div>
-              <p className="text-blue-200 text-xs leading-relaxed">
-                Free, professional counselling for students, youth and families across the district.
+              <p className="text-blue-200 text-sm leading-relaxed">
+                Providing professional counselling and guidance services to empower the youth and families of our district.
               </p>
             </div>
-
-            {/* Quick Links */}
             <div>
-              <h4 className="font-bold text-sm mb-3 text-blue-100">Quick Links</h4>
-              <ul className="space-y-1.5">
-                {[
-                  { label: 'Home', href: '/' },
-                  { label: 'Services', href: '/services' },
-                  { label: 'Counsellors', href: '/counselors' },
-                  { label: 'Events', href: '/events' },
-                  { label: 'Contact', href: '/contact' },
-                ].map((link) => (
-                  <li key={link.label}>
-                    <Link href={link.href} className="text-blue-300 hover:text-white text-xs transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
+              <h4 className="font-bold text-base mb-4 text-blue-100">Quick Links</h4>
+              <ul className="space-y-2">
+                {[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: 'Counsellors', href: '/counselors' }, { label: 'Events', href: '/events' }, { label: 'Contact', href: '/contact' }].map((link) => (
+                  <li key={link.label}><Link href={link.href} className="text-blue-300 hover:text-white text-sm transition-colors">{link.label}</Link></li>
                 ))}
               </ul>
             </div>
-
-            {/* Our Services */}
             <div>
-              <h4 className="font-bold text-sm mb-3 text-blue-100">Services</h4>
-              <ul className="space-y-1.5">
-                {['Career Counselling', 'Mental Wellness', 'Educational Guidance', 'Family Counselling', 'Group Therapy'].map((service) => (
-                  <li key={service}>
-                    <Link href="/services" className="text-blue-300 hover:text-white text-xs transition-colors">
-                      {service}
-                    </Link>
-                  </li>
+              <h4 className="font-bold text-base mb-4 text-blue-100">Our Services</h4>
+              <ul className="space-y-2">
+                {['Career Counselling', 'Educational Guidance', 'Mental Wellness', 'Youth Guidance', 'Skill Development', 'Family Counselling'].map((service) => (
+                  <li key={service}><Link href="/services" className="text-blue-300 hover:text-white text-sm transition-colors">{service}</Link></li>
                 ))}
               </ul>
             </div>
-
-            {/* Important Links — hidden on mobile */}
-            <div className="hidden md:block">
-              <h4 className="font-bold text-sm mb-3 text-blue-100">Important Links</h4>
-              <ul className="space-y-1.5">
-                {['Ministry of Education', 'NCERT', 'UGC', 'AICTE', 'National Career Service', 'Skill India', 'Digital India'].map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-blue-300 hover:text-white text-xs transition-colors">
-                      {link}
-                    </a>
-                  </li>
-                ))}
+            <div>
+              <h4 className="font-bold text-base mb-4 text-blue-100">Contact</h4>
+              <ul className="space-y-2 text-blue-300 text-sm">
+                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 shrink-0 mt-0.5" /> Civil Lines, District HQ – 110001</li>
+                <li className="flex items-center gap-2"><Phone className="w-4 h-4 shrink-0" /> Helpline: 1800-XXX-XXXX</li>
+                <li className="flex items-center gap-2"><Mail className="w-4 h-4 shrink-0" /> info@dcc.gov.in</li>
+                <li className="flex items-center gap-2"><Clock className="w-4 h-4 shrink-0" /> Mon–Fri: 9 AM – 5 PM</li>
               </ul>
             </div>
-
           </div>
-
-          {/* Bottom bar */}
-          <div className="border-t border-blue-800 pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-blue-300 text-xs text-center sm:text-left">
-              © 2025 District Counselling Center, Govt. of India. All Rights Reserved.
-            </p>
-            <div className="flex gap-3 text-xs">
-              <a href="#" className="text-blue-300 hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="text-blue-300 hover:text-white transition-colors">Terms</a>
+          <div className="border-t border-blue-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-blue-300 text-sm">© 2025 District Counselling Center, Government of India. All Rights Reserved.</p>
+            <div className="flex gap-4 text-sm">
+              <a href="#" className="text-blue-300 hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="text-blue-300 hover:text-white transition-colors">Terms of Use</a>
               <a href="#" className="text-blue-300 hover:text-white transition-colors">Sitemap</a>
             </div>
           </div>
-
         </div>
       </footer>
     </div>

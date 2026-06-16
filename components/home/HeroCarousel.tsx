@@ -4,17 +4,24 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import BookAppointmentModal from '@/components/shared/BookAppointmentModal';
 
+const districtStats = [
+  { label: 'Certified Counsellors', value: '150+' },
+  { label: 'Students Guided', value: '25,000+' },
+  { label: 'Sessions Conducted', value: '50,000+' },
+  { label: 'Workshops Completed', value: '500+' },
+];
+
 const slides = [
   {
-    bg: '/con4.jpg',
-    tag: 'Hope. Healing. Growth',
-    heading: 'Empowering Youth Through Professional Guidance & Counselling',
+    bg: '/home.jpg',
+    tag: 'District Counselling Portal',
+    heading: 'Professional Counselling & Guidance Services for Students',
     overlay: 'from-[#0a1628]/70 via-[#0a1628]/40 to-transparent',
   },
   {
-    bg: '/con3.webp',
+    bg: '/coun1.jpg',
     tag: 'Healing Minds, Transforming Lives',
-    heading: "Helping you navigate life's challenges with expert Therapy, Counselling, and Emotional Support",
+    heading: 'Free, Confidential Counselling for Students & Youth Across J&K',
     overlay: 'from-[#0a1628]/70 via-[#0a1628]/40 to-transparent',
   },
 ];
@@ -34,7 +41,7 @@ export default function HeroCarousel() {
     <div>
       <BookAppointmentModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
       {/* CAROUSEL */}
-      <section className="relative w-full h-[320px] sm:h-[480px] md:h-[560px] overflow-hidden">
+      <section className="relative w-full h-80 sm:h-120 md:h-140 overflow-hidden">
         {slides.map((slide, i) => (
           <div
             key={i}
@@ -43,9 +50,9 @@ export default function HeroCarousel() {
             <img
               src={slide.bg}
               alt={slide.tag}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-top"
             />
-            <div className={`absolute inset-0 bg-gradient-to-r ${slide.overlay}`} />
+            <div className={`absolute inset-0 bg-linear-to-r ${slide.overlay}`} />
 
             {/* Caption */}
             <div className="absolute inset-0 flex items-center">
@@ -61,8 +68,20 @@ export default function HeroCarousel() {
           </div>
         ))}
 
+        {/* District Stats Bar */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 bg-black/40 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-center sm:justify-between divide-x divide-white/20">
+            {districtStats.map((stat) => (
+              <div key={stat.label} className="px-4 sm:px-6 py-4 text-center sm:text-left">
+                <p className="text-white text-2xl sm:text-3xl font-bold leading-tight">{stat.value}</p>
+                <p className="text-white/80 text-xs sm:text-sm font-medium uppercase tracking-wide leading-tight mt-1">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Dot indicators */}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {slides.map((_, i) => (
             <button
               key={i}
