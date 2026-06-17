@@ -77,10 +77,10 @@ const events = [
 ];
 
 const pastEvents = [
-  { title: 'National Youth Day Counselling Camp', date: 'January 12, 2026', participants: '450+', type: 'Camp' },
-  { title: 'Career Fair 2025 – Connecting Youth with Opportunities', date: 'December 15, 2025', participants: '800+', type: 'Fair' },
-  { title: 'World Mental Health Day Awareness Drive', date: 'October 10, 2025', participants: '1,200+', type: 'Drive' },
-  { title: 'Back to School Counselling Program', date: 'July 5, 2025', participants: '600+', type: 'Program' },
+  { title: 'National Youth Day Counselling Camp', date: 'January 12, 2026', participants: '450+', type: 'Camp', accent: 'border-2 border-blue-500', iconBg: 'bg-blue-100', iconColor: 'text-blue-700', statColor: 'text-blue-600' },
+  { title: 'Career Fair 2025 – Connecting Youth with Opportunities', date: 'December 15, 2025', participants: '800+', type: 'Fair', accent: 'border-2 border-emerald-500', iconBg: 'bg-emerald-100', iconColor: 'text-emerald-700', statColor: 'text-emerald-600' },
+  { title: 'World Mental Health Day Awareness Drive', date: 'October 10, 2025', participants: '1,200+', type: 'Drive', accent: 'border-2 border-rose-500', iconBg: 'bg-rose-100', iconColor: 'text-rose-700', statColor: 'text-rose-600' },
+  { title: 'Back to School Counselling Program', date: 'July 5, 2025', participants: '600+', type: 'Program', accent: 'border-2 border-amber-500', iconBg: 'bg-amber-100', iconColor: 'text-amber-700', statColor: 'text-amber-600' },
 ];
 
 export default function EventsPage() {
@@ -121,46 +121,58 @@ export default function EventsPage() {
       </section>
 
       {/* STATS STRIP */}
-      <section className="bg-gradient-to-r from-[#1a3a6b] to-[#0a1628] py-5 px-4">
+      <section className="bg-white border-b border-gray-200 py-5 px-4 shadow-sm">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               {
                 value: '6',
                 label: 'Upcoming Events',
-                iconBg: 'bg-blue-500/20',
-                iconColor: 'text-blue-300',
-                icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>,
+                cardBg: 'bg-blue-50 border-blue-200',
+                iconBg: 'bg-blue-600',
+                iconColor: 'text-white',
+                valueColor: 'text-blue-700',
+                labelColor: 'text-blue-500',
+                icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>,
               },
               {
                 value: '100%',
                 label: 'All Events Free',
-                iconBg: 'bg-emerald-500/20',
-                iconColor: 'text-emerald-300',
-                icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>,
+                cardBg: 'bg-emerald-50 border-emerald-200',
+                iconBg: 'bg-emerald-600',
+                iconColor: 'text-white',
+                valueColor: 'text-emerald-700',
+                labelColor: 'text-emerald-500',
+                icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" /></svg>,
               },
               {
                 value: '10+',
                 label: 'Venues Across District',
-                iconBg: 'bg-rose-500/20',
-                iconColor: 'text-rose-300',
-                icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>,
+                cardBg: 'bg-rose-50 border-rose-200',
+                iconBg: 'bg-rose-600',
+                iconColor: 'text-white',
+                valueColor: 'text-rose-700',
+                labelColor: 'text-rose-500',
+                icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>,
               },
               {
                 value: 'Free',
                 label: 'Registration Required',
-                iconBg: 'bg-amber-500/20',
-                iconColor: 'text-amber-300',
-                icon: <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" /></svg>,
+                cardBg: 'bg-amber-50 border-amber-200',
+                iconBg: 'bg-amber-600',
+                iconColor: 'text-white',
+                valueColor: 'text-amber-700',
+                labelColor: 'text-amber-500',
+                icon: <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" /></svg>,
               },
             ].map((item) => (
-              <div key={item.label} className="flex items-center gap-3 bg-white/5 hover:bg-white/10 transition-colors rounded-xl px-4 py-3 border border-white/10">
+              <div key={item.label} className={`flex items-center gap-3 ${item.cardBg} rounded-xl px-4 py-3 border`}>
                 <div className={`${item.iconBg} ${item.iconColor} p-2 rounded-lg shrink-0`}>
                   {item.icon}
                 </div>
                 <div>
-                  <p className="text-white font-bold text-base lg:text-lg leading-none">{item.value}</p>
-                  <p className="text-white/60 text-[11px] sm:text-xs mt-1 leading-tight">{item.label}</p>
+                  <p className={`${item.valueColor} font-bold text-base lg:text-lg leading-none`}>{item.value}</p>
+                  <p className={`${item.labelColor} text-[11px] sm:text-xs mt-1 leading-tight`}>{item.label}</p>
                 </div>
               </div>
             ))}
@@ -190,7 +202,7 @@ export default function EventsPage() {
                   <div className="flex-1">
                     <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${event.typeColor}`}>{event.type}</span>
                     <div className="flex items-center gap-1.5 text-blue-200 text-xs mt-1">
-                      <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <svg className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                       {event.time}
                     </div>
                   </div>
@@ -200,15 +212,15 @@ export default function EventsPage() {
                   <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-1">{event.desc}</p>
                   <div className="space-y-1.5 text-sm text-gray-500 mb-4">
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+                      <svg className="w-4 h-4 shrink-0 text-gray-400" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
                       <span>{event.location}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                      <svg className="w-4 h-4 shrink-0 text-gray-400" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
                       <span>{event.speaker}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
+                      <svg className="w-4 h-4 shrink-0 text-gray-400" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>
                       <span>{event.seats}</span>
                     </div>
                   </div>
@@ -239,16 +251,16 @@ export default function EventsPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {pastEvents.map((event) => (
-              <div key={event.title} className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl border border-gray-100 hover:border-blue-200 transition-colors">
-                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg className="w-6 h-6 text-[#1a2e4a]" fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" /></svg>
+              <div key={event.title} className={`flex items-center gap-4 p-5 bg-white rounded-xl ${event.accent} hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300`}>
+                <div className={`w-12 h-12 ${event.iconBg} rounded-xl flex items-center justify-center shrink-0`}>
+                  <svg className={`w-6 h-6 ${event.iconColor}`} fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
                 </div>
                 <div className="flex-1">
                   <h3 className="font-bold text-[#1a3a6b] text-sm mb-1">{event.title}</h3>
                   <p className="text-gray-500 text-xs">{event.date}</p>
                 </div>
-                <div className="text-right flex-shrink-0">
-                  <div className="text-[#2563eb] font-bold text-sm">{event.participants}</div>
+                <div className="text-right shrink-0">
+                  <div className={`${event.statColor} font-bold text-sm`}>{event.participants}</div>
                   <div className="text-gray-400 text-xs">Participants</div>
                 </div>
               </div>
@@ -294,10 +306,10 @@ export default function EventsPage() {
             <div>
               <h4 className="font-bold text-base mb-4 text-blue-100">Contact</h4>
               <ul className="space-y-2 text-blue-300 text-sm">
-                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" /> Civil Lines, District HQ – 110001</li>
-                <li className="flex items-center gap-2"><Phone className="w-4 h-4 flex-shrink-0" /> Helpline: 1800-XXX-XXXX</li>
-                <li className="flex items-center gap-2"><Mail className="w-4 h-4 flex-shrink-0" /> info@dcc.gov.in</li>
-                <li className="flex items-center gap-2"><Clock className="w-4 h-4 flex-shrink-0" /> Mon–Fri: 9 AM – 5 PM</li>
+                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 shrink-0 mt-0.5" /> Civil Lines, District HQ – 110001</li>
+                <li className="flex items-center gap-2"><Phone className="w-4 h-4 shrink-0" /> Helpline: 1800-XXX-XXXX</li>
+                <li className="flex items-center gap-2"><Mail className="w-4 h-4 shrink-0" /> info@dcc.gov.in</li>
+                <li className="flex items-center gap-2"><Clock className="w-4 h-4 shrink-0" /> Mon–Fri: 9 AM – 5 PM</li>
               </ul>
             </div>
           </div>

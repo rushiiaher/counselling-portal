@@ -4,7 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Search, Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import BookAppointmentModal from "@/components/shared/BookAppointmentModal";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -19,19 +20,20 @@ const navLinks = [
 export default function SiteNavbar({ onBookClick }: { onBookClick?: () => void }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   const handleBookClick = () => {
-    console.log('Book button clicked!');
     if (onBookClick) {
-      console.log('Calling onBookClick function');
       onBookClick();
     } else {
-      console.log('No onBookClick function provided!');
+      setBookingOpen(true);
     }
   };
 
   return (
-    <nav className="shadow-md bg-white">
+    <>
+    <BookAppointmentModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+    <nav className="shadow-md bg-white sticky top-0 z-9999">
       {/* TOP HEADER BAR */}
       <div className="bg-[#D9D5D2] border-b border-[#B8B5B2]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,9 +43,9 @@ export default function SiteNavbar({ onBookClick }: { onBookClick?: () => void }
               भारत सरकार<br />
               <span className="font-semibold">GOVERNMENT OF INDIA</span>
             </div>
-            {/* Right side - J&K Administration — hidden on very small screens */}
-            <div className="hidden xs:block sm:block text-[9px] sm:text-[11px] font-bold text-[#333333] tracking-tight leading-[1.2] text-right" style={{ fontFamily: 'Arial, sans-serif' }}>
-              <span className="hidden sm:inline">जम्मू और कश्मीर प्रशासन<br /></span>
+            {/* Right side - J&K Administration */}
+            <div className="text-[9px] sm:text-[11px] font-bold text-[#333333] tracking-tight leading-[1.2] text-right" style={{ fontFamily: 'Arial, sans-serif' }}>
+              जम्मू और कश्मीर प्रशासन<br />
               <span className="font-semibold text-[8px] sm:text-[10px]">J&K ADMINISTRATION</span>
             </div>
           </div>
@@ -51,14 +53,14 @@ export default function SiteNavbar({ onBookClick }: { onBookClick?: () => void }
       </div>
 
       {/* MAIN HEADER — sticky on mobile, static on desktop */}
-      <div className="bg-white py-2 sm:py-4 border-b border-[#E5E5E5] sticky top-0 z-9999 lg:static lg:z-auto shadow-sm lg:shadow-none">
+      <div className="bg-white py-1 sm:py-4 border-b border-[#E5E5E5] shadow-sm">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-2">
 
             {/* LEFT: Digital India Logo + Title */}
             <Link href="/" className="flex items-center gap-2 sm:gap-4 flex-1 min-w-0">
               <div className="shrink-0">
-                <div className="relative w-12 h-8 sm:w-32 sm:h-16 md:w-40 md:h-20">
+                <div className="relative w-16 h-12 sm:w-32 sm:h-16 md:w-40 md:h-20">
                   <Image src="/digital-india.png" alt="Digital India" fill className="object-contain" />
                 </div>
               </div>
@@ -74,9 +76,9 @@ export default function SiteNavbar({ onBookClick }: { onBookClick?: () => void }
               </div>
             </Link>
 
-            {/* RIGHT: Logo — visible on all sizes, hidden on sm and below to save space, shown from md+ */}
+            {/* RIGHT: Logo — hidden on mobile */}
             <div className="hidden sm:block shrink-0 ml-2 lg:ml-4">
-              <div className="relative w-20 h-12 sm:w-32 sm:h-16 lg:w-64 lg:h-16 xl:w-80 xl:h-20">
+              <div className="relative sm:w-32 sm:h-16 lg:w-64 lg:h-16 xl:w-80 xl:h-20">
                 <Image src="/logo.png" alt="Logo" fill className="object-contain" />
               </div>
             </div>
@@ -94,7 +96,7 @@ export default function SiteNavbar({ onBookClick }: { onBookClick?: () => void }
       </div>
 
       {/* NAVIGATION BAR — sticky on desktop only */}
-      <div className="lg:sticky lg:top-0 lg:z-9999 bg-[#E8E8E8] border-b-2 border-[#CCCCCC] shadow-sm hidden lg:block">
+      <div className="bg-[#E8E8E8] border-b-2 border-[#CCCCCC] shadow-sm hidden lg:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-start gap-1">
             {navLinks.map((link) => {
@@ -149,7 +151,7 @@ export default function SiteNavbar({ onBookClick }: { onBookClick?: () => void }
             })}
             <div className="mt-3 pt-3 border-t border-gray-200">
               <button
-                onClick={() => { setMobileOpen(false); onBookClick?.(); }}
+                onClick={() => { setMobileOpen(false); handleBookClick(); }}
                 className="w-full py-3 px-4 text-sm font-bold uppercase bg-green-600 text-white hover:bg-green-700 transition-colors rounded-sm"
               >
                 Book Free Session
@@ -159,5 +161,6 @@ export default function SiteNavbar({ onBookClick }: { onBookClick?: () => void }
         </div>
       )}
     </nav>
+    </>
   );
 }

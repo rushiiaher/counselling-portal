@@ -125,7 +125,7 @@ export default function HomePage() {
                 style={{ perspective: '1000px' }}
                 onClick={() => setFlippedCard(flippedCard === service.title ? null : service.title)}
               >
-                <div className={`relative w-full h-full transition-transform duration-500 transform-3d md:group-hover:rotate-y-180 ${flippedCard === service.title ? 'rotate-y-180' : ''}`}>
+                <div className={`relative w-full h-full transition-transform duration-500 transform-3d group-hover:rotate-y-180 ${flippedCard === service.title ? 'rotate-y-180' : ''}`}>
 
                   {/* FRONT FACE */}
                   <div className={`absolute inset-0 backface-hidden ${service.cardBg} rounded-xl p-5 border ${service.border} ${service.hoverBorder} border-t-4 ${service.accent} shadow-sm flex flex-col items-center justify-center text-center gap-4`}>
@@ -348,7 +348,11 @@ export default function HomePage() {
       </section>
 
       {/* EVENTS SECTION */}
-      <section className="bg-white py-16 px-4">
+      <section className="py-16 px-4 relative overflow-hidden" style={{
+        backgroundColor: '#f8faff',
+        backgroundImage: `radial-gradient(circle at 1px 1px, #c5d5f0 1px, transparent 0)`,
+        backgroundSize: '28px 28px'
+      }}>
         <div className="max-w-4xl mx-auto">
 
           {/* Header */}

@@ -199,25 +199,6 @@ export default function CounsellorsPage() {
       </section>
 
       {/* JOIN AS COUNSELLOR CTA */}
-      <section className="bg-white py-16 px-4 border-t border-gray-100">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-10 border border-blue-100">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <UserRound className="w-8 h-8 text-[#1a3a6b]" />
-            </div>
-            <h2 className="text-2xl font-bold text-[#1a2e4a] mb-3">Are You a Qualified <em className="italic">Counsellor?</em></h2>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Join our growing network of certified counsellors and make a difference in the lives of students and families across the district. We welcome RCI-registered and qualified counselling professionals.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/signup" className="bg-[#1a3a6b] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#2563eb] transition-colors">
-                Apply to Join Our Team
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* FOOTER */}
       <footer className="bg-[#1a3a6b] text-white border-t border-blue-800">
         <div className="max-w-7xl mx-auto px-4 py-12">

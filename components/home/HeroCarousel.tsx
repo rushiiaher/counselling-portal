@@ -13,16 +13,22 @@ const districtStats = [
 
 const slides = [
   {
-    bg: '/home.jpg',
-    tag: 'District Counselling Portal',
-    heading: 'Professional Counselling & Guidance Services for Students',
-    overlay: 'from-[#0a1628]/70 via-[#0a1628]/40 to-transparent',
+    bg: '/banner.png',
+    tag: '',
+    heading: '',
+    overlay: '',
+    hideCaption: true,
+    hideStats: false,
+    pos: 'object-cover object-center',
   },
   {
     bg: '/coun1.jpg',
-    tag: 'Healing Minds, Transforming Lives',
-    heading: 'Free, Confidential Counselling for Students & Youth Across J&K',
-    overlay: 'from-[#0a1628]/70 via-[#0a1628]/40 to-transparent',
+    tag: '',
+    heading: '',
+    overlay: '',
+    hideCaption: true,
+    hideStats: false,
+    pos: 'object-cover object-top',
   },
 ];
 
@@ -41,47 +47,51 @@ export default function HeroCarousel() {
     <div>
       <BookAppointmentModal isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
       {/* CAROUSEL */}
-      <section className="relative w-full h-80 sm:h-120 md:h-140 overflow-hidden">
+      <section className="relative w-full h-56 sm:h-120 md:h-140 overflow-hidden">
         {slides.map((slide, i) => (
           <div
             key={i}
             className={`absolute inset-0 transition-opacity duration-1000 ${i === current ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
           >
             <img
+              key={i === current ? `active-${i}` : `idle-${i}`}
               src={slide.bg}
               alt={slide.tag}
-              className="w-full h-full object-cover object-top"
+              className={`w-full h-full ${slide.pos} ${i === current ? 'sm:animate-kenburns' : ''}`}
             />
-            <div className={`absolute inset-0 bg-linear-to-r ${slide.overlay}`} />
+            {slide.overlay && <div className={`absolute inset-0 bg-linear-to-r ${slide.overlay}`} />}
 
             {/* Caption */}
-            <div className="absolute inset-0 flex items-center">
-              <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
-                <p className="text-orange-400 font-semibold text-xs sm:text-sm md:text-base uppercase tracking-widest mb-2 sm:mb-3">
-                  {slide.tag}
-                </p>
-                <h2 className="text-white font-bold text-base sm:text-2xl md:text-4xl lg:text-5xl leading-tight max-w-2xl">
-                  {slide.heading}
-                </h2>
+            {!slide.hideCaption && (
+              <div className="absolute inset-0 flex items-center">
+                <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
+                  <p className="text-orange-400 font-semibold text-xs sm:text-sm md:text-base uppercase tracking-widest mb-2 sm:mb-3">
+                    {slide.tag}
+                  </p>
+                  <h2 className="text-white font-bold text-base sm:text-2xl md:text-4xl lg:text-5xl leading-tight max-w-2xl">
+                    {slide.heading}
+                  </h2>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         ))}
 
-        {/* District Stats Bar */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 bg-black/40 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 sm:grid-cols-4 divide-x-0 sm:divide-x divide-white/20">
+
+        {/* District Stats Bar — desktop only (overlaid on image) */}
+        <div className={`hidden sm:block absolute bottom-0 left-0 right-0 z-20 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ${slides[current].hideStats ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-4 divide-x divide-white/20">
             {districtStats.map((stat) => (
-              <div key={stat.label} className="px-3 sm:px-6 py-2 sm:py-4 text-center sm:text-left border-b sm:border-b-0 border-white/10 last:border-b-0">
-                <p className="text-white text-lg sm:text-3xl font-bold leading-tight">{stat.value}</p>
-                <p className="text-white/80 text-[10px] sm:text-sm font-medium uppercase tracking-wide leading-tight mt-0.5">{stat.label}</p>
+              <div key={stat.label} className="px-6 py-4 text-left">
+                <p className="text-white text-3xl font-bold leading-tight">{stat.value}</p>
+                <p className="text-white/80 text-sm font-medium uppercase tracking-wide leading-tight mt-0.5">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Dot indicators */}
-        <div className="absolute bottom-24 sm:bottom-24 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        <div className="absolute bottom-3 sm:bottom-24 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {slides.map((_, i) => (
             <button
               key={i}
@@ -106,7 +116,8 @@ export default function HeroCarousel() {
         </button>
       </section>
 
-      {/* BUTTONS BELOW IMAGE */}
+
+{/* BUTTONS BELOW IMAGE */}
       <div className="bg-white py-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 px-4 sm:px-0 border-b border-gray-100">
         <button
           onClick={() => setBookingOpen(true)}

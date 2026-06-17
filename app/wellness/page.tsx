@@ -166,7 +166,7 @@ export default function WellnessHubPage() {
       </section>
 
       {/* FILTER TABS */}
-      <section className="bg-white px-6 py-5 border-b border-gray-100 sticky top-0 z-30">
+      <section className="px-6 py-5 border-b border-orange-100 sticky top-0 z-30" style={{ background: 'linear-gradient(to bottom, #fff5e6, #ffffff, #eaf6ea)' }}>
         <div className="max-w-5xl mx-auto flex flex-wrap gap-2">
           {FILTERS.map((f) => (
             <button
@@ -185,7 +185,7 @@ export default function WellnessHubPage() {
       </section>
 
       {/* RESOURCE GRID */}
-      <section className="bg-white py-10 px-6">
+      <section className="py-10 px-6" style={{ background: 'linear-gradient(to bottom, #fff5e6, #ffffff, #eaf6ea)' }}>
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((r) => (

@@ -9,8 +9,8 @@ import { ChevronRight, ArrowRight, Building2, MapPin, Phone, Mail, Clock, Calend
 const services = [
   {
     title: 'Career Counselling',
-    img: '/career.jpg',
-    detailImg: '/study.jpg',
+    img: '/career.png',
+    detailImg: '/career.png',
     heading: 'Complete Solution For Career Growth & Professional Development',
     para1: 'Our Career Counselling service is a comprehensive, evidence-based program designed to help students, graduates, and working professionals make informed and confident career decisions. We understand that choosing the right career path is one of the most important decisions in a person\'s life, and our certified career counsellors are here to guide you every step of the way.',
     para2: 'We use scientifically validated tools such as <strong>Holland\'s Career Interest Inventory</strong>, <strong>MBTI Personality Assessment</strong>, and <strong>Multiple Intelligence Tests</strong> to map your strengths, interests, and aptitudes to the most suitable career options. Our counsellors then work with you to build a personalised career roadmap.',
@@ -30,8 +30,8 @@ const services = [
   },
   {
     title: 'Educational Guidance',
-    img: '/study.jpg',
-    detailImg: '/career.jpg',
+    img: '/education.png',
+    detailImg: '/education.png',
     heading: 'Complete Solution For Academic Excellence & Higher Education',
     para1: 'Educational Guidance services are designed to help students navigate the complex landscape of academic choices and challenges. From selecting the right subjects in school to choosing the best college and course for higher education, our educational counsellors provide evidence-based guidance tailored to each student\'s unique profile.',
     para2: 'We address a wide range of academic concerns including <strong>subject and stream selection</strong>, <strong>study skills coaching</strong>, <strong>learning disability assessment</strong>, and <strong>higher education planning</strong>. Our counsellors work closely with students and parents to create a structured academic plan.',
@@ -51,8 +51,8 @@ const services = [
   },
   {
     title: 'Mental Wellness',
-    img: '/wellness.jpg',
-    detailImg: '/stress.jpg',
+    img: '/wellness.png',
+    detailImg: '/wellness.png',
     heading: 'Complete Solution For Psychological Well-being & Mental Health',
     para1: 'Our Mental Wellness program offers a safe, confidential, and non-judgmental space for individuals to address mental health challenges. Our licensed clinical psychologists and counsellors use evidence-based therapeutic approaches to help you achieve emotional balance and lasting mental well-being.',
     para2: 'We focus on a range of therapeutic approaches, each tailored to the specific requirements of our clients. Our team utilises advanced approaches such as <strong>Cognitive Behavioral Therapy (CBT)</strong>, <strong>Mindfulness-Based Stress Reduction (MBSR)</strong>, <strong>Solution-Focused Brief Therapy (SFBT)</strong>, and Acceptance & Commitment Therapy (ACT) to ensure each individual receives a comprehensive, personalised treatment plan.',
@@ -72,8 +72,8 @@ const services = [
   },
   {
     title: 'Youth Guidance',
-    img: '/con1.jpg',
-    detailImg: '/coun.jpg',
+    img: '/youth.png',
+    detailImg: '/youth.png',
     heading: 'Complete Solution For Youth Development & Life Skills',
     para1: 'The Youth Guidance program is specifically designed for young people aged 13–25 who are navigating the challenges of adolescence and early adulthood. Our youth counsellors provide a supportive environment to address issues related to identity, peer pressure, relationships, and life skills development.',
     para2: 'We address critical youth issues including <strong>identity and self-esteem development</strong>, <strong>peer pressure and bullying</strong>, <strong>substance abuse prevention</strong>, and <strong>digital wellness</strong>. Our programs are interactive, engaging, and designed to resonate with today\'s youth.',
@@ -93,8 +93,10 @@ const services = [
   },
   {
     title: 'Skill Development',
-    img: '/con4.jpg',
-    detailImg: '/career.jpg',
+    img: '/skill.png',
+    imgClass: 'object-fill',
+    detailImg: '/skill.png',
+    detailImgPos: 'object-top',
     heading: 'Complete Solution For Vocational Training & Employment Readiness',
     para1: 'Our Skill Development Counselling service bridges the gap between education and employment by helping individuals identify their vocational strengths and connect them with appropriate skill development opportunities. We work in close collaboration with the Skill India Mission and NSDC.',
     para2: 'We provide guidance on <strong>government skill development schemes</strong>, <strong>ITI and polytechnic courses</strong>, <strong>PMKVY enrollment</strong>, and <strong>entrepreneurship development</strong>. Our counsellors help you identify the right vocational path based on your aptitude and market demand.',
@@ -114,8 +116,10 @@ const services = [
   },
   {
     title: 'Family Counselling',
-    img: '/con2.jpg',
-    detailImg: '/con3.webp',
+    img: '/family.png',
+    imgClass: 'object-cover object-[30%]',
+    detailImg: '/family.png',
+    detailImgPos: 'object-top',
     heading: 'Complete Solution For Family Harmony & Relationship Wellness',
     para1: 'Family Counselling services focus on improving family dynamics, communication patterns, and relationships. Our family therapists work with the entire family unit to identify and resolve conflicts, improve understanding, and build a healthier, more supportive home environment.',
     para2: 'We address issues ranging from <strong>parent-child conflicts</strong> to <strong>marital challenges</strong>, <strong>blended family adjustments</strong>, and <strong>elder care concerns</strong>. Our therapists use Emotionally Focused Therapy (EFT), Narrative Therapy, and Structural Family Therapy to bring lasting positive change.',
@@ -135,8 +139,10 @@ const services = [
   },
   {
     title: 'Personal Counselling',
-    img: '/self.jpg',
-    detailImg: '/con4.jpg',
+    img: '/personal.png',
+    imgClass: 'object-cover object-[30%]',
+    detailImg: '/personal.png',
+    detailImgPos: 'object-center',
     heading: 'Complete Solution For Personal Growth & Emotional Well-being',
     para1: 'Personal Counselling provides individualized support for a wide range of personal challenges that affect daily functioning and quality of life. Whether you are dealing with low self-esteem, relationship difficulties, grief, life transitions, or simply feeling stuck, our counsellors offer a compassionate and professional space.',
     para2: 'Our counsellors are trained in <strong>Person-Centered Therapy</strong>, <strong>Cognitive Behavioral Therapy (CBT)</strong>, <strong>Motivational Interviewing</strong>, and <strong>Narrative Therapy</strong> to help you explore your concerns, understand your patterns, and develop effective coping strategies tailored to your unique situation.',
@@ -156,8 +162,8 @@ const services = [
   },
   {
     title: 'Crisis Support',
-    img: '/trauma.jpg',
-    detailImg: '/stress.jpg',
+    img: '/crisis.png',
+    detailImg: '/crisis.png',
     heading: 'Complete Solution For Crisis Intervention & Emergency Mental Health',
     para1: 'Our Crisis Support service provides immediate, compassionate, and professional intervention for individuals experiencing acute mental health crises, emotional breakdowns, or situations of immediate risk. Our trained crisis counsellors are available to provide rapid response and stabilisation.',
     para2: 'We are equipped to handle a wide range of crisis situations including <strong>suicidal ideation</strong>, <strong>acute anxiety and panic attacks</strong>, <strong>trauma and PTSD episodes</strong>, <strong>domestic violence situations</strong>, and <strong>substance abuse crises</strong>. Our team follows evidence-based crisis intervention protocols to ensure safety and stabilisation.',
@@ -203,9 +209,9 @@ export default function ServicesPage() {
       {/* HERO BANNER */}
       <section className="relative overflow-hidden">
         <img
-          src="/con2.jpg"
+          src="/home.jpg"
           alt="Counselling Services"
-          className="w-full h-80 object-cover object-center"
+          className="w-full h-80 object-cover object-top"
         />
         <div className="absolute inset-0 bg-[#1a3a6b]/65" />
         <div className="absolute inset-0 flex items-center">
@@ -236,7 +242,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             {services.map((service) => (
               <div
                 key={service.title}
@@ -247,12 +253,12 @@ export default function ServicesPage() {
                 <img
                   src={service.img}
                   alt={service.title}
-                  className="w-full h-40 sm:h-52 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className={`w-full h-36 sm:h-52 group-hover:scale-110 transition-transform duration-700 ${'imgClass' in service ? (service as any).imgClass : 'object-cover'}`}
                 />
 
                 {/* Normal title bar — slides away on hover */}
-                <div className="absolute bottom-0 left-0 right-0 bg-[#1a2e4a] py-3 px-4 text-center translate-y-0 group-hover:translate-y-full transition-transform duration-300 z-10">
-                  <p className="text-white font-semibold text-sm">{service.title}</p>
+                <div className="absolute bottom-0 left-0 right-0 bg-[#1a2e4a] py-2 sm:py-3 px-2 sm:px-4 text-center translate-y-0 group-hover:translate-y-full transition-transform duration-300 z-10">
+                  <p className="text-white font-semibold text-[11px] sm:text-sm leading-tight">{service.title}</p>
                 </div>
 
                 {/* Hover overlay — slides up */}
@@ -288,7 +294,7 @@ export default function ServicesPage() {
             </div>
 
             {/* Main content — left text, right image */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-6 lg:gap-10 items-start">
               {/* LEFT — text */}
               <div>
                 <p className="text-gray-700 leading-relaxed mb-5 text-[15px]">{selected.para1}</p>
@@ -334,11 +340,11 @@ export default function ServicesPage() {
               </div>
 
               {/* RIGHT — image */}
-              <div className="rounded-2xl overflow-hidden shadow-lg">
+              <div className="rounded-2xl overflow-hidden shadow-lg max-w-xs sm:max-w-none mx-auto w-full">
                 <img
                   src={selected.detailImg}
                   alt={selected.title}
-                  className="w-full h-105 object-cover"
+                  className={`w-full h-56 sm:h-64 lg:h-80 object-cover ${'detailImgPos' in selected ? (selected as any).detailImgPos : 'object-center'}`}
                 />
               </div>
             </div>
@@ -349,9 +355,9 @@ export default function ServicesPage() {
 
 
       {/* CTA SECTION */}
-      <section className="bg-[#eef2f9] py-16 px-4 border-t border-blue-100">
+      <section className="bg-linear-to-r from-[#fff5e6] via-white to-[#eaf6ea] py-16 px-4 border-t border-orange-100">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: 'Georgia, serif' }}>Ready to Take <em className="italic">the First Step?</em></h2>
+          <h2 className="inline-block bg-[#424242] text-white text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide mb-4 px-6 py-2.5 rounded-lg shadow-md border-b-4 border-[#c07a2a]" style={{ fontFamily: "'Noto Sans', sans-serif" }}>Ready to Take <em className="italic">the First Step?</em></h2>
           <p className="text-gray-600 mb-8 leading-relaxed">
             All our services are completely free for district residents. Book your appointment today and take the first step towards a better tomorrow.
           </p>
