@@ -45,7 +45,7 @@ export default function ContactPage() {
       {/* HERO BANNER */}
       <section className="relative overflow-hidden">
         <img
-          src="/contact.jpg"
+          src="/cnt.png"
           alt="Contact Us"
           className="w-full h-80 object-cover object-center"
         />

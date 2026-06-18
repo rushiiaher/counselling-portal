@@ -9,22 +9,22 @@ const FILTERS = ['All Resources', 'Mental Health', 'Stress & Anxiety', 'Career',
 
 const resources = [
   {
-    id: 1,
+    id: 6,
     type: 'Video',
-    typeBg: 'bg-blue-50',
-    typeText: 'text-blue-600',
-    thumbBg: 'bg-blue-100',
-    category: 'Stress & Anxiety',
+    typeBg: 'bg-red-50',
+    typeText: 'text-red-500',
+    thumbBg: 'bg-red-50',
+    category: 'Mental Health',
     categoryColor: 'text-[#c07a2a]',
-    title: '5-Minute Breathing Technique for Exam Stress',
-    desc: 'A simple box-breathing exercise proven to reduce exam anxiety in under 5 minutes.',
-    author: 'Dr. Aamir Wani',
-    meta: '3,200 views',
-    duration: '8:45',
-    filter: 'Stress & Anxiety',
+    title: 'Healthy vs. Toxic Relationships — Recognizing the Signs',
+    desc: 'How to identify unhealthy patterns in friendships, family, and romantic relationships.',
+    author: 'Dr. Sameer Malik',
+    meta: '4,100 views',
+    duration: '12:00',
+    filter: 'Mental Health',
     icon: (
-      <svg className="w-8 h-8 text-blue-300" fill="none" stroke="currentColor" strokeWidth={1.2} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <svg className="w-8 h-8 text-red-200" fill="none" stroke="currentColor" strokeWidth={1.2} viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="7" />
       </svg>
     ),
   },
@@ -110,22 +110,22 @@ const resources = [
     ),
   },
   {
-    id: 6,
+    id: 1,
     type: 'Video',
-    typeBg: 'bg-red-50',
-    typeText: 'text-red-500',
-    thumbBg: 'bg-red-50',
-    category: 'Mental Health',
+    typeBg: 'bg-blue-50',
+    typeText: 'text-blue-600',
+    thumbBg: 'bg-blue-100',
+    category: 'Stress & Anxiety',
     categoryColor: 'text-[#c07a2a]',
-    title: 'Healthy vs. Toxic Relationships — Recognizing the Signs',
-    desc: 'How to identify unhealthy patterns in friendships, family, and romantic relationships.',
-    author: 'Dr. Sameer Malik',
-    meta: '4,100 views',
-    duration: '12:00',
-    filter: 'Mental Health',
+    title: '5-Minute Breathing Technique for Exam Stress',
+    desc: 'A simple box-breathing exercise proven to reduce exam anxiety in under 5 minutes.',
+    author: 'Dr. Aamir Wani',
+    meta: '3,200 views',
+    duration: '8:45',
+    filter: 'Stress & Anxiety',
     icon: (
-      <svg className="w-8 h-8 text-red-200" fill="none" stroke="currentColor" strokeWidth={1.2} viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="7" />
+      <svg className="w-8 h-8 text-blue-300" fill="none" stroke="currentColor" strokeWidth={1.2} viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
   },
@@ -187,38 +187,38 @@ export default function WellnessHubPage() {
       {/* RESOURCE GRID */}
       <section className="py-10 px-6" style={{ background: 'linear-gradient(to bottom, #fff5e6, #ffffff, #eaf6ea)' }}>
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
             {filtered.map((r) => (
               <div
                 key={r.id}
-                className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col cursor-pointer"
+                className="group bg-white border border-gray-100 rounded-xl sm:rounded-2xl overflow-hidden hover:shadow-md transition-shadow duration-200 flex flex-col cursor-pointer"
               >
                 {/* Thumbnail */}
-                <div className={`relative ${r.thumbBg} h-36 sm:h-44 flex items-center justify-center overflow-hidden`}>
+                <div className={`relative ${r.thumbBg} h-28 sm:h-44 flex items-center justify-center overflow-hidden`}>
                   {r.id === 1 ? (
-                    <img src="/stress.jpg" alt={r.title} className="w-full h-full object-cover object-center" />
+                    <img src="/stress.png" alt={r.title} className="w-full h-full object-cover object-[30%]" />
                   ) : r.id === 2 ? (
-                    <img src="/trauma.jpg" alt={r.title} className="w-full h-full object-cover object-center" />
+                    <img src="/trauma.png" alt={r.title} className="w-full h-full object-cover object-[30%]" />
                   ) : r.id === 3 ? (
-                    <img src="/career.jpg" alt={r.title} className="w-full h-full object-cover object-center" />
+                    <img src="/career1.png" alt={r.title} className="w-full h-full object-cover object-[30%]" />
                   ) : r.id === 4 ? (
-                    <img src="/wellness.jpg" alt={r.title} className="w-full h-full object-cover object-center" />
+                    <img src="/meditation.png" alt={r.title} className="w-full h-full object-cover object-center" />
                   ) : r.id === 5 ? (
-                    <img src="/study.jpg" alt={r.title} className="w-full h-full object-cover object-center" />
+                    <img src="/study.png" alt={r.title} className="w-full h-full object-cover object-center" />
                   ) : (
-                    <img src="/con1.jpg" alt={r.title} className="w-full h-full object-cover object-center" />
+                    <img src="/mental health.png" alt={r.title} className="w-full h-full object-cover object-[30%]" />
                   )}
                 </div>
 
                 {/* Body */}
-                <div className="p-5 flex flex-col flex-1 gap-2">
-                  <span className={`text-[10px] font-bold uppercase tracking-widest ${r.categoryColor}`}>
+                <div className="p-2 sm:p-5 flex flex-col gap-1 sm:gap-2">
+                  <span className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-widest ${r.categoryColor} h-3 sm:h-auto`}>
                     {r.category}
                   </span>
-                  <h3 className="font-bold text-[#1a2e4a] text-sm leading-snug group-hover:text-[#2d5fa6] transition-colors">
+                  <h3 className="font-bold text-[#1a2e4a] text-[11px] sm:text-sm leading-snug group-hover:text-[#2d5fa6] transition-colors line-clamp-2 sm:line-clamp-none">
                     {r.title}
                   </h3>
-                  <p className="text-gray-500 text-xs leading-relaxed flex-1">{r.desc}</p>
+                  <p className="text-gray-500 text-[10px] sm:text-xs leading-relaxed hidden sm:block">{r.desc}</p>
                 </div>
               </div>
             ))}
@@ -269,10 +269,10 @@ export default function WellnessHubPage() {
             <div>
               <h4 className="font-bold text-base mb-4 text-blue-100">Contact</h4>
               <ul className="space-y-2 text-blue-300 text-sm">
-                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" /> Civil Lines, District HQ – 110001</li>
-                <li className="flex items-center gap-2"><Phone className="w-4 h-4 flex-shrink-0" /> Helpline: 1800-XXX-XXXX</li>
-                <li className="flex items-center gap-2"><Mail className="w-4 h-4 flex-shrink-0" /> info@dcc.gov.in</li>
-                <li className="flex items-center gap-2"><Clock className="w-4 h-4 flex-shrink-0" /> Mon–Fri: 9 AM – 5 PM</li>
+                <li className="flex items-start gap-2"><MapPin className="w-4 h-4 shrink-0 mt-0.5" /> Civil Lines, District HQ – 110001</li>
+                <li className="flex items-center gap-2"><Phone className="w-4 h-4 shrink-0" /> Helpline: 1800-XXX-XXXX</li>
+                <li className="flex items-center gap-2"><Mail className="w-4 h-4 shrink-0" /> info@dcc.gov.in</li>
+                <li className="flex items-center gap-2"><Clock className="w-4 h-4 shrink-0" /> Mon–Fri: 9 AM – 5 PM</li>
               </ul>
             </div>
           </div>
