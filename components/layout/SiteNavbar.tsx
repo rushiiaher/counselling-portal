@@ -121,6 +121,13 @@ export default function SiteNavbar({ onBookClick }: { onBookClick?: () => void }
             >
               BOOK SESSION
             </button>
+            <Link
+              href="/login"
+              className="py-2.5 px-5 text-[13px] font-bold bg-[#1a3a6b] text-white hover:bg-[#15305a] transition-colors shadow-sm"
+              style={{ fontFamily: 'Arial, sans-serif' }}
+            >
+              LOGIN
+            </Link>
           </div>
         </div>
       </div>
@@ -149,13 +156,20 @@ export default function SiteNavbar({ onBookClick }: { onBookClick?: () => void }
                 </Link>
               );
             })}
-            <div className="mt-3 pt-3 border-t border-gray-200">
+            <div className="mt-3 pt-3 border-t border-gray-200 flex gap-2">
               <button
                 onClick={() => { setMobileOpen(false); handleBookClick(); }}
-                className="w-full py-3 px-4 text-sm font-bold uppercase bg-green-600 text-white hover:bg-green-700 transition-colors rounded-sm"
+                className="flex-1 py-3 px-4 text-sm font-bold uppercase bg-green-600 text-white hover:bg-green-700 transition-colors rounded-sm"
               >
-                Book Free Session
+                Book Session
               </button>
+              <Link
+                href="/login"
+                onClick={() => setMobileOpen(false)}
+                className="flex-1 py-3 px-4 text-sm font-bold uppercase bg-[#1a3a6b] text-white hover:bg-[#15305a] transition-colors rounded-sm text-center"
+              >
+                Login
+              </Link>
             </div>
           </div>
         </div>
