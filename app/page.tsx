@@ -123,7 +123,7 @@ export default function HomePage() {
                 key={service.title}
                 className="group relative h-64 cursor-pointer"
                 style={{ perspective: '1000px' }}
-                onClick={() => setFlippedCard(flippedCard === service.title ? null : service.title)}
+                onTouchStart={() => setFlippedCard(flippedCard === service.title ? null : service.title)}
               >
                 <div className={`relative w-full h-full transition-transform duration-500 transform-3d group-hover:rotate-y-180 ${flippedCard === service.title ? 'rotate-y-180' : ''}`}>
 

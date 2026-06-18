@@ -9,6 +9,7 @@ import BookAppointmentModal from "@/components/shared/BookAppointmentModal";
 
 const navLinks = [
   { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Find Counsellor", href: "/counselors" },
   { label: "Self Assessment", href: "/assessments" },

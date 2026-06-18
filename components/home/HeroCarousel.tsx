@@ -19,7 +19,7 @@ const slides = [
     overlay: '',
     hideCaption: true,
     hideStats: false,
-    pos: 'object-cover object-center',
+    pos: 'object-cover object-[70%]',
   },
   {
     bg: '/coun1.jpg',
